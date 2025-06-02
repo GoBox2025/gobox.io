@@ -1,0 +1,108 @@
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: white;
+    margin: 0;
+    padding: 0;
+    text-align: center;
+    color: #542a03;
+}
+  
+  .contenedor {
+
+    padding: 20px;
+    padding-bottom: 80px
+  }
+  
+  .barra-arriba {
+    height: 40px;
+    background-color: #ffa500;
+  }
+  .icono-registro {
+    text-align: center;  
+  }
+  
+  .icono-registro img {
+    width: 100px;
+    margin-left: auto;  
+    margin-right: auto; 
+    display: block;     
+  }
+
+  /* Estilo general para el formulario */
+.formulario {
+  background-color: rgb(255, 255, 255);
+  padding: 20px;
+  border-radius: 15px;
+  text-align: left;
+  margin: 10px;
+  padding-left: 3px;
+  
+}
+
+
+.formulario input,
+.formulario select {
+  width: 100%; 
+  padding: 12px; 
+  margin-bottom: 16px; 
+  border: 2px solid #d3d3d3; 
+  border-radius: 8px; 
+  font-size: 16px;
+  background-color: #f9f9f9; /* Fondo suave */
+  color: #6F4F37; /* Color café en el texto */
+  transition: all 0.3s ease; /* Transición suave para el hover y focus */
+  
+}
+
+#producto {
+  background-color: #f9f9f9; 
+  color: rgb(80, 79, 79); /* Color del texto */
+}
+
+/* Cambia el color de fondo cuando se selecciona una opción */
+#producto:focus {
+  background-color: orange; /* Fondo naranja cuando se enfoca */
+  color: white; 
+}
+
+#producto option:checked {
+  background-color: orange; /* Fondo naranja para la opción seleccionada */
+  color: #fff; /* Texto blanco para la opción seleccionada */
+}
+
+
+
+/* Estilo para los botones */
+.boton-centro {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+  margin-top: 20px;
+}
+
+.boton {
+  padding: 10px 20px;
+  background-color: #FFA500;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: all 0.3s ease; /* Transición suave al pasar el ratón */
+}
+
+.boton:hover {
+  background-color: #f1f1f1; /* Fondo gris claro cuando se pasa el ratón */
+  color: #FFA500; /* Texto naranja en el hover */
+  border: 2px solid #FFA500; /* Borde naranja */
+}
+
+
+ 
+ 
+ 
+.agregar{
+  text-align: center;
+  
+}
+  

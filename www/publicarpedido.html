@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/www/estilos/publicarpedido.css">
+    <link rel="stylesheet" href="estilos/menu.css">
+    <title>Document</title>
+     <script src="https://www.gstatic.com/firebasejs/10.10.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.10.0/firebase-auth-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.10.0/firebase-firestore-compat.js"></script>
+    <script type="module" src="codigo/publicarpedidos.js"></script>
+
+ 
+</head>
+<body>
+
+    <!--Linea Naranja (Arriba)-->
+  <div class="barra-arriba"></div>
+
+  <!--Imagen agregar-->
+ 
+
+    <a href="/www/Home_comprador.html">
+      <img src="/www/img/flechaIzquierda.png" alt="flecha"  style="width: auto; height: 30px; margin-left:-330px; padding: 10px;">
+    </a>
+    <br>
+    
+    <div class="icono-registro">
+      <b>
+        <p style="color: #542a03; margin-left: 0px; font-size: medium;">Colocar Foto Del Producto</p>
+      </b>
+      <img src="/www/img/registro.png" alt="icono registro">
+      <input type="file" id="imagen" accept="image/*" style="display: none;">
+    </div>
+    
+
+    <div class="contenedor">
+      
+      <form class="formulario">  <b>
+          <label for="nombre" style="color: #542a03;">Nombre:</label><br></b>
+          <input type="text" id="nombre" placeholder="Ingrese su nombre"><br><br>
+        <b>
+          <label for="producto">Tipo De Producto</label><br></b>
+          <select id="producto" name="producto">
+              <option value="Electrodoméstico">Electrodoméstico</option>
+              <option value="Ropa">Ropa</option>
+              <option value="Electronicos">Electrónicos</option>
+          </select><br><br>
+          <b>
+          <label for="cantidad"  style="color: #542a03;">Cantidad</label><br></b>
+          <input type="text" id="cantidad" placeholder="Cantidad De Paquetes"><br><br>
+  
+         <b> <label for="peso" style="color: #542a03;">Peso (Lb)</label><br> </b>
+          <input type="text" id="peso" placeholder="Ingrese Peso Total"><br><br>
+  
+         <b> <label for="empaquetado" style="color: #542a03;">Tipo De Empaquetado</label><br></b>
+          <input type="text" id="empaquetado" placeholder="Ingrese Empaquetado"><br><br>
+  
+         <b> <label for="direccion_origen" style="color: #542a03;">Dirección De Origen</label><br></b>
+          <input type="text" id="direccion_origen" placeholder="Ingrese Su Dirección"><br><br>
+  
+          <b><label for="direccion_destino" style="color: #542a03;">Dirección De Destino</label><br></b>
+          <input type="text" id="direccion_destino" placeholder="Ingrese Su Destino"><br><br>
+  
+          <b> <label for="descripcion" style="color: #542a03;">Descripción</label><br></b>
+          <input type="text" id="descripcion" placeholder="Descripción Del Producto"><br><br>
+  
+         <b> <label for="costo" style="color: #542a03;">Costo $</label><br> </b>
+          <input type="text" id="costo" placeholder="Ingrese Costo"><br><br>
+
+          
+          <b> <label for="fecha_estimada" style="color: #542a03;">Fecha Estimada</label><br> </b>
+          <input type="text" id="fecha_estimada" placeholder="Ingrese Fecha"><br><br>
+
+        
+  
+          <!-- Botones de Publicar y Cancelar -->
+          <div class="boton-centro">
+              <input type="submit" value="PUBLICAR" class="boton" >
+              <input type="button" value="CANCELAR" class="boton" onclick="window.location.href='Home_comprador.html';">
+          </div>
+      </form>
+      
+    </div>
+    
+  
+          <div class="footer">
+    <div class="iconos">
+       <nav class="navbar">
+        <a href="/www/Home_comprador.html"><img src="/www/img/home.png" alt="Inicio"></a>
+        <a href="/www/Asistente.html"><img src="/www/img/IA.png" alt=""></a>
+        <a href="/www/UserComprador.html"><img src="/www/img/user.png" alt="Perfil" ></a>
+    </nav>
+  
+  </div>
+
+</body>
+  <!-- Incluir los SDK de Firebase desde CDN -->
+  <script src="https://www.gstatic.com/firebasejs/10.10.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.10.0/firebase-firestore-compat.js"></script>
+
+  <!-- Referenciar el archivo JavaScript externo -->
+  <script src="/www/codigo/publicarpedidos.js"></script>
+
+</html>

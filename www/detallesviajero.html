@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Detalles del Pedido</title>
+  <link rel="stylesheet" href="/www/estilos/detallesviajero.css" />
+  <link rel="stylesheet" href="/www/estilos/menu.css">
+  
+  <style>
+    #botonWhatsApp {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      max-width: 48px; 
+       max-height: 48px;
+      border: none;
+      background: none;
+      cursor: pointer;
+      z-index: 1000;
+    overflow: hidden;
+    padding-bottom: 100px;
+
+    }
+
+    #botonWhatsApp img {
+      width: 48px;
+      height: 48px;
+    }
+  </style>
+</head>
+<body>
+  <div class="barra-arriba"></div>
+
+  <a href="Home_viajero.html">
+    <img src="/www/img/flechaIzquierda.png" alt="Volver" class="flecha-volver">
+  </a>
+
+  <div id="contactoWhatsApp" style="margin-top: 15px;"></div>
+
+  <h2>Imagen:</h2>
+  <img id="imagen-pedido" src="" alt="Imagen del Pedido" class="imagen-pedido" />
+
+  <div class="contenedor">
+    <h1>Pago</h1>
+    <p id="costo">Cargando...</p>
+
+    <div class="detalle">
+      <h2>Nombre del producto:</h2>
+      <p id="pedido">Cargando...</p>
+
+      <h2>Tipo:</h2>
+      <p id="tipo">Cargando...</p>
+
+      <h2>Entrega antes de:</h2>
+      <p id="tipoEntrega">Cargando...</p>
+
+      <h2>Recoger en:</h2>
+      <p id="recogerEn">Cargando...</p>
+
+      <h2>Entregar en:</h2>
+      <p id="entregarEn">Cargando...</p>
+
+      <h2>Cantidad:</h2>
+      <p id="cantidad">Cargando...</p>
+
+      <h2>Peso</h2>
+      <p id="peso">Cargando...</p>
+
+      <h2>Tipo de empaquetado</h2>
+      <p id="tipoDeEmpaquetado">Cargando...</p>
+    </div>
+  </div>
+
+  <div class="boton-centro">
+    <button class="boton" onclick="guardarCambios()">Haz tu oferta</button>
+  </div>
+
+  <!-- Botón flotante de WhatsApp -->
+  <button id="botonWhatsApp" title="Contactar por WhatsApp">
+  <img src="img/icons8-whatsapp-48.png" alt="WhatsApp">
+</button>
+
+
+<footer><div class="navbar">
+        <div class="icon" onclick="expandIcon(this)" ><a href="Home_viajero.html"><img src="img/home.png" alt=""></div></a>
+        <div class="icon" onclick="expandIcon(this)"><a href="viajes.html"><img src="img/viajes.png" alt=""></div></a>
+        <div class="icon" onclick="expandIcon(this)"><a href="lista_pedidos.html"><img src="img/box.png" alt=""></div></a>
+        <div class="icon" onclick="expandIcon(this)"><a href="AsistenteViajero.html"><img src="img/IA.png" alt=""></div></a>
+        <div class="icon" onclick="expandIcon(this)"><a href="ViajeroProfile.html"><img src="img/user.png" alt=""></div></a>
+    </div>
+</footer>
+</body>
+<script type="module" src="/www/codigo/detallesviajero.js"></script>
+</html>

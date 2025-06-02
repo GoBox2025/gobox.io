@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/www/estilos/pant17vjerosAnadirViaje.css">
+    <script src="/www/codigo/pant17vjerosAnadirViaje.js" type="module"></script>
+    <title>Añadir Viaje</title>
+</head>
+<body>
+      
+<div class="barra-arriba">
+  <div class="icono">
+    <div>
+      <a href="/www/viajes.html"><img src="/www/img/flechaIzquierda.png" alt=""></a>
+    </div>
+  </div>
+</div>
+<br>
+<center>
+<h1 style="width: 90%;">Añade los detalles de tu viaje para empezar a ganar</h1>
+</center>
+
+  <form id="anadirViaje" name="anadirViajee" action="">
+    <table>
+      <!-- SECCIÓN "VIAJA DESDE" -->
+      <tr>
+        <td colspan="2"><label for="paisOrigen">Viaja desde:</label></td>
+      </tr>
+      <tr>
+        <td colspan="2">
+          <select name="paisOrigen" id="paisOrigen" class="paises">
+            <option value="" disabled selected>Seleccione un país</option>
+            <option value="El Salvador">El Salvador</option>
+            <option value="Estados Unidos">Estados Unidos</option>
+          </select>
+        </td>
+      </tr>
+      <tr>
+        <td colspan="2">
+          <!-- Selector de departamentos de El Salvador (origen) -->
+          <select name="departamentosOrigenSV" id="departamentosOrigenSV" class="departamentosSV">
+            <option value="" disabled selected>Seleccione departamento</option>
+            <option value="San Miguel">San Miguel</option>
+            <option value="La Union">La Unión</option>
+            <option value="Morazan">Morazán</option>
+            <option value="Usulutan">Usulután</option>
+          </select>
+        </td>
+      </tr>
+      <tr>
+        <td colspan="2">
+          <!-- Selector de estados de USA (origen) -->
+          <select name="estadosOrigenUSA" id="estadosOrigenUSA" class="estadosUSA">
+            <option value="" disabled selected>Seleccione estado</option>
+            <option value="Alabama">Alabama</option>
+            <option value="Alaska">Alaska</option>
+            <option value="Arizona">Arizona</option>
+            <option value="Arkansas">Arkansas</option>
+            <option value="California">California</option>
+            <option value="Carolina del Norte">Carolina del Norte</option>
+            <option value="Carolina del Sur">Carolina del Sur</option>
+            <option value="Colorado">Colorado</option>
+            <option value="Connecticut">Connecticut</option>
+            <option value="Dakota del Norte">Dakota del Norte</option>
+            <option value="Dakota del Sur">Dakota del Sur</option>
+            <option value="Delaware">Delaware</option>
+            <option value="Florida">Florida</option>
+            <option value="Georgia">Georgia</option>
+            <option value="Hawai">Hawái</option>
+            <option value="Idaho">Idaho</option>
+            <option value="Illinois">Illinois</option>
+            <option value="Indiana">Indiana</option>
+            <option value="Iowa">Iowa</option>
+            <option value="Kansas">Kansas</option>
+            <option value="Kentucky">Kentucky</option>
+            <option value="Luisiana">Luisiana</option>
+            <option value="Maine">Maine</option>
+            <option value="Maryland">Maryland</option>
+            <option value="Massachusetts">Massachusetts</option>
+            <option value="Michigan">Michigan</option>
+            <option value="Minnesota">Minnesota</option>
+            <option value="Misisipi">Misisipi</option>
+            <option value="Misuri">Misuri</option>
+            <option value="Montana">Montana</option>
+            <option value="Nebraska">Nebraska</option>
+            <option value="Nevada">Nevada</option>
+            <option value="Nueva Jersey">Nueva Jersey</option>
+            <option value="Nueva York">Nueva York</option>
+            <option value="Nuevo Hampshire">Nuevo Hampshire</option>
+            <option value="Nuevo Mexico">Nuevo México</option>
+            <option value="Ohio">Ohio</option>
+            <option value="Oklahoma">Oklahoma</option>
+            <option value="Oregon">Oregón</option>
+            <option value="Pensilvania">Pensilvania</option>
+            <option value="Rhode Island">Rhode Island</option>
+            <option value="Tennessee">Tennessee</option>
+            <option value="Texas">Texas</option>
+            <option value="Utah">Utah</option>
+            <option value="Vermont">Vermont</option>
+            <option value="Virginia">Virginia</option>
+            <option value="Virginia Occidental">Virginia Occidental</option>
+            <option value="Wanshington">Wanshington</option>
+            <option value="Wisconsin">Wisconsin</option>
+            <option value="Wyoming">Wyoming</option> 
+          </select>
+        </td>
+      </tr>
+
+      <!-- SECCIÓN "VIAJA A" -->
+      <tr>
+        <td colspan="2"><label for="paisDestino">Viaja a:</label></td>
+      </tr>
+      <tr>
+        <td colspan="2">
+          <select name="paisDestino" id="paisDestino" class="paises">
+            <option value="" disabled selected>Seleccione un país</option>
+            <option value="El Salvador">El Salvador</option>
+            <option value="Estados Unidos">Estados Unidos</option>
+          </select>
+        </td>
+      </tr>
+      <tr>
+        <td colspan="2">
+          <!-- Selector de departamentos de El Salvador (destino) -->
+          <select name="departamentosDestinoSV" id="departamentosDestinoSV" class="departamentosSV">
+            <option value="" disabled selected>Seleccione departamento</option>
+            <option value="San Miguel">San Miguel</option>
+            <option value="La Union">La Unión</option>
+            <option value="Morazan">Morazán</option>
+            <option value="Usulutan">Usulután</option>
+          </select>
+        </td>
+      </tr>
+      <tr>
+        <td colspan="2">
+          <!-- Selector de estados de USA (destino) -->
+          <select name="estadosDestinoUSA" id="estadosDestinoUSA" class="estadosUSA">
+            <option value="" disabled selected>Seleccione estado</option>
+            <option value="Alabama">Alabama</option>
+            <option value="Alaska">Alaska</option>
+            <option value="Arizona">Arizona</option>
+            <option value="Arkansas">Arkansas</option>
+            <option value="California">California</option>
+            <option value="Carolina del Norte">Carolina del Norte</option>
+            <option value="Carolina del Sur">Carolina del Sur</option>
+            <option value="Colorado">Colorado</option>
+            <option value="Connecticut">Connecticut</option>
+            <option value="Dakota del Norte">Dakota del Norte</option>
+            <option value="Dakota del Sur">Dakota del Sur</option>
+            <option value="Delaware">Delaware</option>
+            <option value="Florida">Florida</option>
+            <option value="Georgia">Georgia</option>
+            <option value="Hawai">Hawái</option>
+            <option value="Idaho">Idaho</option>
+            <option value="Illinois">Illinois</option>
+            <option value="Indiana">Indiana</option>
+            <option value="Iowa">Iowa</option>
+            <option value="Kansas">Kansas</option>
+            <option value="Kentucky">Kentucky</option>
+            <option value="Luisiana">Luisiana</option>
+            <option value="Maine">Maine</option>
+            <option value="Maryland">Maryland</option>
+            <option value="Massachusetts">Massachusetts</option>
+            <option value="Michigan">Michigan</option>
+            <option value="Minnesota">Minnesota</option>
+            <option value="Misisipi">Misisipi</option>
+            <option value="Misuri">Misuri</option>
+            <option value="Montana">Montana</option>
+            <option value="Nebraska">Nebraska</option>
+            <option value="Nevada">Nevada</option>
+            <option value="Nueva Jersey">Nueva Jersey</option>
+            <option value="Nueva York">Nueva York</option>
+            <option value="Nuevo Hampshire">Nuevo Hampshire</option>
+            <option value="Nuevo Mexico">Nuevo México</option>
+            <option value="Ohio">Ohio</option>
+            <option value="Oklahoma">Oklahoma</option>
+            <option value="Oregon">Oregón</option>
+            <option value="Pensilvania">Pensilvania</option>
+            <option value="Rhode Island">Rhode Island</option>
+            <option value="Tennessee">Tennessee</option>
+            <option value="Texas">Texas</option>
+            <option value="Utah">Utah</option>
+            <option value="Vermont">Vermont</option>
+            <option value="Virginia">Virginia</option>
+            <option value="Virginia Occidental">Virginia Occidental</option>
+            <option value="Wanshington">Wanshington</option>
+            <option value="Wisconsin">Wisconsin</option>
+            <option value="Wyoming">Wyoming</option>
+          </select>
+        </td>
+      </tr>
+
+      <!-- FECHA DE VIAJE -->
+      <tr>
+        <td colspan="2"><label for="fechaDeViaje">Fecha de viaje:</label></td>
+      </tr>
+      <tr>
+        <td colspan="2"><input type="date" id="fechaDeViaje" name="fechaDeViaje" required></td>
+      </tr>
+      
+      <!-- BOTÓN DE ENVÍO -->
+      <tr>
+        <td colspan="2"><input type="submit" value="Añadir viaje" id="bttnAnadirViaje" name="bttnAnadirViaje"></td>
+      </tr>
+    </table>
+  </form>
+
+ 
+
+</body>
+</html>

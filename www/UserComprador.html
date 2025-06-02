@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Perfil</title>
+    <link rel="stylesheet" href="/www/estilos/estiloCompradorP.css">
+    <link rel="stylesheet" href="/www/estilos/menu.css">
+</head>
+<body>
+    <div class="barra-arriba"></div>
+    <img src="img/logout.png" id="logout" alt="">
+<br>
+   <center> <table class="tabla" style="border-spacing: 20px;" >
+
+        <tr>
+
+            <td id="Contenedor_nombre"> <input type="text" id="username" disabled></h2>
+
+                <h5 id="useremail"></h5>
+
+            </td>
+
+            <td id="photo">
+
+                
+
+            </td>
+
+        </tr>
+
+    </table>
+</center>
+    <hr id="separador">
+
+    <div class="contenedor">
+
+      
+       <b><p style="font-size: 20px;">Rol</p></b> 
+
+        <select name="" class="Rol" style="font-size: 20px;" id="rolSelect" disabled>
+
+            <option value="Comprador"    >Comprador</option>
+
+            <option value="Viajero"  onclick="miConfirm(event)" id="rolCambio" >Viajero</option>  <!--LUZ ACA VAS A PONER EL SELECTED EN VIAJERO-->
+
+        </select> 
+
+       <b><p style="font-size: 20px;">Telefono</p></b> 
+
+       <input type="text" id="userphone" disabled>
+
+         <b><p style="font-size: 20px;">Fecha de nacimiento:</p></b> 
+
+          <input type="date" id="userFecha" disabled>
+
+           <b><p style="font-size: 20px;">Genero:</p></b>
+
+            <select name="" class="Rol" style="font-size: 20px;" id="selectGenero" disabled>
+
+            <option value="Femenino"  selected  >Femenino</option>
+
+            <option value="Masculino"  >Masculino</option>
+
+            <option value="Otro" >Otro</option>
+
+        </select> 
+           
+           
+
+    </div>
+ <br>
+    <button id="change">Editar</button>
+
+</center>
+
+   
+  <div class="footer">
+    <div class="iconos">
+       <nav class="navbar">
+        <a href="/www/Home_comprador.html"><img src="/www/img/home.png" alt="Inicio"></a>
+        <a href="/www/Asistente.html"><img src="/www/img/IA.png" alt=""></a>
+        <a href="/www/UserComprador.html"><img src="/www/img/user.png" alt="Perfil" ></a>
+    </nav>
+  
+  </div>
+  
+  <script type="module" src="/www/codigo/perfilC.js"></script>
+</body>
+</html>

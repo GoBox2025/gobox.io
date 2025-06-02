@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Tus pedidos tomados</title>
+  <link rel="stylesheet" href="/www/estilos/css.css" />
+  <link rel="stylesheet" href="/www/estilos/menu.css">
+</head>
+<body>
+  <script src="/www/codigo/lista_pedidos.js" type="module"></script>
+
+  <header class="header">
+   <a href="/www/Home_viajero.html">
+      <img src="/www/img/flechaIzquierda.png" alt="flecha"  style="width: auto; height: 30px; ">
+    </a>
+    <h1 class="title">Tus pedidos tomados</h1>
+  </header>
+
+  <div class="filter">
+    <select id="filter-select">
+      <option value="todos">Filtrar por: Todos</option>
+      <option value="en camino">En camino</option>
+      <option value="entregado">Entregado</option>
+       <option value="En espera">En espera</option>
+    </select>
+  </div>
+
+  <!-- lista de pedidos-->
+  <template id="pedido-template">
+    <div class="order-card" data-status="">
+      <img src="" alt="Imagen del producto" class="product-img" />
+      <div class="order-info">
+        <p class="pedido-nombre"></p>
+        <p class="pedido-estado"></p>
+        <p class="pedido-fecha"></p>
+      </div>
+      <button class="detalle-btn"><img src="/www/img/ArrowRight.png" alt="" id="arrow"></button>
+    </div>
+  </template>
+
+  
+  <section class="orders"></section>
+  <br>
+  <br>
+  <br>
+
+  <div class="navbar">
+        <div class="icon" onclick="expandIcon(this)" ><a href="Home_viajero.html"><img src="img/home.png" alt=""></div></a>
+        <div class="icon" onclick="expandIcon(this)"><a href="viajes.html"><img src="img/viajes.png" alt=""></div></a>
+        <div class="icon" onclick="expandIcon(this)"><a href="lista_pedidos.html"><img src="img/box.png" alt=""></div></a>
+        <div class="icon" onclick="expandIcon(this)"><a href="AsistenteViajero.html"><img src="img/IA.png" alt=""></div></a>
+        <div class="icon" onclick="expandIcon(this)"><a href="ViajeroProfile.html"><img src="img/user.png" alt=""></div></a>
+    </div>
+</body>
+</html>

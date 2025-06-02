@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/www/estilos/pant15vjerosHacerOferta.css">
+    <script src="/www/codigo/pant15vjerosHacerOferta.js" type="module"></script>
+    <title>Hacer Oferta</title>
+</head>
+<body>
+
+<div class="barra-arriba">
+  <div class="icono">
+    <div>
+      <a href="Home_viajero.html"><img src="/www/img/flechaIzquierda.png" alt=""></a>
+    </div>
+  </div>
+</div>
+
+<h1>Oferta para:</h1>
+
+<form id="ofertaForm">
+  <table>
+    <tr>
+      <td><label for="textFechaRetiroPaq">Fecha de retiro del paquete:</label></td>
+    </tr>
+    <tr>
+      <td><input type="date" id="textFechaRetiroPaq" name="fechaRetiroPaq"></td>
+    </tr>
+    <tr>
+      <td><label for="textFechaEntregaPaq">Fecha de entrega del paquete:</label></td>
+    </tr>
+    <tr>
+      <td><input type="date" id="textFechaEntregaPaq" name="fechaEntregaPaq"></td>
+    </tr>
+    <tr>
+      <td><label for="textPrecioEntregarPaq">Precio por llevar el paquete:</label></td>
+    </td>
+    <tr>
+      <td><input type="number" id="textPrecioEntregarPaq" name="precioEntregarPaq" step="0.01" min="0"></td>
+    </tr>
+    <tr>
+        <td><input type="submit" value="Publicar" id="bttnPublicarOferta" name="bttnPublicarOferta"></td>
+        <td><input type="button" value="Cancelar" id="bttnCancelarOferta" name="bttnCancelarOferta"></td>
+    </tr>
+  </table>
+</form>
+
+  
+
+</body>
+</html>
