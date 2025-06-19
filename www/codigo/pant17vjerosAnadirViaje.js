@@ -24,115 +24,106 @@ const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
 const auth = getAuth(app);
 
-// 1. LÓGICA DE LOS SELECTORES
-document.addEventListener('DOMContentLoaded', function() {
-    // Configurar eventos para los selectores de país
-    document.getElementById('paisOrigen').addEventListener('change', function() {
-        mostrarUbicacion('Origen', this.value);
-    });
-    
-    document.getElementById('paisDestino').addEventListener('change', function() {
-        mostrarUbicacion('Destino', this.value);
-    });
-    
-    // Inicializar - ocultar todos los selectores condicionales
-    document.querySelectorAll('.departamentosSV, .estadosUSA').forEach(function(element) {
-        element.style.display = 'none';
-    });
+// ========= 1. LÓGICA DE LOS SELECTORES =========
+document.addEventListener('DOMContentLoaded', () => {
+  // Oculta todos los selectores condicionales al inicio
+  document.querySelectorAll('.departamentosSV, .estadosUSA').forEach(el => el.style.display = 'none');
+
+  // Asignar eventos a los selects de país
+  document.getElementById('paisOrigen').addEventListener('change', function () {
+    mostrarUbicacion('Origen', this.value);
+  });
+
+  document.getElementById('paisDestino').addEventListener('change', function () {
+    mostrarUbicacion('Destino', this.value);
+  });
 });
 
+// Muestra el selector correcto según el país
 function mostrarUbicacion(tipo, pais) {
-    const deptSV = document.getElementById(`departamentos${tipo}SV`);
-    const estadosUSA = document.getElementById(`estados${tipo}USA`);
-    
-    deptSV.style.display = 'none';
-    estadosUSA.style.display = 'none';
-    
-    if (pais === 'El Salvador') {
-        deptSV.style.display = 'block';
-    } else if (pais === 'Estados Unidos') {
-        estadosUSA.style.display = 'block';
-    }
+  const deptSV = document.getElementById(`departamentos${tipo}SV`);
+  const estadosUSA = document.getElementById(`estados${tipo}USA`);
+
+  deptSV.style.display = 'none';
+  estadosUSA.style.display = 'none';
+
+  if (pais === 'El Salvador') {
+    deptSV.style.display = 'block';
+  } else if (pais === 'Estados Unidos') {
+    estadosUSA.style.display = 'block';
+  }
 }
 
-// 2. LÓGICA PARA ENVIAR A FIRESTORE
-document.addEventListener('DOMContentLoaded', function() {
-    const form = document.getElementById('anadirViaje');
-    
-    form.addEventListener('submit', async (e) => {
-        e.preventDefault();
-        
-        // Obtener usuario actual
-        const user = auth.currentUser;
+// ========= 2. ENVÍO DE FORMULARIO A FIRESTORE =========
+document.addEventListener('DOMContentLoaded', () => {
+  const form = document.getElementById('anadirViaje');
 
-        
-        if (!user) {
-            alert("Debes estar autenticado para registrar un viaje.");
-            return;
-        }
-        
-        // Obtener valores del formulario
-        const paisOrigen = document.getElementById('paisOrigen').value;
-        const paisDestino = document.getElementById('paisDestino').value;
-        const fechaViaje = document.getElementById('fechaDeViaje').value;
-        
-        // Obtener ubicaciones específicas
-        let ubicacionOrigen, ubicacionDestino;
-        
-        if (paisOrigen === 'El Salvador') {
-            ubicacionOrigen = document.getElementById('departamentosOrigenSV').value;
-        } else if (paisOrigen === 'Estados Unidos') {
-            ubicacionOrigen = document.getElementById('estadosOrigenUSA').value;
-        }
-        
-        if (paisDestino === 'El Salvador') {
-            ubicacionDestino = document.getElementById('departamentosDestinoSV').value;
-        } else if (paisDestino === 'Estados Unidos') {
-            ubicacionDestino = document.getElementById('estadosDestinoUSA').value;
-        }
-        
-        // Validaciones
-        if (!paisOrigen || !paisDestino) {
-            alert('Por favor selecciona países de origen y destino');
-            return;
-        }
-        
-        if (!ubicacionOrigen || !ubicacionDestino) {
-            alert('Por favor selecciona una ubicación específica');
-            return;
-        }
-        
-        if (!fechaViaje) {
-            alert('Por favor selecciona una fecha de viaje');
-            return;
-        }
-        
-        try {
-            // Crear objeto con los datos del viaje
-            const viajeData = {
-                paisOrigen: paisOrigen,
-                ubicacionOrigen: ubicacionOrigen,
-                paisDestino: paisDestino,
-                ubicacionDestino: ubicacionDestino,
-                fechaViaje: fechaViaje,
-                viajeroId: user.uid,
-                nombre:user.displayName || "Usuario desconocido",
-                correo:user.email ,
-                fecha_publicacion:  new Date().toISOString()
-            };
-            
-            // Enviar a Firestore
-            const docRef = await addDoc(collection(db, "Viajes"), viajeData);
-            
-            alert('¡Viaje añadido con éxito!');
-            form.reset();
-            
-            // Opcional: redirigir
-            window.location.href = 'viajes.html';
-            
-        } catch (error) {
-            console.error("Error al añadir el viaje: ", error);
-            alert('Error al añadir el viaje: ' + error.message);
-        }
-    });
+  form.addEventListener('submit', async (e) => {
+    e.preventDefault();
+
+    const user = auth.currentUser;
+    if (!user) {
+      alert("Debes iniciar sesión para registrar un viaje.");
+      return;
+    }
+
+    // Obtener valores básicos
+    const paisOrigen = document.getElementById('paisOrigen').value;
+    const paisDestino = document.getElementById('paisDestino').value;
+    const fechaViaje = document.getElementById('fechaDeViaje').value;
+
+    // Obtener valores específicos de ubicación
+    let ubicacionOrigen = '';
+    if (paisOrigen === 'El Salvador') {
+      ubicacionOrigen = document.getElementById('departamentosOrigenSV').value;
+    } else if (paisOrigen === 'Estados Unidos') {
+      ubicacionOrigen = document.getElementById('estadosOrigenUSA').value;
+    }
+
+    let ubicacionDestino = '';
+    if (paisDestino === 'El Salvador') {
+      ubicacionDestino = document.getElementById('departamentosDestinoSV').value;
+    } else if (paisDestino === 'Estados Unidos') {
+      ubicacionDestino = document.getElementById('estadosDestinoUSA').value;
+    }
+
+    // Validaciones
+    if (!paisOrigen || !paisDestino) {
+      alert('Por favor selecciona los países de origen y destino.');
+      return;
+    }
+
+    if (!ubicacionOrigen || !ubicacionDestino) {
+      alert('Por favor selecciona las ubicaciones específicas.');
+      return;
+    }
+
+    if (!fechaViaje) {
+      alert('Por favor selecciona la fecha del viaje.');
+      return;
+    }
+
+    // Construcción de datos del viaje
+    const viajeData = {
+      paisOrigen,
+      ubicacionOrigen,
+      paisDestino,
+      ubicacionDestino,
+      fechaViaje,
+      viajeroId: user.uid,
+      nombre: user.displayName || "Usuario desconocido",
+      correo: user.email,
+      fecha_publicacion: new Date().toISOString()
+    };
+
+    try {
+      await addDoc(collection(db, "Viajes"), viajeData);
+      alert("¡Viaje añadido con éxito!");
+      form.reset();
+      window.location.href = "viajes.html";
+    } catch (error) {
+      console.error("Error al añadir el viaje: ", error);
+      alert("Error al añadir el viaje: " + error.message);
+    }
+  });
 });

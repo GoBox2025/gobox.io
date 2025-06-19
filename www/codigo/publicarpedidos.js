@@ -1,5 +1,9 @@
+// Firebase imports
 import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.0/firebase-app.js";
-import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/11.6.0/firebase-auth.js";
+import {
+  getAuth,
+  onAuthStateChanged
+} from "https://www.gstatic.com/firebasejs/11.6.0/firebase-auth.js";
 import {
   getFirestore,
   doc,
@@ -8,7 +12,7 @@ import {
   increment
 } from "https://www.gstatic.com/firebasejs/11.6.0/firebase-firestore.js";
 
-// Configuración de Firebase
+// Firebase config
 const firebaseConfig = {
   apiKey: "AIzaSyBB0GFK5FhyPsLXrZGIYCxNT47738DXK1o",
   authDomain: "goboxprueba.firebaseapp.com",
@@ -18,33 +22,29 @@ const firebaseConfig = {
   appId: "1:470323269250:web:777b46cbea8d7260822e9b"
 };
 
-// Inicializar Firebase
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
 const db = getFirestore(app);
 
-// Elementos
+// Imagen
 const inputImagen = document.getElementById('imagen');
 const iconoRegistro = document.querySelector('.icono-registro');
 
-iconoRegistro.addEventListener('click', () => {
-  inputImagen.click();
-});
+iconoRegistro?.addEventListener('click', () => inputImagen?.click());
 
-// Vista previa de la imagen
-inputImagen.addEventListener('change', (event) => {
+inputImagen?.addEventListener('change', (event) => {
   const archivo = event.target.files[0];
   if (archivo) {
     const lector = new FileReader();
     lector.onload = function (e) {
       const imagenPreview = iconoRegistro.querySelector('img');
-      imagenPreview.src = e.target.result;
+      if (imagenPreview) imagenPreview.src = e.target.result;
     };
     lector.readAsDataURL(archivo);
   }
 });
 
-// Obtener siguiente ID
+// ID incremental
 async function obtenerSiguienteID() {
   const contadorRef = doc(db, "contadores", "pedido");
   try {
@@ -65,7 +65,14 @@ async function obtenerSiguienteID() {
   }
 }
 
-// Publicacion del pedido
+// Validar país
+function validarUbicacion(direccion) {
+  if (!direccion) return false;
+  const paisPermitido = ["estados unidos", "el salvador"];
+  return paisPermitido.some(pais => direccion.toLowerCase().includes(pais));
+}
+
+// Publicar pedido
 async function publicarPedido(event) {
   event.preventDefault();
 
@@ -91,13 +98,20 @@ async function publicarPedido(event) {
       const costo = document.getElementById('costo').value;
       const fechaEstimada = document.getElementById('fecha_estimada').value;
 
+      // Validación de ubicación
+      if (!validarUbicacion(direccionOrigen) || !validarUbicacion(direccionDestino)) {
+        alert("Las direcciones deben estar ubicadas en Estados Unidos o El Salvador.");
+        return;
+      }
+
+      // Imagen
       const imagenArchivo = inputImagen.files[0];
       let imagenURL = "";
       if (imagenArchivo) {
         const formData = new FormData();
         formData.append("image", imagenArchivo);
 
-        const respuesta = await fetch("https://api.imgbb.com/1/upload?key=1404856594a8d1b1c9b941aae6004f22&name=Pedidos_" + idFormateado, {
+        const respuesta = await fetch(`https://api.imgbb.com/1/upload?key=1404856594a8d1b1c9b941aae6004f22&name=Pedidos_${idFormateado}`, {
           method: "POST",
           body: formData
         });
@@ -138,4 +152,4 @@ async function publicarPedido(event) {
   });
 }
 
-document.querySelector('.formulario').addEventListener('submit', publicarPedido);
+document.querySelector('.formulario')?.addEventListener('submit', publicarPedido);

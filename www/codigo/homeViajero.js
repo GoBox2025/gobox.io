@@ -21,22 +21,21 @@ let pedidosCargados = false;
 
 
 // === Mostrar saludo con nombre ===
-async function mostrarSaludo() {
+function mostrarSaludo() {
   onAuthStateChanged(auth, async (user) => {
     if (!user) return;
-    const uid = user.uid;
-    const usuarios = query(collection(db, "users"), where("uid", "==", uid));
+    const usuarios = collection(db, "users");
     const querySnapshot = await getDocs(usuarios);
-
     querySnapshot.forEach((userDoc) => {
       const data = userDoc.data();
-      const saludoElem = document.getElementById("BienvenidaP");
-
-      saludoElem.innerHTML = `
-        <p style="font-size: 25px; margin-bottom: 0.2em;">¡Bienvenido/a, ${data.nombre}!</p>
-        <p style="font-size: 1em; margin: 0;">Cada viaje es una nueva oportunidad. Llena tu maleta con ganancias.</p>
-       
-      `;
+      if (data.uid === user.uid) {
+        const saludoElem = document.getElementById("BienvenidaP");
+        saludoElem.innerHTML = `
+          <p style="font-size: 20px; margin-bottom: 0.1em;">Bienvenido/a, ${data.nombre} 👋</p>
+          <br>
+          <p style="font-size: 0.7em; margin: 0;">"Cada viaje es una nueva oportunidad. Llena tu maleta con ganancias."</p>
+        `;
+      }
     });
   });
 }
@@ -49,29 +48,23 @@ function getFechaString(fecha) {
   return null;
 }
 
-// === Obtener viaje más próximo ===
-
 function cargarProximoViaje() {
   onAuthStateChanged(auth, async (user) => {
-    if (!user) {
-      console.error(" No hay usuario autenticado.");
-      return;
-    }
-
-    const usuarioUID = user.uid;
-    console.log(" Usuario autenticado con UID:", usuarioUID);
+    if (!user) return;
 
     const viajesRef = collection(db, "Viajes");
-    const q = query(viajesRef, where("usuarioId", "==", usuarioUID)); /* de esta forma se obtiene de la base de datos los viajes
-                                                                         que le perteneces al usuari0*/
+    const hoy = new Date();
+    const viajesFuturos = [];
 
     try {
-      const snapshot = await getDocs(q);
-      const hoy = new Date();
-      const viajesFuturos = [];
+      const snapshot = await getDocs(viajesRef);
 
       snapshot.forEach((doc) => {
         const data = doc.data();
+
+        // Filtra solo viajes creados por el usuario
+     if (data.viajeroId !== user.uid) return;
+
         const fechaStr = getFechaString(data.fechaViaje);
         const fechaObj = new Date(fechaStr);
 
@@ -87,14 +80,14 @@ function cargarProximoViaje() {
         }
       });
 
+      // Ordenar y mostrar el más próximo
       viajesFuturos.sort((a, b) => new Date(a.fechaViaje) - new Date(b.fechaViaje));
       mostrarViajeProximo(viajesFuturos[0] || null);
     } catch (err) {
-      console.error(" no se pudo obtener el viaje:", err);
+      console.error("Error al obtener los viajes:", err);
     }
   });
-}
-    
+};
 
 // === Mostrar próximo viaje ===
 function mostrarViajeProximo(viaje) {
@@ -103,8 +96,7 @@ function mostrarViajeProximo(viaje) {
 
   if (!viaje) {
     rutaElem.textContent = "No hay viajes próximos.";
-    fechaElem.textContent = "No hay fecha programada";
-    
+    fechaElem.textContent = "-";
     return;
   }
 
@@ -137,6 +129,10 @@ async function mostrarPedidos() {
         fila.setAttribute("data-nombre", data.nombre.toLowerCase());
         fila.setAttribute("data-id", doc.id);
 
+        const estado = data.estado?.toLowerCase().trim();
+
+       
+
         // Imagen
         const celdaFoto = fila.insertCell(0);
         const img = document.createElement("img");
@@ -150,9 +146,9 @@ async function mostrarPedidos() {
         // Datos
         const celda = document.createElement("td");
         celda.innerHTML =
-         `Nombre: ${data.nombre}
-        <br><br>Estado: ${data.estado}<br>
-        <br>Fecha de entrega: ${data.fecha_estimada}`;
+          `<p><strong>Nombre:</strong> ${data.nombre}</p>
+          <p style="line-height: 20px;"><strong>Dirección destino:</strong> ${data.direccion_destino || "-"}</p>
+          <p><strong>Estado:</strong> ${data.estado}</p>`;
         fila.appendChild(celda);
 
         // Botón
@@ -160,101 +156,96 @@ async function mostrarPedidos() {
         buttonCell.id = "celdaBotones";
         const button = document.createElement("button");
         button.id = 'Detalles2';
-        button.style.height = "75px";
-      
+        button.style.height = "82px";
+
         button.addEventListener("click", () => {
           const pedidoId = doc.id;
           window.location.href = `detallesviajero.html?id=${pedidoId}`;
         });
-             
+
         const imgButton = document.createElement("img");
         imgButton.id = 'arrow2';
         imgButton.src = 'img/ArrowRight.png';
         button.appendChild(imgButton);
         buttonCell.appendChild(button);
 
-         const fila2 = tabla.insertRow();
-            fila2.id = 'fila2';
-            fila2.classList.add("fila-separadora");
-            fila2.setAttribute("data-id", doc.id);
+        const fila2 = tabla.insertRow();
+        fila2.id = 'fila2';
+        fila2.classList.add("fila-separadora");
+        fila2.setAttribute("data-id", doc.id);
+
+         if (estado === "tomado" || estado === "entregado exitosamente") {
+          fila.style.display = "none";
+          fila2.style.display = "none";
+        };
       });
 
       if (tabla.rows.length === 0) {
-        
-            //llamar el div para insertar el mensaje dentro de el. y poner el parrafo
-            document.querySelector(".listPedidos").innerHTML = "<br><p>Aún no has realizado pedidos.</p>";
 
-            //llamar el div otra vez para que en otra linea se inserte la imagen (solo por decoración)
+        //llamar el div para insertar el mensaje dentro de el. y poner el parrafo
+        document.querySelector(".listPedidos").innerHTML = "<br><p>Aún no has realizado pedidos.</p>";
 
-            const emptyBOX = document.querySelector(".listPedidos");
+        //llamar el div otra vez para que en otra linea se inserte la imagen (solo por decoración)
 
-            //se crea la imagen
-            const imgB = document.createElement("img");
+        const emptyBOX = document.querySelector(".listPedidos");
 
-            //se le añade su dirección
-            imgB.src = '/HomePageComprador/imagene/caja.png';
+        //se crea la imagen
+        const imgB = document.createElement("img");
 
-            //asigno id para modificarlo desde css
-            imgB.id = 'Cajavacia';
+        //se le añade su dirección
+        imgB.src = '/HomePageComprador/imagene/caja.png';
 
-            //se le modifican sus propiedades para esterilizar mejor :)
+        //asigno id para modificarlo desde css
+        imgB.id = 'Cajavacia';
+
+        //se le modifican sus propiedades para esterilizar mejor :)
 
 
-            imgB.style.height = "130px";
+        imgB.style.height = "130px";
 
-            imgB.style.borderRadius = "10px";
+        imgB.style.borderRadius = "10px";
 
-            //se inserta dentro del DIV
-            emptyBOX.appendChild(imgB);
+        //se inserta dentro del DIV
+        emptyBOX.appendChild(imgB);
 
-            console.log(querySnapshot.size);
+        console.log(querySnapshot.size);
       }
     } else if (!user) {
       document.querySelector(".listPedidos").innerHTML = "<p>Debes iniciar sesión para ver los pedidos.</p>";
     }
+    activarFiltroEnInput(); // SIN AUTOCOMPLETADO, SOLO FILTRO
   });
-
-
-  
 }
 
-// Filtro por nombre del producto
-function agregarFiltroBusqueda() {
-  const inputBusqueda = document.getElementById("busquedaProductos");
-  inputBusqueda.addEventListener("input", () => {
-    const filtro = inputBusqueda.value.toLowerCase();
-    const filas = tabla.querySelectorAll(".fila-pedido");
+// Filtrado simple sin sugerencias
+function activarFiltroEnInput() {
+  const input = document.getElementById("busquedaProductos");
+  input.addEventListener("input", function () {
+    filtrarPedidos();
+  });
+}
 
-    filas.forEach(fila => {
-      const nombreProducto = fila.getAttribute("data-nombre") || "";
-      const pedidoId = fila.getAttribute("data-id"); // Obtener el ID del pedido
+// Filtra en base al texto escrito
+function filtrarPedidos() {
+  const filtro = document.getElementById("busquedaProductos").value.toLowerCase();
+  const filas = tabla.querySelectorAll(".fila-pedido");
 
-      if (nombreProducto.includes(filtro)) {
-        fila.style.display = ""; //  Muestra la fila del pedido
-       
-        //  Busca la fila2 
-        const filaSeparadora = document.querySelector(`.fila-separadora[data-id="${pedidoId}"]`);
-        if (filaSeparadora) {
-          filaSeparadora.style.display = "";
-        }
-      } else {
-        fila.style.display = "none"; 
-        
-        
-        //  Oculta la fila separadora 
-        const filaSeparadora = document.querySelector(`.fila-separadora[data-id="${pedidoId}"]`);
-        if (filaSeparadora) {
-          filaSeparadora.style.display = "none";
-        }
-      }
-    });
+  filas.forEach(fila => {
+    const pedidoId = fila.getAttribute("data-id");
+    const filaSeparadora = document.querySelector(`.fila-separadora[data-id="${pedidoId}"]`);
+
+    // Captura TODO el contenido visible de la fila (nombre, estado, fecha, etc.)
+    const textoCompleto = fila.textContent.toLowerCase();
+
+    const coincide = textoCompleto.includes(filtro);
+    fila.style.display = coincide ? "" : "none";
+    if (filaSeparadora) filaSeparadora.style.display = coincide ? "" : "none";
   });
 }
 // Función de inicialización
 function inicializar() {
   mostrarSaludo();
   mostrarPedidos();
-  agregarFiltroBusqueda();
   cargarProximoViaje();
 
 }

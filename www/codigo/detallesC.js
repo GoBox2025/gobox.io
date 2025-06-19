@@ -1,3 +1,4 @@
+// Importación de módulos de Firebase necesarios
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.0.0/firebase-app.js";
 import { getFirestore, doc, getDoc, updateDoc } from "https://www.gstatic.com/firebasejs/10.0.0/firebase-firestore.js";
 import { getStorage, ref, uploadBytesResumable, getDownloadURL } from "https://www.gstatic.com/firebasejs/10.0.0/firebase-storage.js";
@@ -13,21 +14,23 @@ const firebaseConfig = {
     measurementId: "G-ABC1234ABC"
 };
 
-// Inicializar Firebase
+// Inicializa la aplicación de Firebase y los servicios Firestore y Storage
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
 const storage = getStorage(app);
 
-// Obtener el ID del pedido desde la URL
+// Extrae el ID del pedido desde la URL (?pedidoId=xxxxx)
 const urlParams = new URLSearchParams(window.location.search);
 const pedidoId = urlParams.get('pedidoId');
 console.log("ID del Pedido recibido:", pedidoId);
+
+// Si se encontró un ID en la URL, busca el documento correspondiente en Firestore
 if (pedidoId) {
     const pedidoRef = doc(db, "pedido1", pedidoId);
     getDoc(pedidoRef).then((docSnapshot) => {
         if (docSnapshot.exists()) {
-            const pedido = docSnapshot.data();  // Aquí estamos extrayendo los datos del pedido
-            mostrarPedido(pedido);  // Llamamos a la función que muestra los datos
+            const pedido = docSnapshot.data(); // Obtiene los datos del pedido
+            mostrarPedido(pedido);             // Muestra los datos en los inputs
         } else {
             console.log("No se encontró el pedido.");
             alert("Este pedido no existe.");
@@ -40,7 +43,7 @@ if (pedidoId) {
     alert("No se ha proporcionado un ID de pedido.");
 }
 
-// Función para mostrar los detalles del pedido en los inputs
+// Muestra los datos del pedido en el formulario
 function mostrarPedido(pedido) {
     document.getElementById('nombre-pedido').value = pedido.nombre || 'No disponible';
     document.getElementById('producto-pedido').value = pedido.producto || 'No disponible';
@@ -53,21 +56,22 @@ function mostrarPedido(pedido) {
     document.getElementById('costo-pedido').value = pedido.costo || '0';
     document.getElementById('fecha-estimada-pedido').value = pedido.fecha_estimada || 'No disponible';
 
-    // Mostrar el estado en un p (no editable)
+    // Estado del pedido (solo lectura)
     const estadoPedido = document.getElementById('estado-pedido');
     estadoPedido.textContent = pedido.estado || 'No disponible';
 
-    // Cargar la imagen desde el campo imagen_url
+    // Muestra la imagen del pedido si existe
     const imagenPedido = document.getElementById('imagen-pedido');
     if (pedido.imagen_url) {
-        imagenPedido.src = pedido.imagen_url;  // Usamos imagen_url
+        imagenPedido.src = pedido.imagen_url;
     } else {
         imagenPedido.alt = "Imagen no disponible";
     }
 }
 
-// Función para guardar los cambios en Firestore
+// Evento para guardar cambios cuando el usuario hace clic en "guardar-cambios"
 document.getElementById('guardar-cambios').addEventListener('click', function () {
+    // Obtiene los nuevos valores del formulario
     const nombre = document.getElementById('nombre-pedido').value;
     const producto = document.getElementById('producto-pedido').value;
     const cantidad = document.getElementById('cantidad-pedido').value;
@@ -78,41 +82,45 @@ document.getElementById('guardar-cambios').addEventListener('click', function ()
     const descripcion = document.getElementById('descripcion-pedido').value;
     const costo = document.getElementById('costo-pedido').value;
     const fechaEstimada = document.getElementById('fecha-estimada-pedido').value;
-    const estado = document.getElementById('estado-pedido').textContent; // No editable
+    const estado = document.getElementById('estado-pedido').textContent;
 
     const pedidoRef = doc(db, "pedido1", pedidoId);
 
-    // Si se seleccionó una nueva imagen, la subimos
+    // Verifica si se seleccionó una nueva imagen para subir
     const inputImagen = document.getElementById('input-imagen');
     let nuevaImagenURL = null;
+
     if (inputImagen.files.length > 0) {
         const archivo = inputImagen.files[0];
         const imagenRef = ref(storage, 'images/' + archivo.name);
         const uploadTask = uploadBytesResumable(imagenRef, archivo);
 
+        // Seguimiento del progreso de subida
         uploadTask.on('state_changed', (snapshot) => {
-            // Opcional: ver el progreso de la subida
             const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
             console.log('Progreso de subida: ' + progress + '%');
         }, (error) => {
             console.log('Error al subir la imagen:', error);
             alert("Error al subir la imagen.");
         }, () => {
+            // Cuando la imagen termina de subir, obtenemos la URL
             getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
                 nuevaImagenURL = downloadURL;
                 console.log("Imagen subida correctamente, URL:", nuevaImagenURL);
-                // Ahora actualizamos los datos
+
+                // Llama a la función para actualizar el pedido con la nueva imagen
                 actualizarPedido(pedidoRef, nombre, producto, cantidad, peso, empaquetado, direccionOrigen, direccionDestino, descripcion, costo, fechaEstimada, estado, nuevaImagenURL);
             });
         });
     } else {
-        // Si no se seleccionó nueva imagen, actualizamos sin imagen
+        // No se subió nueva imagen, actualiza solo los datos
         actualizarPedido(pedidoRef, nombre, producto, cantidad, peso, empaquetado, direccionOrigen, direccionDestino, descripcion, costo, fechaEstimada, estado);
     }
 });
 
 // Función para actualizar el pedido en Firestore
 function actualizarPedido(pedidoRef, nombre, producto, cantidad, peso, empaquetado, direccionOrigen, direccionDestino, descripcion, costo, fechaEstimada, estado, nuevaImagenURL) {
+    // Datos a actualizar
     const datosActualizados = {
         nombre,
         producto,
@@ -127,23 +135,25 @@ function actualizarPedido(pedidoRef, nombre, producto, cantidad, peso, empaqueta
         estado
     };
 
+    // Si hay una nueva imagen, añade su URL al objeto
     if (nuevaImagenURL) {
-        datosActualizados.imagen_url = nuevaImagenURL;  // Guardamos la URL con el campo imagen_url
+        datosActualizados.imagen_url = nuevaImagenURL;
     }
 
+    // Actualiza el documento en Firestore
     updateDoc(pedidoRef, datosActualizados)
         .then(() => {
-            // Mostrar mensaje de éxito
             alert("Pedido actualizado exitosamente");
-
-            // Redirigir automáticamente a la página de detalles actualizada
-            window.location.href = `detallesC.html?id=${pedidoId}`;  // Redirige a la página de detalles actualizada
+            // Redirige a la página de detalles del pedido
+            window.location.href = `detallesC.html?id=${pedidoId}`;
         })
         .catch((error) => {
             console.error("Error al actualizar el pedido:", error);
             alert("Hubo un error al actualizar el pedido.");
         });
 }
+
+// Botón para marcar el pedido como entregado exitosamente
 document.getElementById('marcar-entregado').addEventListener('click', async () => {
     if (!pedidoId) {
         alert("No se ha encontrado el ID del pedido.");
@@ -153,6 +163,7 @@ document.getElementById('marcar-entregado').addEventListener('click', async () =
     const pedidoRef = doc(db, "pedido1", pedidoId);
 
     try {
+        // Cambia el estado a "Entregado Exitosamente"
         await updateDoc(pedidoRef, {
             estado: "Entregado Exitosamente"
         });
@@ -163,4 +174,3 @@ document.getElementById('marcar-entregado').addEventListener('click', async () =
         alert("No se pudo actualizar el estado.");
     }
 });
-

@@ -23,12 +23,15 @@ const firebaseConfig = {
   measurementId: "G-ABC1234ABC"
 };
 
+// Inicializa la app y los servicios de Firebase
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
 const auth = getAuth(app);
 
+// Variable para almacenar el usuario autenticado
 let currentUser = null;
 
+// Función para mostrar una notificación push simple en pantalla por unos segundos
 function mostrarNotificacionPush(mensaje) {
   const noti = document.getElementById("notificacion-push");
   if (!noti) return;
@@ -37,6 +40,7 @@ function mostrarNotificacionPush(mensaje) {
   setTimeout(() => noti.classList.add("oculto"), 4000);
 }
 
+// Función asincrónica que carga las ofertas que le han hecho al usuario autenticado
 async function cargarOfertas() {
   if (!currentUser) {
     console.log("No hay usuario activo para cargar ofertas.");
@@ -45,6 +49,7 @@ async function cargarOfertas() {
 
   console.log("Usuario detectado:", currentUser.uid);
 
+  // Consulta en la colección "HacerOferta" las ofertas hechas al usuario actual
   const ofertasRef = collection(db, "HacerOferta");
   const ofertasQuery = query(ofertasRef, where("propietarioId", "==", currentUser.uid));
 
@@ -58,14 +63,17 @@ async function cargarOfertas() {
       return;
     }
 
+    // Itera sobre cada oferta encontrada
     for (const ofertaDoc of ofertasSnap.docs) {
       const ofertaData = ofertaDoc.data();
       const pedidoId = ofertaData.pedidoId;
 
+      // Obtiene los detalles del pedido correspondiente a la oferta
       const pedidoSnap = await getDoc(doc(db, "pedido1", pedidoId));
       if (pedidoSnap.exists()) {
         const pedidoData = pedidoSnap.data();
 
+        // Muestra notificación y construye tarjeta con la info del pedido
         mostrarNotificacionPush(`¡Tienes una nueva oferta para: ${pedidoData.producto}!`);
 
         const card = document.createElement("section");
@@ -95,7 +103,7 @@ async function cargarOfertas() {
   }
 }
 
-// Sólo aquí escuchamos el estado de autenticación para llamar a cargarOfertas
+// Detecta si hay un usuario autenticado, y en caso afirmativo, carga sus ofertas
 onAuthStateChanged(auth, (user) => {
   currentUser = user ?? null;
   if (currentUser) {

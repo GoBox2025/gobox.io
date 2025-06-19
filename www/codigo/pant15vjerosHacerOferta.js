@@ -4,7 +4,8 @@ import {
     collection,
     addDoc,
     doc,
-    getDoc
+    getDoc,
+    updateDoc 
 } from "https://www.gstatic.com/firebasejs/10.0.0/firebase-firestore.js";
 import { getAuth } from "https://www.gstatic.com/firebasejs/10.0.0/firebase-auth.js";
 
@@ -18,105 +19,92 @@ const firebaseConfig = {
     appId: "1:470323269250:web:777b46cbea8d7260822e9b"
 };
 
-// Inicializar Firebase
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
 const auth = getAuth(app);
 
-// Función para crear la notificación
+// Función para crear una notificación asociada a una oferta
 async function crearNotificacionOferta(oferta) {
-    try {
-        const notificacionData = {
-            correoViajero: oferta.correo,
-            fechaEntrega: oferta.fechaEntrega,
-            precio: oferta.precio,
-            pedidoId: oferta.pedidoId,
-            propietarioId: oferta.propietarioId,
-            fecha: new Date().toISOString(),
-            leida: false
-        };
-        await addDoc(collection(db, "notificaciones"), notificacionData);
-        console.log("Notificación creada para el comprador");
-    } catch (error) {
-        console.error("Error creando notificación:", error);
-    }
+  const notificacionData = {
+    correoViajero: oferta.correo,
+    fechaEntrega: oferta.fechaEntrega,
+    precio: oferta.precio,
+    pedidoId: oferta.pedidoId,
+    propietarioId: oferta.propietarioId,
+    fecha: new Date().toISOString(),
+    leida: false
+  };
+  await addDoc(collection(db, "notificaciones"), notificacionData);
 }
 
-// Esperar a que cargue el DOM
+// Lógica ejecutada una vez cargado el DOM
 document.addEventListener('DOMContentLoaded', () => {
-    const form = document.querySelector('form');
-    const cancelButton = document.getElementById('bttnCancelarOferta');
+  const form = document.querySelector('form');
+  const cancelButton = document.getElementById('bttnCancelarOferta');
 
-    form.addEventListener('submit', async (e) => {
-        e.preventDefault();
+  // Evento al enviar el formulario de oferta
+  form.addEventListener('submit', async (e) => {
+    e.preventDefault();
 
-        // Obtener valores del formulario
-        const fechaRetiro = document.getElementById('textFechaRetiroPaq').value;
-        const fechaEntrega = document.getElementById('textFechaEntregaPaq').value;
-        const precio = document.getElementById('textPrecioEntregarPaq').value;
+    const fechaRetiro = document.getElementById('textFechaRetiroPaq').value;
+    const fechaEntrega = document.getElementById('textFechaEntregaPaq').value;
+    const precio = document.getElementById('textPrecioEntregarPaq').value;
 
-        // Verificar usuario autenticado
-        const user = auth.currentUser;
-        if (!user) {
-            alert('Debes iniciar sesión para hacer una oferta.');
-            return;
-        }
+    const user = auth.currentUser;
+    if (!user) {
+      alert('Debes iniciar sesión para hacer una oferta.');
+      return;
+    }
 
-        const uid = user.uid;
-        const nombre = user.displayName || "Nombre no disponible";
-        const correo = user.email;
+    const uid = user.uid;
+    const nombre = user.displayName || "Nombre no disponible";
+    const correo = user.email;
 
-        // Obtener ID del pedido desde la URL
-        const params = new URLSearchParams(window.location.search);
-        const pedidoId = params.get('id');
+    const params = new URLSearchParams(window.location.search);
+    const pedidoId = params.get('id');
+    if (!pedidoId) {
+      alert("No se encontró el ID del pedido.");
+      return;
+    }
 
-        if (!pedidoId) {
-            alert("No se encontró el ID del pedido.");
-            return;
-        }
+    const pedidoRef = doc(db, "pedido1", pedidoId);
+    const pedidoSnap = await getDoc(pedidoRef);
+    if (!pedidoSnap.exists()) {
+      alert("El pedido no existe.");
+      return;
+    }
 
-        // Obtener el usuario que creó el pedido desde Firestore
-        try {
-            const pedidoRef = doc(db, "pedido1", pedidoId);
-            const pedidoSnap = await getDoc(pedidoRef);
+    const propietarioId = pedidoSnap.data().usuarioId;
 
-            if (!pedidoSnap.exists()) {
-                alert("El pedido no existe.");
-                return;
-            }
+    const ofertaData = {
+      fechaRetiro,
+      fechaEntrega,
+      precio: parseFloat(precio),
+      viajeroId: uid,
+      nombre,
+      correo,
+      pedidoId,
+      propietarioId,
+      fecha_publicacion: new Date().toISOString()
+    };
 
-            const propietarioId = pedidoSnap.data().usuarioId;
+    await addDoc(collection(db, "HacerOferta"), ofertaData);
+    await crearNotificacionOferta(ofertaData);
 
-            // Crear objeto con datos de la oferta
-            const ofertaData = {
-                fechaRetiro,
-                fechaEntrega,
-                precio: parseFloat(precio),
-                viajeroId: uid,
-                nombre,
-                correo,
-                pedidoId,
-                propietarioId,
-                fecha_publicacion: new Date().toISOString()
-            };
+    try {
+      await updateDoc(pedidoRef, { ofertado: true });
+    } catch (error) {
+      console.error("Error al actualizar el estado del pedido:", error);
+      alert("Ocurrió un error actualizando el estado del pedido.");
+      return;
+    }
 
-            // Guardar la oferta en Firestore
-            const docRef = await addDoc(collection(db, "HacerOferta"), ofertaData);
+    alert('¡Oferta publicada con éxito!');
+    form.reset();
+    window.location.href = '/www/Home_viajero.html';
+  });
 
-            // Crear notificación para el comprador
-            await crearNotificacionOferta(ofertaData);
-
-            alert('¡Oferta publicada con éxito! ID: ' + docRef.id);
-            form.reset();
-            window.location.href = '/www/Home_viajero.html';
-        } catch (error) {
-            console.error("Error al publicar la oferta: ", error);
-            alert('Error al publicar la oferta: ' + error.message);
-        }
-    });
-
-    // Botón de cancelar
-    cancelButton.addEventListener('click', () => {
-        form.reset();
-    });
+  cancelButton.addEventListener('click', () => {
+    form.reset();
+  });
 });
