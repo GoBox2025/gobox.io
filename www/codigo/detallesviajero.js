@@ -60,7 +60,7 @@ async function mostrarPedido() {
   document.getElementById("tipoEntrega").textContent = ` ${data.fecha_estimada|| "No especificado"}`;
   document.getElementById("entregarEn").textContent = ` ${data.direccion_destino || "No especificado"}`;
   document.getElementById("recogerEn").textContent = ` ${data.direccion_origen || "No especificado"}`;
-  document.getElementById("peso").textContent = `${data.peso || "No especificado"}lb `;
+  document.getElementById("peso").textContent = `${data.peso || "No especificado"} `;
   document.getElementById("tipoDeEmpaquetado").textContent = ` ${data.empaquetado || "No especificado"}`;
   document.getElementById("imagen-pedido").src = data.imagen_url || "";
   document.getElementById("pedido").textContent = data.producto || "No especificado";
