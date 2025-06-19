@@ -79,7 +79,7 @@
           position: fixed;
           bottom: 70px;
           right: 20px;
-          background-color: #ffa940;
+          background-color: #ff981b;
           color: white;
           border: none;
           width: 60px;
@@ -91,7 +91,7 @@
         }
 
         .navbar {
-          background-color: #ffa940;
+          background-color: #ff981b;
           position: fixed;
           bottom: 0;
           width: 100%;
