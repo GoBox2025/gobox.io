@@ -3,38 +3,21 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  
-  <!-- CSS -->
   <link rel="stylesheet" href="estilos/pant17vjerosAnadirViaje.css" />
-  <link rel="stylesheet" href="estilos/menu.css" />
-
   <title>Añadir Viaje</title>
-
-  <style>
-    /* Para ocultar selects condicionales inicialmente */
-    .departamentosSV, .estadosUSA {
-      display: none;
-    }
-  </style>
-
-  <!-- JS -->
-  <script src="codigo/pant17vjerosAnadirViaje.js" type="module"></script>
 </head>
 <body style="background-color: black; color: white;">
 
-  <!-- Barra de navegación superior -->
   <div class="barra-arriba">
     <div class="icono">
       <a href="viajes.html"><img src="img/flechaIzquierda.png" alt="Volver" /></a>
     </div>
   </div>
 
-  <br />
   <center>
     <h1 style="width: 90%; color: white;">Añade los detalles de tu viaje para empezar a ganar</h1>
   </center>
 
-  <!-- Formulario -->
   <form id="anadirViaje" name="anadirViaje" action="">
     <table>
       <!-- Origen -->
@@ -48,74 +31,24 @@
           </select>
         </td>
       </tr>
-      <tr>
-        <td colspan="2">
-          <select name="departamentosOrigenSV" id="departamentosOrigenSV" class="departamentosSV">
-            <option value="" disabled selected>Seleccione departamento</option>
-            <option value="San Miguel">San Miguel</option>
-            <option value="La Unión">La Unión</option>
-            <option value="Morazán">Morazán</option>
-            <option value="Usulután">Usulután</option>
-          </select>
-        </td>
-      </tr>
-      <tr>
-        <td colspan="2">
-          <select name="estadosOrigenUSA" id="estadosOrigenUSA" class="estadosUSA">
-            <option value="" disabled selected>Seleccione estado</option>
-            <option value="Alabama">Alabama</option>
-            <option value="Alaska">Alaska</option>
-            <option value="Arizona">Arizona</option>
-            <option value="Arkansas">Arkansas</option>
-            <option value="California">California</option>
-            <option value="Carolina del Norte">Carolina del Norte</option>
-            <option value="Carolina del Sur">Carolina del Sur</option>
-            <option value="Colorado">Colorado</option>
-            <option value="Connecticut">Connecticut</option>
-            <option value="Dakota del Norte">Dakota del Norte</option>
-            <option value="Dakota del Sur">Dakota del Sur</option>
-            <option value="Delaware">Delaware</option>
-            <option value="Florida">Florida</option>
-            <option value="Georgia">Georgia</option>
-            <option value="Hawái">Hawái</option>
-            <option value="Idaho">Idaho</option>
-            <option value="Illinois">Illinois</option>
-            <option value="Indiana">Indiana</option>
-            <option value="Iowa">Iowa</option>
-            <option value="Kansas">Kansas</option>
-            <option value="Kentucky">Kentucky</option>
-            <option value="Luisiana">Luisiana</option>
-            <option value="Maine">Maine</option>
-            <option value="Maryland">Maryland</option>
-            <option value="Massachusetts">Massachusetts</option>
-            <option value="Michigan">Michigan</option>
-            <option value="Minnesota">Minnesota</option>
-            <option value="Misisipi">Misisipi</option>
-            <option value="Misuri">Misuri</option>
-            <option value="Montana">Montana</option>
-            <option value="Nebraska">Nebraska</option>
-            <option value="Nevada">Nevada</option>
-            <option value="Nueva Jersey">Nueva Jersey</option>
-            <option value="Nueva York">Nueva York</option>
-            <option value="Nuevo Hampshire">Nuevo Hampshire</option>
-            <option value="Nuevo México">Nuevo México</option>
-            <option value="Ohio">Ohio</option>
-            <option value="Oklahoma">Oklahoma</option>
-            <option value="Oregón">Oregón</option>
-            <option value="Pensilvania">Pensilvania</option>
-            <option value="Rhode Island">Rhode Island</option>
-            <option value="Tennessee">Tennessee</option>
-            <option value="Texas">Texas</option>
-            <option value="Utah">Utah</option>
-            <option value="Vermont">Vermont</option>
-            <option value="Virginia">Virginia</option>
-            <option value="Virginia Occidental">Virginia Occidental</option>
-            <option value="Washington">Washington</option>
-            <option value="Wisconsin">Wisconsin</option>
-            <option value="Wyoming">Wyoming</option>
-          </select>
-        </td>
-      </tr>
+      <tr><td colspan="2">
+        <select id="departamentosOrigenSV" class="departamentosSV">
+          <option value="" disabled selected>Seleccione departamento</option>
+          <option value="San Miguel">San Miguel</option>
+          <option value="La Unión">La Unión</option>
+          <option value="Morazán">Morazán</option>
+          <option value="Usulután">Usulután</option>
+        </select>
+      </td></tr>
+      <tr><td colspan="2">
+        <select id="estadosOrigenUSA" class="estadosUSA">
+          <option value="" disabled selected>Seleccione estado</option>
+          <option value="California">California</option>
+          <option value="Texas">Texas</option>
+          <option value="Florida">Florida</option>
+          <!-- ...otros estados -->
+        </select>
+      </td></tr>
 
       <!-- Destino -->
       <tr><td colspan="2"><label for="paisDestino">Hacia:</label></td></tr>
@@ -128,50 +61,48 @@
           </select>
         </td>
       </tr>
-      <tr>
-        <td colspan="2">
-          <select name="departamentosDestinoSV" id="departamentosDestinoSV" class="departamentosSV">
-            <option value="" disabled selected>Seleccione departamento</option>
-            <option value="San Miguel">San Miguel</option>
-            <option value="La Unión">La Unión</option>
-            <option value="Morazán">Morazán</option>
-            <option value="Usulután">Usulután</option>
-          </select>
-        </td>
-      </tr>
-      <tr>
-        <td colspan="2">
-          <select name="estadosDestinoUSA" id="estadosDestinoUSA" class="estadosUSA">
-            <option value="" disabled selected>Seleccione estado</option>
-            <!-- Mismos estados que en origen... -->
-            <!-- Puedes copiar los mismos del origen o referenciar dinámicamente -->
-          </select>
-        </td>
-      </tr>
+      <tr><td colspan="2">
+        <select id="departamentosDestinoSV" class="departamentosSV">
+          <option value="" disabled selected>Seleccione departamento</option>
+          <option value="San Miguel">San Miguel</option>
+          <option value="La Unión">La Unión</option>
+          <option value="Morazán">Morazán</option>
+          <option value="Usulután">Usulután</option>
+        </select>
+      </td></tr>
+      <tr><td colspan="2">
+        <select id="estadosDestinoUSA" class="estadosUSA">
+          <option value="" disabled selected>Seleccione estado</option>
+          <option value="California">California</option>
+          <option value="Texas">Texas</option>
+          <option value="Florida">Florida</option>
+          <!-- ...otros estados -->
+        </select>
+      </td></tr>
 
       <!-- Fecha -->
       <tr><td colspan="2"><label for="fechaDeViaje">Fecha de viaje:</label></td></tr>
       <tr><td colspan="2"><input type="date" id="fechaDeViaje" name="fechaDeViaje" required /></td></tr>
 
-      <!-- Botón personalizado -->
-      <tr>
-        <td colspan="2">
-          <button class="btn-31" type="submit">
-            <span class="text-container"><span class="text">Añadir viaje</span></span>
-          </button>
-        </td>
-      </tr>
+      <!-- Botón -->
+      <tr><td colspan="2">
+        <button class="btn-31" type="submit">
+          <span class="text-container"><span class="text">Añadir viaje</span></span>
+        </button>
+      </td></tr>
     </table>
   </form>
 
-  <!-- Navbar nuevo -->
-  <div class="navbar">
-    <div class="icon"><a href="Home_viajero.html"><img src="img/home.png" alt="Inicio"></a></div>
-    <div class="icon"><a href="viajes.html"><img src="img/viajes.png" alt="Viajes"></a></div>
-    <div class="icon"><a href="lista_pedidos.html"><img src="img/box.png" alt="Pedidos"></a></div>
-    <div class="icon"><a href="BOXBOT.html"><img src="img/IA.png" alt="IA"></a></div>
-    <div class="icon"><a href="ViajeroProfile.html"><img src="img/user.png" alt="Perfil"></a></div>
+  <div class="footer">
+    <div class="iconos">
+      <a href="Home_viajero.html"><img src="img/home.png" alt="Inicio" /></a>
+      <a href="viajes.html"><img src="img/viajes.png" alt="Viajes" /></a>
+      <a href="lista_pedidos.html"><img src="img/box.png" alt="Pedidos" /></a>
+      <a href="BOXBOT.html"><img src="img/IA.png" alt="IA" /></a>
+      <a href="ViajeroProfile.html"><img src="img/user.png" alt="Perfil" /></a>
+    </div>
   </div>
 
+  <script type="module" src="anadirViaje.js"></script>
 </body>
 </html>
