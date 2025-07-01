@@ -9,7 +9,7 @@ body{
 
 /*estilo para el boton de agregar pedido*/
 button{
-    background-color: #fda735;
+    background-color:  #fda735;
     height: 70px;
     width: 310px;
     border-radius: 10px;
@@ -24,7 +24,7 @@ button{
 
 
 button:hover {
-    background:#ef7c2c;;
+    background:#ef7c2c;
     box-shadow: 0 5px 5px rgba(0, 0, 0, .7);
 }
 
@@ -121,4 +121,9 @@ input{
     font-size: 0.75rem;
     padding: 0.4rem 0.7rem;
   }
+}
+#Detalles2:hover {
+  background-color: #e37f00; 
+  box-shadow: 0 5px 5px rgba(0, 0, 0, 0.7);
+  cursor: pointer; 
 }
