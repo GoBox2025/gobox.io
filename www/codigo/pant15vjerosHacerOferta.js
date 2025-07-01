@@ -101,7 +101,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     alert('¡Oferta publicada con éxito!');
     form.reset();
-    window.location.href = '/www/Home_viajero.html';
+    window.location.href = 'Home_viajero.html';
   });
 
   cancelButton.addEventListener('click', () => {
