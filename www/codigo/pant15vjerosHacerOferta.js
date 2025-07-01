@@ -107,7 +107,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
         // Botón cancelar
         cancelarBtn.addEventListener("click", () => {
-            form.reset();
+             window.location.href = "Home_viajero.html";
         // Enlace dinámico para regresar con el mismo ID de pedido
 const params = new URLSearchParams(window.location.search);
 const pedidoId = params.get("id");
