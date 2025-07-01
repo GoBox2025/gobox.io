@@ -56,6 +56,7 @@
 
         .lista-viaje {
           display: flex;
+          color: black;
           flex-direction: column;
           gap: 2rem;
           margin-bottom: 80px;
@@ -106,3 +107,11 @@
           filter: brightness(10); /* blanco */
 
         }
+        .boton-viaje:hover {
+  background-color: #e37f00;
+  transform: scale(1.1);
+}
+.boton-borrar:hover .icono-eliminar {
+  transform: scale(1.2);
+  filter: brightness(0.4) sepia(1) hue-rotate(-30deg) saturate(4); /* Color anaranjado oscuro */
+}
