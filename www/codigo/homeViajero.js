@@ -19,7 +19,6 @@ const auth = getAuth(app);
 const tabla = document.getElementById("tablaPedidos").getElementsByTagName("tbody")[0];
 let pedidosCargados = false;
 
-
 // === Mostrar saludo con nombre ===
 function mostrarSaludo() {
   onAuthStateChanged(auth, async (user) => {
@@ -63,7 +62,7 @@ function cargarProximoViaje() {
         const data = doc.data();
 
         // Filtra solo viajes creados por el usuario
-     if (data.viajeroId !== user.uid) return;
+        if (data.viajeroId !== user.uid) return;
 
         const fechaStr = getFechaString(data.fechaViaje);
         const fechaObj = new Date(fechaStr);
@@ -87,7 +86,7 @@ function cargarProximoViaje() {
       console.error("Error al obtener los viajes:", err);
     }
   });
-};
+}
 
 // === Mostrar próximo viaje ===
 function mostrarViajeProximo(viaje) {
@@ -112,8 +111,6 @@ function mostrarViajeProximo(viaje) {
 
 document.addEventListener("DOMContentLoaded", cargarProximoViaje);
 
-
-
 // Mostrar pedidos
 async function mostrarPedidos() {
   onAuthStateChanged(auth, async (user) => {
@@ -131,12 +128,10 @@ async function mostrarPedidos() {
 
         const estado = data.estado?.toLowerCase().trim();
 
-       
-
         // Imagen
         const celdaFoto = fila.insertCell(0);
         const img = document.createElement("img");
-        img.src = data.imagen_url || "/GOBOX_APP/www/img/caja.png"
+        img.src = data.imagen_url || "img/caja.png"; // ruta relativa corregida
         img.alt = "Foto del producto";
         img.style.width = "100px";
         img.style.height = "85px";
@@ -160,12 +155,12 @@ async function mostrarPedidos() {
 
         button.addEventListener("click", () => {
           const pedidoId = doc.id;
-          window.location.href = `detallesviajero.html?id=${pedidoId}`;
+          window.location.href = `detallesviajero.html?id=${pedidoId}`; // ruta relativa corregida
         });
 
         const imgButton = document.createElement("img");
         imgButton.id = 'arrow2';
-        imgButton.src = '/GOBOX_APP/www/img/ArrowRight.png';
+        imgButton.src = "img/ArrowRight.png"; // ruta relativa corregida
         button.appendChild(imgButton);
         buttonCell.appendChild(button);
 
@@ -174,41 +169,22 @@ async function mostrarPedidos() {
         fila2.classList.add("fila-separadora");
         fila2.setAttribute("data-id", doc.id);
 
-         if (estado === "tomado" || estado === "entregado exitosamente") {
+        if (estado === "tomado" || estado === "entregado exitosamente") {
           fila.style.display = "none";
           fila2.style.display = "none";
-        };
+        }
       });
 
       if (tabla.rows.length === 0) {
+        const listPedidos = document.querySelector(".listPedidos");
+        listPedidos.innerHTML = "<br><p>Aún no has realizado pedidos.</p>";
 
-        //llamar el div para insertar el mensaje dentro de el. y poner el parrafo
-        document.querySelector(".listPedidos").innerHTML = "<br><p>Aún no has realizado pedidos.</p>";
-
-        //llamar el div otra vez para que en otra linea se inserte la imagen (solo por decoración)
-
-        const emptyBOX = document.querySelector(".listPedidos");
-
-        //se crea la imagen
         const imgB = document.createElement("img");
-
-        //se le añade su dirección
-        imgB.src = '/HomePageComprador/imagene/caja.png';
-
-        //asigno id para modificarlo desde css
+        imgB.src = "img/caja.png"; // ruta relativa corregida
         imgB.id = 'Cajavacia';
-
-        //se le modifican sus propiedades para esterilizar mejor :)
-
-
         imgB.style.height = "130px";
-
         imgB.style.borderRadius = "10px";
-
-        //se inserta dentro del DIV
-        emptyBOX.appendChild(imgB);
-
-        console.log(querySnapshot.size);
+        listPedidos.appendChild(imgB);
       }
     } else if (!user) {
       document.querySelector(".listPedidos").innerHTML = "<p>Debes iniciar sesión para ver los pedidos.</p>";
@@ -247,7 +223,6 @@ function inicializar() {
   mostrarSaludo();
   mostrarPedidos();
   cargarProximoViaje();
-
 }
 
 window.addEventListener("DOMContentLoaded", inicializar);
