@@ -1,110 +1,70 @@
-import { initializeApp } from "https://www.gstatic.com/firebasejs/10.0.0/firebase-app.js";
+import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.0/firebase-app.js";
 import {
-    getFirestore,
-    collection,
-    addDoc,
-    doc,
-    getDoc,
-    updateDoc 
-} from "https://www.gstatic.com/firebasejs/10.0.0/firebase-firestore.js";
-import { getAuth } from "https://www.gstatic.com/firebasejs/10.0.0/firebase-auth.js";
+  getAuth,
+  signInWithEmailAndPassword
+} from "https://www.gstatic.com/firebasejs/11.6.0/firebase-auth.js";
+import {
+  getFirestore,
+  collection,
+  getDocs
+} from "https://www.gstatic.com/firebasejs/11.6.0/firebase-firestore.js";
 
-// Configuración de Firebase
+// Configuración Firebase
 const firebaseConfig = {
-    apiKey: "AIzaSyBB0GFK5FhyPsLXrZGIYCxNT47738DXK1o",
-    authDomain: "goboxprueba.firebaseapp.com",
-    projectId: "goboxprueba",
-    storageBucket: "goboxprueba.appspot.com",
-    messagingSenderId: "470323269250",
-    appId: "1:470323269250:web:777b46cbea8d7260822e9b"
+  apiKey: "AIzaSyBB0GFK5FhyPsLXrZGIYCxNT47738DXK1o",
+  authDomain: "goboxprueba.firebaseapp.com",
+  projectId: "goboxprueba",
+  storageBucket: "goboxprueba.firebasestorage.app",
+  messagingSenderId: "470323269250",
+  appId: "1:470323269250:web:777b46cbea8d7260822e9b"
 };
 
 const app = initializeApp(firebaseConfig);
-const db = getFirestore(app);
 const auth = getAuth(app);
+const db = getFirestore(app);
 
-// Función para crear una notificación asociada a una oferta
-async function crearNotificacionOferta(oferta) {
-  const notificacionData = {
-    correoViajero: oferta.correo,
-    fechaEntrega: oferta.fechaEntrega,
-    precio: oferta.precio,
-    pedidoId: oferta.pedidoId,
-    propietarioId: oferta.propietarioId,
-    fecha: new Date().toISOString(),
-    leida: false
-  };
-  await addDoc(collection(db, "notificaciones"), notificacionData);
-}
-
-// Lógica ejecutada una vez cargado el DOM
 document.addEventListener('DOMContentLoaded', () => {
-  const form = document.querySelector('form');
-  const cancelButton = document.getElementById('bttnCancelarOferta');
+  const loginEmailField = document.getElementById('loginEmail');
+  const loginPasswordField = document.getElementById('loginPassword');
+  const loginBtn = document.getElementById('botonLogin');
 
-  // Evento al enviar el formulario de oferta
-  form.addEventListener('submit', async (e) => {
+  loginBtn.addEventListener('click', async (e) => {
     e.preventDefault();
-
-    const fechaRetiro = document.getElementById('textFechaRetiroPaq').value;
-    const fechaEntrega = document.getElementById('textFechaEntregaPaq').value;
-    const precio = document.getElementById('textPrecioEntregarPaq').value;
-
-    const user = auth.currentUser;
-    if (!user) {
-      alert('Debes iniciar sesión para hacer una oferta.');
-      return;
-    }
-
-    const uid = user.uid;
-    const nombre = user.displayName || "Nombre no disponible";
-    const correo = user.email;
-
-    const params = new URLSearchParams(window.location.search);
-    const pedidoId = params.get('id');
-    if (!pedidoId) {
-      alert("No se encontró el ID del pedido.");
-      return;
-    }
-
-    const pedidoRef = doc(db, "pedido1", pedidoId);
-    const pedidoSnap = await getDoc(pedidoRef);
-    if (!pedidoSnap.exists()) {
-      alert("El pedido no existe.");
-      return;
-    }
-
-    const propietarioId = pedidoSnap.data().usuarioId;
-
-    const ofertaData = {
-      fechaRetiro,
-      fechaEntrega,
-      precio: parseFloat(precio),
-      viajeroId: uid,
-      nombre,
-      correo,
-      pedidoId,
-      propietarioId,
-      fecha_publicacion: new Date().toISOString()
-    };
-
-    await addDoc(collection(db, "HacerOferta"), ofertaData);
-    await crearNotificacionOferta(ofertaData);
+    const email = loginEmailField.value.trim();
+    const password = loginPasswordField.value;
 
     try {
-      await updateDoc(pedidoRef, { ofertado: true });
+      const userCredential = await signInWithEmailAndPassword(auth, email, password);
+      const user = userCredential.user;
+
+      const usersRef = collection(db, "users");
+      const querySnapshot = await getDocs(usersRef);
+
+      let userFound = null;
+
+      querySnapshot.forEach(doc => {
+        const data = doc.data();
+        if (data.uid === user.uid) {
+          userFound = data;
+        }
+      });
+
+      if (userFound) {
+        const rol = userFound.Rol?.toLowerCase();
+        if (rol === "viajero") {
+          window.location.href = "./Home_viajero.html";
+        } else if (rol === "comprador") {
+          window.location.href = "./Home_comprador.html";
+        } else {
+          alert("Rol desconocido: " + userFound.Rol);
+        }
+      } else {
+        alert("Usuario no encontrado en la colección 'users'.");
+      }
+
     } catch (error) {
-      console.error("Error al actualizar el estado del pedido:", error);
-      alert("Ocurrió un error actualizando el estado del pedido.");
-      return;
+      alert("Error al iniciar sesión: " + error.message);
+      console.error(error);
     }
-
-    alert('¡Oferta publicada con éxito!');
-    form.reset();
-    window.location.href = 'Home_viajero.html';
-  });
-
-  cancelButton.addEventListener('click', () => {
-    form.reset();
   });
 });
