@@ -46,7 +46,7 @@ const cerrarSesion = async () => {
         let confirmacion = confirm("¿Estás seguro de cerrar sesión?");
         if (confirmacion) {
             await auth.signOut();
-            window.location.href = "login.html";
+            window.location.href = "login.html";  // ruta relativa
         }
     } catch (error) {
         console.error("Error cerrando sesión:", error);
@@ -112,7 +112,7 @@ function rolcambio() {
         "¿Está seguro de cambiar a comprador y disfrutar de las mejores funcionalidades para pedir en GoBox?"
     );
     if (confirmCambio) {
-        window.location.href = "Home_comprador.html";
+        window.location.href = "Home_comprador.html";  // ruta relativa
     }
 }
 
