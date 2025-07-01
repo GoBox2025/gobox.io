@@ -108,6 +108,14 @@ document.addEventListener("DOMContentLoaded", () => {
         // Botón cancelar
         cancelarBtn.addEventListener("click", () => {
             form.reset();
+        // Enlace dinámico para regresar con el mismo ID de pedido
+const params = new URLSearchParams(window.location.search);
+const pedidoId = params.get("id");
+if (pedidoId) {
+  const volver = document.getElementById("linkVolver");
+  volver.href = `detallesviajero.html?id=${pedidoId}`;
+}
+
         });
     });
 });
