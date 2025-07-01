@@ -8,7 +8,7 @@ body {
   
   .barra-arriba {
     height: 40px;
-    background-color: #ffa500;
+    background: linear-gradient(90deg, #ff6f00, #ff9500);
 }
 
 .icono {
@@ -20,8 +20,13 @@ body {
   margin-top: 5px;
   width: 30px;
   height: 30px;
+  cursor: pointer;
+  transition: transform 0.3s;
 }
 
+.icono img:hover {
+  transform: scale(1.1);
+}
 
 form {
   max-width: 500px;
@@ -33,8 +38,8 @@ form {
 }
   
   h1 {
-    color: #d1740e;
-    font-size: 2.0rem;
+    color: #f8f7f7;
+    font-size: 1.5rem;
     text-align: center;
     margin-bottom: 20px;
     font-weight: bold;
@@ -64,11 +69,121 @@ select:focus {
   outline: none;
 }
 
-input[type="submit"],
-input[type="button"] {
-  width: 150px;
-  margin-top: 10;
-}
+/*******************************************************************/
+/*******************************************************************/
+
+    /* Contenedor para centrar el botón */
+    .btn-container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin: 10px 0;
+    }
+
+    /* Estilos del botón */
+    .btn-31,
+    .btn-31 *,
+    .btn-31 :after,
+    .btn-31 :before,
+    .btn-31:after,
+    .btn-31:before {
+      border: 0 solid;
+      box-sizing: border-box;
+    }
+
+    .btn-31 {
+      -webkit-tap-highlight-color: transparent;
+      /*-webkit-appearance: button;*/
+      background-color: #ff9500; /* Color normal */
+      margin: 10px 0 5px;
+      padding: 10px 0 5px;
+      background-image: none;
+      color: #fff; /* Color de texto base */
+      cursor: pointer;
+      font-family: Arial, sans-serif;
+      font-size: 100%;
+      font-weight: 900;
+      line-height: 1.5;
+      /*-webkit-mask-image: -webkit-radial-gradient(#000, #fff);*/
+      transition: background-color 0.2s ease;
+      border-radius: 12px;
+    }
+
+    .btn-31:active {
+      background-color: #e74504; 
+    }
+
+    .btn-31:disabled {
+      cursor: default;
+    }
+
+    .btn-31:-moz-focusring {
+      outline: auto;
+    }
+
+    .btn-31 {
+      border-width: 1px;
+      padding: 1rem 2rem;
+      position: relative;
+      text-transform: uppercase;
+    }
+
+    .btn-31:before {
+      --progress: 100%;
+      background: #e74504;
+      -webkit-clip-path: polygon(
+        100% 0,
+        var(--progress) var(--progress),
+        0 100%,
+        100% 100%
+      );
+      clip-path: polygon(
+        100% 0,
+        var(--progress) var(--progress),
+        0 100%,
+        100% 100%
+      );
+      content: "";
+      inset: 0;
+      position: absolute;
+      transition: -webkit-clip-path 0.2s ease;
+      transition: clip-path 0.2s ease;
+      transition: clip-path 0.2s ease, -webkit-clip-path 0.2s ease;
+      border-radius: 11px;
+    }
+
+    .btn-31:hover:before {
+      --progress: 0%;
+    }
+
+    .btn-31 .text-container {
+      display: block;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .btn-31 .text {
+      display: block;
+      font-weight: 900;
+      color: white !important; /* Fuerza el color blanco */
+      position: relative;
+      z-index: 2; /* Asegura que el texto esté sobre otros elementos */
+    }
+
+    .btn-31:hover .text {
+      -webkit-animation: move-up-alternate 0.3s ease forwards;
+      animation: move-up-alternate 0.3s ease forwards;
+    }
+
+    @keyframes move-up-alternate {
+      0% { transform: translateY(0); }
+      50% { transform: translateY(80%); }
+      51% { transform: translateY(-80%); }
+      to { transform: translateY(0); }
+    }
+
+/*******************************************************************/
+/*******************************************************************/
 
   label {
     color: #542a03;
@@ -88,28 +203,6 @@ input[type="button"] {
   
   input[type="text"]::placeholder {
     color: #95a5a6;
-  }
-  
-  input[type="submit"],
-  [type="button"] {
-    background-color: #ef8025;
-    color: white;
-    border: none;
-    padding: 12px;
-    border-radius: 6px;
-    font-size: 1rem;
-    font-weight: 600;
-    cursor: pointer;
-    transition: background-color 0.3s;
-    margin-top: 10px;
-  }
-
-  input[type="submit"]:hover {
-    background-color: #f46718;
-  }
-
-  input[type="button"]:hover {
-    background-color: #f46718;
   }
   
   @media (max-width: 480px) {
