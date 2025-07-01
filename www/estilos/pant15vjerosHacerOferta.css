@@ -8,7 +8,7 @@ body {
   
   .barra-arriba {
     height: 40px;
-    background: linear-gradient(90deg, #ff6f00, #ff9500);
+    background-color: #ffa500;
 }
 
 .icono {
@@ -20,13 +20,8 @@ body {
   margin-top: 5px;
   width: 30px;
   height: 30px;
-  cursor: pointer;
-  transition: transform 0.3s;
 }
 
-.icono img:hover {
-  transform: scale(1.1);
-}
 
 form {
   max-width: 500px;
@@ -39,7 +34,7 @@ form {
   
   h1 {
     color: #f8f7f7;
-    font-size: 1.5rem;
+    font-size: 2.0rem;
     text-align: center;
     margin-bottom: 20px;
     font-weight: bold;
@@ -69,6 +64,31 @@ select:focus {
   outline: none;
 }
 
+input[type="submit"],
+input[type="button"] {
+  width: 150px;
+  margin-top: 10;
+}
+
+  label {
+    color: #542a03;
+  }
+
+  
+  input[type="text"],
+  input[type="date"],input[type="number"]{
+    width: 100%;
+    padding: 12px 15px;
+    margin-bottom: 15px;
+    border: 2px solid #542a03;
+    border-radius: 6px;
+    font-size: 1rem;
+    box-sizing: border-box;
+  }
+  
+  input[type="text"]::placeholder {
+    color: #95a5a6;
+  }
 /*******************************************************************/
 /*******************************************************************/
 
@@ -187,22 +207,6 @@ select:focus {
 
   label {
     color: #542a03;
-  }
-
-  
-  input[type="text"],
-  input[type="date"],input[type="number"]{
-    width: 100%;
-    padding: 12px 15px;
-    margin-bottom: 15px;
-    border: 2px solid #542a03;
-    border-radius: 6px;
-    font-size: 1rem;
-    box-sizing: border-box;
-  }
-  
-  input[type="text"]::placeholder {
-    color: #95a5a6;
   }
   
   @media (max-width: 480px) {
