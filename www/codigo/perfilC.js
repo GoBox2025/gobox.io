@@ -149,7 +149,7 @@ async function Guardar() {
             Rol: seleccion
         });
 
-        alert("Tu perfil se editó correctamente.");
+       
 
         // Deshabilitar inputs
         [username, userphone, fechaNacimiento, SelectGender, select].forEach(el => el.disabled = true);
