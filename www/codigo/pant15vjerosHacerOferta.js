@@ -41,7 +41,7 @@ async function crearNotificacionOferta(oferta) {
 // Esperar a que se cargue el DOM
 document.addEventListener("DOMContentLoaded", () => {
     const form = document.getElementById("ofertaForm");
-    const cancelarBtn = document.getElementById("bttnCancelarOferta");
+    const cancelarBtn = document.getElementById("botonCancelarOferta");
 
     // Confirmar usuario autenticado antes de permitir enviar
     onAuthStateChanged(auth, (user) => {
