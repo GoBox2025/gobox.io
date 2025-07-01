@@ -2,14 +2,10 @@ import { initializeApp } from "https://www.gstatic.com/firebasejs/10.0.0/firebas
 import { 
     getFirestore, 
     collection, 
-    addDoc, 
-    doc, 
-    getDoc,
-    serverTimestamp 
+    addDoc
 } from "https://www.gstatic.com/firebasejs/10.0.0/firebase-firestore.js";
-import { getAuth } from "https://www.gstatic.com/firebasejs/10.0.0/firebase-auth.js";
+import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.0.0/firebase-auth.js";
 
-// Llave Firebase
 const firebaseConfig = {
     apiKey: "AIzaSyBB0GFK5FhyPsLXrZGIYCxNT47738DXK1o",
     authDomain: "goboxprueba.firebaseapp.com",
@@ -19,17 +15,15 @@ const firebaseConfig = {
     appId: "1:470323269250:web:777b46cbea8d7260822e9b"
 };
 
-// Inicializar Firebase
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
 const auth = getAuth(app);
 
-// ========= 1. LÓGICA DE LOS SELECTORES =========
 document.addEventListener('DOMContentLoaded', () => {
-  // Oculta todos los selectores condicionales al inicio
+  // Ocultar selects condicionales
   document.querySelectorAll('.departamentosSV, .estadosUSA').forEach(el => el.style.display = 'none');
 
-  // Asignar eventos a los selects de país
+  // Manejo selects país
   document.getElementById('paisOrigen').addEventListener('change', function () {
     mostrarUbicacion('Origen', this.value);
   });
@@ -37,42 +31,35 @@ document.addEventListener('DOMContentLoaded', () => {
   document.getElementById('paisDestino').addEventListener('change', function () {
     mostrarUbicacion('Destino', this.value);
   });
-});
 
-// Muestra el selector correcto según el país
-function mostrarUbicacion(tipo, pais) {
-  const deptSV = document.getElementById(`departamentos${tipo}SV`);
-  const estadosUSA = document.getElementById(`estados${tipo}USA`);
+  // Variables para usuario
+  let currentUser = null;
 
-  deptSV.style.display = 'none';
-  estadosUSA.style.display = 'none';
+  // Esperar a que se cargue usuario autenticado
+  onAuthStateChanged(auth, (user) => {
+    if (user) {
+      currentUser = user;
+    } else {
+      alert("Debes iniciar sesión para registrar un viaje.");
+      window.location.href = "login.html";
+    }
+  });
 
-  if (pais === 'El Salvador') {
-    deptSV.style.display = 'block';
-  } else if (pais === 'Estados Unidos') {
-    estadosUSA.style.display = 'block';
-  }
-}
-
-// ========= 2. ENVÍO DE FORMULARIO A FIRESTORE =========
-document.addEventListener('DOMContentLoaded', () => {
+  // Envío del formulario
   const form = document.getElementById('anadirViaje');
-
   form.addEventListener('submit', async (e) => {
     e.preventDefault();
 
-    const user = auth.currentUser;
-    if (!user) {
+    if (!currentUser) {
       alert("Debes iniciar sesión para registrar un viaje.");
       return;
     }
 
-    // Obtener valores básicos
+    // Valores
     const paisOrigen = document.getElementById('paisOrigen').value;
     const paisDestino = document.getElementById('paisDestino').value;
     const fechaViaje = document.getElementById('fechaDeViaje').value;
 
-    // Obtener valores específicos de ubicación
     let ubicacionOrigen = '';
     if (paisOrigen === 'El Salvador') {
       ubicacionOrigen = document.getElementById('departamentosOrigenSV').value;
@@ -103,16 +90,15 @@ document.addEventListener('DOMContentLoaded', () => {
       return;
     }
 
-    // Construcción de datos del viaje
     const viajeData = {
       paisOrigen,
       ubicacionOrigen,
       paisDestino,
       ubicacionDestino,
       fechaViaje,
-      viajeroId: user.uid,
-      nombre: user.displayName || "Usuario desconocido",
-      correo: user.email,
+      viajeroId: currentUser.uid,
+      nombre: currentUser.displayName || "Usuario desconocido",
+      correo: currentUser.email,
       fecha_publicacion: new Date().toISOString()
     };
 
@@ -127,3 +113,17 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   });
 });
+
+function mostrarUbicacion(tipo, pais) {
+  const deptSV = document.getElementById(`departamentos${tipo}SV`);
+  const estadosUSA = document.getElementById(`estados${tipo}USA`);
+
+  deptSV.style.display = 'none';
+  estadosUSA.style.display = 'none';
+
+  if (pais === 'El Salvador') {
+    deptSV.style.display = 'block';
+  } else if (pais === 'Estados Unidos') {
+    estadosUSA.style.display = 'block';
+  }
+}
