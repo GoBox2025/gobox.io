@@ -3,22 +3,23 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="/www/estilos/pant17vjerosAnadirViaje.css">
-    <script src="/www/codigo/pant17vjerosAnadirViaje.js" type="module"></script>
+    <link rel="stylesheet" href="/GOBOX_APP/www/estilos/pant17vjerosAnadirViaje.css">
+    <script src="/GOBOX_APP/www/codigo/pant17vjerosAnadirViaje.js" type="module"></script>
+    <link rel="stylesheet" href="/GOBOX_APP/www/estilos/menu.css">
     <title>Añadir Viaje</title>
 </head>
-<body>
+<body  style="background-color: black; color: white;">
       
 <div class="barra-arriba">
   <div class="icono">
     <div>
-      <a href="/www/viajes.html"><img src="/www/img/flechaIzquierda.png" alt=""></a>
+      <a href="/GOBOX_APP/www/viajes.html"><img src="/GOBOX_APP/www/img/flechaIzquierda.png" alt=""></a>
     </div>
   </div>
 </div>
 <br>
 <center>
-<h1 style="width: 90%;">Añade los detalles de tu viaje para empezar a ganar</h1>
+<h1 style="width: 90%;color: white;">Añade los detalles de tu viaje para empezar a ganar</h1>
 </center>
 
   <form id="anadirViaje" name="anadirViajee" action="">
@@ -42,9 +43,9 @@
           <select name="departamentosOrigenSV" id="departamentosOrigenSV" class="departamentosSV">
             <option value="" disabled selected>Seleccione departamento</option>
             <option value="San Miguel">San Miguel</option>
-            <option value="La Union">La Unión</option>
-            <option value="Morazan">Morazán</option>
-            <option value="Usulutan">Usulután</option>
+            <option value="La Unión">La Unión</option>
+            <option value="Morazán">Morazán</option>
+            <option value="Usulután">Usulután</option>
           </select>
         </td>
       </tr>
@@ -67,7 +68,7 @@
             <option value="Delaware">Delaware</option>
             <option value="Florida">Florida</option>
             <option value="Georgia">Georgia</option>
-            <option value="Hawai">Hawái</option>
+            <option value="Hawái">Hawái</option>
             <option value="Idaho">Idaho</option>
             <option value="Illinois">Illinois</option>
             <option value="Indiana">Indiana</option>
@@ -88,10 +89,10 @@
             <option value="Nueva Jersey">Nueva Jersey</option>
             <option value="Nueva York">Nueva York</option>
             <option value="Nuevo Hampshire">Nuevo Hampshire</option>
-            <option value="Nuevo Mexico">Nuevo México</option>
+            <option value="Nuevo México">Nuevo México</option>
             <option value="Ohio">Ohio</option>
             <option value="Oklahoma">Oklahoma</option>
-            <option value="Oregon">Oregón</option>
+            <option value="Oregón">Oregón</option>
             <option value="Pensilvania">Pensilvania</option>
             <option value="Rhode Island">Rhode Island</option>
             <option value="Tennessee">Tennessee</option>
@@ -109,7 +110,7 @@
 
       <!-- SECCIÓN "VIAJA A" -->
       <tr>
-        <td colspan="2"><label for="paisDestino">Viaja a:</label></td>
+        <td colspan="2"><label for="paisDestino">Hacia:</label></td>
       </tr>
       <tr>
         <td colspan="2">
@@ -126,9 +127,9 @@
           <select name="departamentosDestinoSV" id="departamentosDestinoSV" class="departamentosSV">
             <option value="" disabled selected>Seleccione departamento</option>
             <option value="San Miguel">San Miguel</option>
-            <option value="La Union">La Unión</option>
-            <option value="Morazan">Morazán</option>
-            <option value="Usulutan">Usulután</option>
+            <option value="La Unión">La Unión</option>
+            <option value="Morazán">Morazán</option>
+            <option value="Usulután">Usulután</option>
           </select>
         </td>
       </tr>
@@ -151,7 +152,7 @@
             <option value="Delaware">Delaware</option>
             <option value="Florida">Florida</option>
             <option value="Georgia">Georgia</option>
-            <option value="Hawai">Hawái</option>
+            <option value="Hawái">Hawái</option>
             <option value="Idaho">Idaho</option>
             <option value="Illinois">Illinois</option>
             <option value="Indiana">Indiana</option>
@@ -172,10 +173,10 @@
             <option value="Nueva Jersey">Nueva Jersey</option>
             <option value="Nueva York">Nueva York</option>
             <option value="Nuevo Hampshire">Nuevo Hampshire</option>
-            <option value="Nuevo Mexico">Nuevo México</option>
+            <option value="Nuevo México">Nuevo México</option>
             <option value="Ohio">Ohio</option>
             <option value="Oklahoma">Oklahoma</option>
-            <option value="Oregon">Oregón</option>
+            <option value="Oregón">Oregón</option>
             <option value="Pensilvania">Pensilvania</option>
             <option value="Rhode Island">Rhode Island</option>
             <option value="Tennessee">Tennessee</option>
@@ -199,14 +200,32 @@
         <td colspan="2"><input type="date" id="fechaDeViaje" name="fechaDeViaje" required></td>
       </tr>
       
-      <!-- BOTÓN DE ENVÍO -->
+      <!-- BOTÓN DE ENVÍO
       <tr>
         <td colspan="2"><input type="submit" value="Añadir viaje" id="bttnAnadirViaje" name="bttnAnadirViaje"></td>
+      </tr>
+      -->
+      <tr>
+        <td colspan="2">
+          <button class="btn-31" type="submit">
+            <span class="text-container">
+              <span class="text">Añadir viaje</span>
+            </span>
+          </button>
+        </td>
       </tr>
     </table>
   </form>
 
- 
+  <div class="footer">
+    <div class="iconos">
+      <nav class="navbar">
+        <a href="/GOBOX_APP/www/Home_comprador.html"><img src="/GOBOX_APP/www/img/home.png" alt="Inicio"></a>
+        <a href="/GOBOX_APP/www/IACOMPRADOR.html"><img src="/GOBOX_APP/www/img/IA.png" alt=""></a>
+         <a href="notificaciones.html"><img src="/GOBOX_APP/www/img/notificacion.png" alt=""></a>
+        <a href="/GOBOX_APP/www/UserComprador.html"><img src="/GOBOX_APP/www/img/user.png" alt="Perfil"></a>
+      </nav>
+  </div>
 
 </body>
 </html>
