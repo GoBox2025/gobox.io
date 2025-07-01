@@ -3,17 +3,17 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Lista de Pedidos</title>
-  <link rel="stylesheet" href="/www/estilos/pedidos.css"/>
-  <link rel="stylesheet" href="/www/estilos/menu.css">
+  <title>Lista de pedidos</title>
+  <link rel="stylesheet" href="/GOBOX_APP/www/estilos/pedidos.css"/>
+  <link rel="stylesheet" href="/GOBOX_APP/www/estilos/menu.css">
 </head>
 <body>
 
       <header class="encabezado">
-        <a href="/www/Home_viajero.html" class="back-button">
-            <img src="/www/img/flechaIzquierda.png" alt="Volver" class="flecha">
+        <a href="/GOBOX_APP/www/Home_viajero.html" class="back-button">
+            <img src="/GOBOX_APP/www/img/flechaIzquierda.png" alt="Volver" class="flecha">
         </a>
-        <h1>Pedidos Publicados</h1>
+        <h1>Pedidos publicados</h1>
     </header>
 
 
@@ -29,19 +29,19 @@
   <div class="ordenar-tarjeta">
     
       <div class="info-usuario">
-        <img class="profile-pic" src="img/usuario-to.png" alt="Usuario">
+        <img class="profile-pic" src="/GOBOX_APP/www/img/usuario-to.png" alt="Usuario">
         <h3 class="nombre-usuario">Usuario</h3>
         <p class="estado-pedido"></p>
       </div>
       <div class="contenido">
-        <img class="product-img" src="img/imagen-defecto.png" alt="Producto">
+        <img class="product-img" src="/GOBOX_APP/www/img/imagen-defecto.png" alt="Producto">
         <div class="ordear-información">
           <p class="detalles-pedido">Detalles del pedido</p>
           <p><strong>Tipo:</strong> <span class="tipo-pedido"></span></p>
           <p><strong>Fecha estimada:</strong> <span class="fecha-entrega"></span></p>
-          <p><strong>De:</strong> <span class="recoger-en"></span></p>
+          <p><strong>Desde:</strong> <span class="recoger-en"></span></p>
           <p><strong>Hasta:</strong> <span class="entregar-en"></span></p>
-          <p><strong>Precio:</strong> $<span class="precio-pedido"></span></p>
+          <p><strong>Valor:</strong> $<span class="precio-pedido"></span></p>
           
         </div>
       </div>
@@ -49,16 +49,17 @@
   </div>
 </template>
 
-      <footer><div class="navbar">
-        <div class="icon" onclick="expandIcon(this)" ><a href="Home_viajero.html"><img src="img/home.png" alt=""></div></a>
-        <div class="icon" onclick="expandIcon(this)"><a href="viajes.html"><img src="img/viajes.png" alt=""></div></a>
-        <div class="icon" onclick="expandIcon(this)"><a href="lista_pedidos.html"><img src="img/box.png" alt=""></div></a>
-        <div class="icon" onclick="expandIcon(this)"><a href="AsistenteViajero.html"><img src="img/IA.png" alt=""></div></a>
-        <div class="icon" onclick="expandIcon(this)"><a href="ViajeroProfile.html"><img src="img/user.png" alt=""></div></a>
+      <footer>
+         <div class="navbar">
+        <div class="icon" onclick="expandIcon(this)" ><a href="Home_viajero.html"><img src="/GOBOX_APP/www/img/home.png" alt=""></div></a>
+        <div class="icon" onclick="expandIcon(this)"><a href="viajes.html"><img src="/GOBOX_APP/www/img/viajes.png" alt=""></div></a>
+        <div class="icon" onclick="expandIcon(this)"><a href="lista_pedidos.html"><img src="/GOBOX_APP/www/img/box.png" alt=""></div></a>
+        <div class="icon" onclick="expandIcon(this)"><a href="BOXBOT.html"><img src="/GOBOX_APP/www/img/IA.png" alt=""></div></a>
+        <div class="icon" onclick="expandIcon(this)"><a href="ViajeroProfile.html"><img src="/GOBOX_APP/www/img/user.png" alt=""></div></a>
     </div>
 </footer>
 
 
-  <script type="module" src="/www/codigo/pedidos.js"></script>
+  <script type="module" src="/GOBOX_APP/www//www/codigo/pedidos.js"></script>
 </body>
 </html>
