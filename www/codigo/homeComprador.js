@@ -201,17 +201,17 @@ async function mostrarPedido() {
             // Evento ver detalles
             button.addEventListener("click", () => {
                 const pedidoId = pedidoDoc.id;
-                window.location.href = `/www/detallesC.html?pedidoId=${pedidoId}`;
+                window.location.href = `/GOBOX_APP/www/detallesC.html?pedidoId=${pedidoId}`;
             });
 
             // Icono para botón de detalles
             const imgButton = document.createElement("img");
             imgButton.id = 'arrow';
-            imgButton.src = '/www/img/ArrowRight.png';
+            imgButton.src = '/GOBOX_APP/www/img/ArrowRight.png';
 
             // Icono para botón de eliminar
             const imgdelete = document.createElement("img");
-            imgdelete.src = '/www/img/basura.png';
+            imgdelete.src = '/GOBOX_APP/www/img/basura.png';
             imgdelete.style.height = "20px";
             imgdelete.id = 'Delete';
 
@@ -231,7 +231,7 @@ async function mostrarPedido() {
             document.querySelector(".listPedidos").innerHTML = "<br><p>Aún no has realizado pedidos.</p>";
             const emptyBOX = document.querySelector(".listPedidos");
             const imgB = document.createElement("img");
-            imgB.src = '/www/img/caja.png';
+            imgB.src = '/GOBOX_APP/www/img/caja.png';
             imgB.id = 'Cajavacia';
             imgB.style.height = "130px";
             imgB.style.borderRadius = "10px";
