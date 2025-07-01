@@ -1,20 +1,18 @@
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.0.0/firebase-app.js";
-import { 
-    getFirestore, 
-    collection, 
-    addDoc
-} from "https://www.gstatic.com/firebasejs/10.0.0/firebase-firestore.js";
+import { getFirestore, collection, addDoc } from "https://www.gstatic.com/firebasejs/10.0.0/firebase-firestore.js";
 import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.0.0/firebase-auth.js";
 
+// Configuración Firebase
 const firebaseConfig = {
-    apiKey: "AIzaSyBB0GFK5FhyPsLXrZGIYCxNT47738DXK1o",
-    authDomain: "goboxprueba.firebaseapp.com",
-    projectId: "goboxprueba",
-    storageBucket: "goboxprueba.appspot.com",
-    messagingSenderId: "470323269250",
-    appId: "1:470323269250:web:777b46cbea8d7260822e9b"
+  apiKey: "AIzaSyBB0GFK5FhyPsLXrZGIYCxNT47738DXK1o",
+  authDomain: "goboxprueba.firebaseapp.com",
+  projectId: "goboxprueba",
+  storageBucket: "goboxprueba.appspot.com",
+  messagingSenderId: "470323269250",
+  appId: "1:470323269250:web:777b46cbea8d7260822e9b"
 };
 
+// Inicializar Firebase
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
 const auth = getAuth(app);
@@ -23,7 +21,7 @@ document.addEventListener('DOMContentLoaded', () => {
   // Ocultar selects condicionales
   document.querySelectorAll('.departamentosSV, .estadosUSA').forEach(el => el.style.display = 'none');
 
-  // Manejo selects país
+  // Mostrar select adecuado según país seleccionado
   document.getElementById('paisOrigen').addEventListener('change', function () {
     mostrarUbicacion('Origen', this.value);
   });
@@ -32,10 +30,9 @@ document.addEventListener('DOMContentLoaded', () => {
     mostrarUbicacion('Destino', this.value);
   });
 
-  // Variables para usuario
   let currentUser = null;
 
-  // Esperar a que se cargue usuario autenticado
+  // Verificar usuario autenticado
   onAuthStateChanged(auth, (user) => {
     if (user) {
       currentUser = user;
@@ -55,7 +52,6 @@ document.addEventListener('DOMContentLoaded', () => {
       return;
     }
 
-    // Valores
     const paisOrigen = document.getElementById('paisOrigen').value;
     const paisDestino = document.getElementById('paisDestino').value;
     const fechaViaje = document.getElementById('fechaDeViaje').value;
@@ -114,10 +110,12 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 });
 
+// Mostrar selects según país
 function mostrarUbicacion(tipo, pais) {
   const deptSV = document.getElementById(`departamentos${tipo}SV`);
   const estadosUSA = document.getElementById(`estados${tipo}USA`);
 
+  // Ocultar ambos primero
   deptSV.style.display = 'none';
   estadosUSA.style.display = 'none';
 
