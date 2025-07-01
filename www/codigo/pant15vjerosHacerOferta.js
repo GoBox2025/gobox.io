@@ -1,70 +1,113 @@
-import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.0/firebase-app.js";
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.0.0/firebase-app.js";
 import {
-  getAuth,
-  signInWithEmailAndPassword
-} from "https://www.gstatic.com/firebasejs/11.6.0/firebase-auth.js";
-import {
-  getFirestore,
-  collection,
-  getDocs
-} from "https://www.gstatic.com/firebasejs/11.6.0/firebase-firestore.js";
+    getFirestore,
+    collection,
+    addDoc,
+    doc,
+    getDoc,
+    updateDoc
+} from "https://www.gstatic.com/firebasejs/10.0.0/firebase-firestore.js";
+import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.0.0/firebase-auth.js";
 
 // Configuración Firebase
 const firebaseConfig = {
-  apiKey: "AIzaSyBB0GFK5FhyPsLXrZGIYCxNT47738DXK1o",
-  authDomain: "goboxprueba.firebaseapp.com",
-  projectId: "goboxprueba",
-  storageBucket: "goboxprueba.firebasestorage.app",
-  messagingSenderId: "470323269250",
-  appId: "1:470323269250:web:777b46cbea8d7260822e9b"
+    apiKey: "AIzaSyBB0GFK5FhyPsLXrZGIYCxNT47738DXK1o",
+    authDomain: "goboxprueba.firebaseapp.com",
+    projectId: "goboxprueba",
+    storageBucket: "goboxprueba.appspot.com",
+    messagingSenderId: "470323269250",
+    appId: "1:470323269250:web:777b46cbea8d7260822e9b"
 };
 
+// Inicializar Firebase
 const app = initializeApp(firebaseConfig);
-const auth = getAuth(app);
 const db = getFirestore(app);
+const auth = getAuth(app);
 
-document.addEventListener('DOMContentLoaded', () => {
-  const loginEmailField = document.getElementById('loginEmail');
-  const loginPasswordField = document.getElementById('loginPassword');
-  const loginBtn = document.getElementById('botonLogin');
+// Función para crear la notificación
+async function crearNotificacionOferta(oferta) {
+    const notificacionData = {
+        correoViajero: oferta.correo,
+        fechaEntrega: oferta.fechaEntrega,
+        precio: oferta.precio,
+        pedidoId: oferta.pedidoId,
+        propietarioId: oferta.propietarioId,
+        fecha: new Date().toISOString(),
+        leida: false
+    };
+    await addDoc(collection(db, "notificaciones"), notificacionData);
+}
 
-  loginBtn.addEventListener('click', async (e) => {
-    e.preventDefault();
-    const email = loginEmailField.value.trim();
-    const password = loginPasswordField.value;
+// Esperar a que se cargue el DOM
+document.addEventListener("DOMContentLoaded", () => {
+    const form = document.getElementById("ofertaForm");
+    const cancelarBtn = document.getElementById("bttnCancelarOferta");
 
-    try {
-      const userCredential = await signInWithEmailAndPassword(auth, email, password);
-      const user = userCredential.user;
-
-      const usersRef = collection(db, "users");
-      const querySnapshot = await getDocs(usersRef);
-
-      let userFound = null;
-
-      querySnapshot.forEach(doc => {
-        const data = doc.data();
-        if (data.uid === user.uid) {
-          userFound = data;
+    // Confirmar usuario autenticado antes de permitir enviar
+    onAuthStateChanged(auth, (user) => {
+        if (!user) {
+            alert("Debes iniciar sesión para hacer una oferta.");
+            window.location.href = "login.html";
         }
-      });
 
-      if (userFound) {
-        const rol = userFound.Rol?.toLowerCase();
-        if (rol === "viajero") {
-          window.location.href = "./Home_viajero.html";
-        } else if (rol === "comprador") {
-          window.location.href = "./Home_comprador.html";
-        } else {
-          alert("Rol desconocido: " + userFound.Rol);
-        }
-      } else {
-        alert("Usuario no encontrado en la colección 'users'.");
-      }
+        form.addEventListener("submit", async (e) => {
+            e.preventDefault();
 
-    } catch (error) {
-      alert("Error al iniciar sesión: " + error.message);
-      console.error(error);
-    }
-  });
+            const fechaRetiro = document.getElementById("textFechaRetiroPaq").value;
+            const fechaEntrega = document.getElementById("textFechaEntregaPaq").value;
+            const precio = parseFloat(document.getElementById("textPrecioEntregarPaq").value);
+
+            if (!fechaRetiro || !fechaEntrega || isNaN(precio)) {
+                alert("Por favor completa todos los campos correctamente.");
+                return;
+            }
+
+            const params = new URLSearchParams(window.location.search);
+            const pedidoId = params.get("id");
+            if (!pedidoId) {
+                alert("No se encontró el ID del pedido.");
+                return;
+            }
+
+            try {
+                const pedidoRef = doc(db, "pedido1", pedidoId);
+                const pedidoSnap = await getDoc(pedidoRef);
+
+                if (!pedidoSnap.exists()) {
+                    alert("El pedido no existe.");
+                    return;
+                }
+
+                const propietarioId = pedidoSnap.data().usuarioId;
+                const ofertaData = {
+                    fechaRetiro,
+                    fechaEntrega,
+                    precio,
+                    viajeroId: user.uid,
+                    nombre: user.displayName || "Viajero sin nombre",
+                    correo: user.email,
+                    pedidoId,
+                    propietarioId,
+                    fecha_publicacion: new Date().toISOString()
+                };
+
+                await addDoc(collection(db, "HacerOferta"), ofertaData);
+                await crearNotificacionOferta(ofertaData);
+                await updateDoc(pedidoRef, { ofertado: true });
+
+                alert("¡Oferta publicada con éxito!");
+                form.reset();
+                window.location.href = "Home_viajero.html";
+
+            } catch (error) {
+                console.error("Error al enviar oferta:", error);
+                alert("Ocurrió un error al hacer la oferta.");
+            }
+        });
+
+        // Botón cancelar
+        cancelarBtn.addEventListener("click", () => {
+            form.reset();
+        });
+    });
 });
