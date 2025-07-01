@@ -1,36 +1,42 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="/GOBOX_APP/www/estilos/pant17vjerosAnadirViaje.css">
-    <script src="/GOBOX_APP/www/codigo/pant17vjerosAnadirViaje.js" type="module"></script>
-    <link rel="stylesheet" href="/GOBOX_APP/www/estilos/menu.css">
-    <title>Añadir Viaje</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  
+  <!-- CSS -->
+  <link rel="stylesheet" href="estilos/pant17vjerosAnadirViaje.css" />
+  <link rel="stylesheet" href="estilos/menu.css" />
+
+  <title>Añadir Viaje</title>
+
+  <style>
+    /* Solo para que se oculten inicialmente */
+    .departamentosSV, .estadosUSA {
+      display: none;
+    }
+  </style>
 </head>
-<body  style="background-color: black; color: white;">
-      
-<div class="barra-arriba">
-  <div class="icono">
-    <div>
-      <a href="/GOBOX_APP/www/viajes.html"><img src="/GOBOX_APP/www/img/flechaIzquierda.png" alt=""></a>
+<body style="background-color: black; color: white;">
+
+  <div class="barra-arriba">
+    <div class="icono">
+      <a href="viajes.html"><img src="img/flechaIzquierda.png" alt="Volver" /></a>
     </div>
   </div>
-</div>
-<br>
-<center>
-<h1 style="width: 90%;color: white;">Añade los detalles de tu viaje para empezar a ganar</h1>
-</center>
 
-  <form id="anadirViaje" name="anadirViajee" action="">
+  <br />
+  <center>
+    <h1 style="width: 90%;color: white;">Añade los detalles de tu viaje para empezar a ganar</h1>
+  </center>
+
+  <form id="anadirViaje" name="anadirViaje" action="">
     <table>
-      <!-- SECCIÓN "VIAJA DESDE" -->
-      <tr>
-        <td colspan="2"><label for="paisOrigen">Viaja desde:</label></td>
-      </tr>
+      <!-- Origen -->
+      <tr><td colspan="2"><label for="paisOrigen">Viaja desde:</label></td></tr>
       <tr>
         <td colspan="2">
-          <select name="paisOrigen" id="paisOrigen" class="paises">
+          <select name="paisOrigen" id="paisOrigen" class="paises" required>
             <option value="" disabled selected>Seleccione un país</option>
             <option value="El Salvador">El Salvador</option>
             <option value="Estados Unidos">Estados Unidos</option>
@@ -39,7 +45,6 @@
       </tr>
       <tr>
         <td colspan="2">
-          <!-- Selector de departamentos de El Salvador (origen) -->
           <select name="departamentosOrigenSV" id="departamentosOrigenSV" class="departamentosSV">
             <option value="" disabled selected>Seleccione departamento</option>
             <option value="San Miguel">San Miguel</option>
@@ -51,7 +56,6 @@
       </tr>
       <tr>
         <td colspan="2">
-          <!-- Selector de estados de USA (origen) -->
           <select name="estadosOrigenUSA" id="estadosOrigenUSA" class="estadosUSA">
             <option value="" disabled selected>Seleccione estado</option>
             <option value="Alabama">Alabama</option>
@@ -101,20 +105,18 @@
             <option value="Vermont">Vermont</option>
             <option value="Virginia">Virginia</option>
             <option value="Virginia Occidental">Virginia Occidental</option>
-            <option value="Wanshington">Wanshington</option>
+            <option value="Washington">Washington</option>
             <option value="Wisconsin">Wisconsin</option>
-            <option value="Wyoming">Wyoming</option> 
+            <option value="Wyoming">Wyoming</option>
           </select>
         </td>
       </tr>
 
-      <!-- SECCIÓN "VIAJA A" -->
-      <tr>
-        <td colspan="2"><label for="paisDestino">Hacia:</label></td>
-      </tr>
+      <!-- Destino -->
+      <tr><td colspan="2"><label for="paisDestino">Hacia:</label></td></tr>
       <tr>
         <td colspan="2">
-          <select name="paisDestino" id="paisDestino" class="paises">
+          <select name="paisDestino" id="paisDestino" class="paises" required>
             <option value="" disabled selected>Seleccione un país</option>
             <option value="El Salvador">El Salvador</option>
             <option value="Estados Unidos">Estados Unidos</option>
@@ -123,7 +125,6 @@
       </tr>
       <tr>
         <td colspan="2">
-          <!-- Selector de departamentos de El Salvador (destino) -->
           <select name="departamentosDestinoSV" id="departamentosDestinoSV" class="departamentosSV">
             <option value="" disabled selected>Seleccione departamento</option>
             <option value="San Miguel">San Miguel</option>
@@ -135,7 +136,6 @@
       </tr>
       <tr>
         <td colspan="2">
-          <!-- Selector de estados de USA (destino) -->
           <select name="estadosDestinoUSA" id="estadosDestinoUSA" class="estadosUSA">
             <option value="" disabled selected>Seleccione estado</option>
             <option value="Alabama">Alabama</option>
@@ -185,32 +185,22 @@
             <option value="Vermont">Vermont</option>
             <option value="Virginia">Virginia</option>
             <option value="Virginia Occidental">Virginia Occidental</option>
-            <option value="Wanshington">Wanshington</option>
+            <option value="Washington">Washington</option>
             <option value="Wisconsin">Wisconsin</option>
             <option value="Wyoming">Wyoming</option>
           </select>
         </td>
       </tr>
 
-      <!-- FECHA DE VIAJE -->
-      <tr>
-        <td colspan="2"><label for="fechaDeViaje">Fecha de viaje:</label></td>
-      </tr>
-      <tr>
-        <td colspan="2"><input type="date" id="fechaDeViaje" name="fechaDeViaje" required></td>
-      </tr>
-      
-      <!-- BOTÓN DE ENVÍO
-      <tr>
-        <td colspan="2"><input type="submit" value="Añadir viaje" id="bttnAnadirViaje" name="bttnAnadirViaje"></td>
-      </tr>
-      -->
+      <!-- Fecha -->
+      <tr><td colspan="2"><label for="fechaDeViaje">Fecha de viaje:</label></td></tr>
+      <tr><td colspan="2"><input type="date" id="fechaDeViaje" name="fechaDeViaje" required /></td></tr>
+
+      <!-- Botón -->
       <tr>
         <td colspan="2">
           <button class="btn-31" type="submit">
-            <span class="text-container">
-              <span class="text">Añadir viaje</span>
-            </span>
+            <span class="text-container"><span class="text">Añadir viaje</span></span>
           </button>
         </td>
       </tr>
@@ -220,12 +210,23 @@
   <div class="footer">
     <div class="iconos">
       <nav class="navbar">
-        <a href="/GOBOX_APP/www/Home_comprador.html"><img src="/GOBOX_APP/www/img/home.png" alt="Inicio"></a>
-        <a href="/GOBOX_APP/www/IACOMPRADOR.html"><img src="/GOBOX_APP/www/img/IA.png" alt=""></a>
-         <a href="notificaciones.html"><img src="/GOBOX_APP/www/img/notificacion.png" alt=""></a>
-        <a href="/GOBOX_APP/www/UserComprador.html"><img src="/GOBOX_APP/www/img/user.png" alt="Perfil"></a>
+        <a href="Home_comprador.html"><img src="img/home.png" alt="Inicio" /></a>
+        <a href="IACOMPRADOR.html"><img src="img/IA.png" alt="IA" /></a>
+        <a href="notificaciones.html"><img src="img/notificacion.png" alt="Notificaciones" /></a>
+        <a href="UserComprador.html"><img src="img/user.png" alt="Perfil" /></a>
       </nav>
+    </div>
   </div>
 
-</body>
-</html>
+  <script type="module">
+    // Esperar DOM listo
+    document.addEventListener('DOMContentLoaded', () => {
+      // Ocultar selects condicionales
+      document.querySelectorAll('.departamentosSV, .estadosUSA').forEach(el => el.style.display = 'none');
+
+      // Mostrar el select correcto al elegir país - Origen
+      document.getElementById('paisOrigen').addEventListener('change', (e) => {
+        mostrarUbicacion('Origen', e.target.value);
+      });
+
+      // Mostrar el select
