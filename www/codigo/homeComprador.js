@@ -201,17 +201,17 @@ async function mostrarPedido() {
             // Evento ver detalles
             button.addEventListener("click", () => {
                 const pedidoId = pedidoDoc.id;
-                window.location.href = `/GOBOX_APP/www/detallesC.html?pedidoId=${pedidoId}`;
+                window.location.href = `detallesC.html?pedidoId=${pedidoId}`;  // Ruta relativa corregida
             });
 
             // Icono para botón de detalles
             const imgButton = document.createElement("img");
             imgButton.id = 'arrow';
-            imgButton.src = '/GOBOX_APP/www/img/ArrowRight.png';
+            imgButton.src = "img/ArrowRight.png";   // Ruta relativa corregida
 
             // Icono para botón de eliminar
             const imgdelete = document.createElement("img");
-            imgdelete.src = '/GOBOX_APP/www/img/basura.png';
+            imgdelete.src = "img/basura.png";       // Ruta relativa corregida
             imgdelete.style.height = "20px";
             imgdelete.id = 'Delete';
 
@@ -228,14 +228,14 @@ async function mostrarPedido() {
 
         // Si no hay pedidos, mostramos mensaje e imagen de caja vacía
         if (querySnapshot.empty) {
-            document.querySelector(".listPedidos").innerHTML = "<br><p>Aún no has realizado pedidos.</p>";
-            const emptyBOX = document.querySelector(".listPedidos");
+            const listPedidosElem = document.querySelector(".listPedidos");
+            listPedidosElem.innerHTML = "<br><p>Aún no has realizado pedidos.</p>";
             const imgB = document.createElement("img");
-            imgB.src = '/GOBOX_APP/www/img/caja.png';
+            imgB.src = "img/caja.png";    // Ruta relativa corregida
             imgB.id = 'Cajavacia';
             imgB.style.height = "130px";
             imgB.style.borderRadius = "10px";
-            emptyBOX.appendChild(imgB);
+            listPedidosElem.appendChild(imgB);
         }
     });
 }
