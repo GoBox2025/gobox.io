@@ -4,6 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Pantalla de inicio</title>
+  <!-- Rutas CSS relativas sin /GOBOX_APP/www/ -->
   <link rel="stylesheet" href="estilos/HomeViajeroEstilo.css"/>
   <link rel="stylesheet" href="estilos/estile.css"/>
   <link rel="stylesheet" href="estilos/menu.css"/>
@@ -47,14 +48,17 @@
 
   <br><br>
 
+  <!-- Navbar con imágenes -->
   <div class="navbar">
-    <div class="icon" onclick="expandIcon(this)"><a href="Home_viajero.html"><img src="img/home.png" alt=""></a></div>
-    <div class="icon" onclick="expandIcon(this)"><a href="viajes.html"><img src="img/viajes.png" alt=""></a></div>
-    <div class="icon" onclick="expandIcon(this)"><a href="lista_pedidos.html"><img src="img/box.png" alt=""></a></div>
-    <div class="icon" onclick="expandIcon(this)"><a href="BOXBOT.html"><img src="img/IA.png" alt=""></a></div>
-    <div class="icon" onclick="expandIcon(this)"><a href="ViajeroProfile.html"><img src="img/user.png" alt=""></a></div>
+    <div class="icon" onclick="expandIcon(this)"><a href="Home_viajero.html"><img src="img/home.png" alt="Inicio"></a></div>
+    <div class="icon" onclick="expandIcon(this)"><a href="viajes.html"><img src="img/viajes.png" alt="Viajes"></a></div>
+    <div class="icon" onclick="expandIcon(this)"><a href="lista_pedidos.html"><img src="img/box.png" alt="Pedidos"></a></div>
+    <div class="icon" onclick="expandIcon(this)"><a href="BOXBOT.html"><img src="img/IA.png" alt="IA"></a></div>
+    <div class="icon" onclick="expandIcon(this)"><a href="ViajeroProfile.html"><img src="img/user.png" alt="Perfil"></a></div>
   </div>
 
+  <!-- Script JS -->
   <script type="module" src="codigo/homeViajero.js"></script>
+
 </body>
 </html>
