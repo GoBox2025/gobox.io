@@ -48,7 +48,7 @@ form {
 tr:last-child td {
   display: inline-block; 
   width: auto;         
-  padding: 0 5px;       
+  padding: -2px 5px;       
 }
 
 tr:last-child {
