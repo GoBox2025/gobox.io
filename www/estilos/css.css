@@ -144,3 +144,8 @@ body {
    height: 20px;
    
 }
+.detalle-btn:hover {
+  background-color: #e07b00; /* Un tono más oscuro al hacer hover */
+  transform: scale(1.05);    /* Hace que crezca un poquito al pasar el mouse */
+  transition: background-color 0.2s ease, transform 0.2s ease;
+}
