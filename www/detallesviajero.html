@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="es">
-  <head>
+<head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Detalles del pedido</title>
@@ -9,8 +9,8 @@
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
   <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 
-  <link rel="stylesheet" href="/GOBOX_APP/www/estilos/detallesviajero.css" />
-  <link rel="stylesheet" href="/GOBOX_APP/www/estilos/menu.css">
+  <link rel="stylesheet" href="estilos/detallesviajero.css" />
+  <link rel="stylesheet" href="estilos/menu.css">
 
   <style>
     #botonWhatsApp {
@@ -39,85 +39,77 @@
 <div class="barra-arriba">
   <div class="icono">
     <div>
-      <a href="Home_viajero.html"><img src="/GOBOX_APP/www/img/flechaIzquierda.png" alt=""></a>
+      <a href="Home_viajero.html"><img src="img/flechaIzquierda.png" alt=""></a>
     </div>
   </div>
 </div>
 
-  <div id="contactoWhatsApp" style="margin-top: 15px;"></div>
+<div id="contactoWhatsApp" style="margin-top: 15px;"></div>
 
+<br>
+<br>
 
-  <br>
-  <br>
-  
-  <img id="imagen-pedido" src="" alt="Imagen del Pedido" class="imagen-pedido" />
+<img id="imagen-pedido" src="" alt="Imagen del Pedido" class="imagen-pedido" />
 
-  <div class="contenedor">
-  
-    <div class="detalle">
+<div class="contenedor">
 
-      <h2>Valor:</h2>
+  <div class="detalle">
+
+    <h2>Valor:</h2>
     <p id="costo">Cargando...</p>
 
-      <h2>Nombre del producto:</h2>
-      <p id="pedido">Cargando...</p>
+    <h2>Nombre del producto:</h2>
+    <p id="pedido">Cargando...</p>
 
-      <h2>Tipo:</h2>
-      <p id="tipo">Cargando...</p>
+    <h2>Tipo:</h2>
+    <p id="tipo">Cargando...</p>
 
-      <h2>Entrega antes de:</h2>
-      <p id="tipoEntrega">Cargando...</p>
+    <h2>Entrega antes de:</h2>
+    <p id="tipoEntrega">Cargando...</p>
 
-      <h2>Recoger en:</h2>
-      <p id="recogerEn">Cargando...</p>
+    <h2>Recoger en:</h2>
+    <p id="recogerEn">Cargando...</p>
 
-      <h2>Entregar en:</h2>
-      <p id="entregarEn">Cargando...</p>
-          
-      <h2>Cantidad:</h2>
-      <p id="cantidad">Cargando...</p>
+    <h2>Entregar en:</h2>
+    <p id="entregarEn">Cargando...</p>
 
-      <h2>Peso:</h2>
-      <p id="peso">Cargando...</p>
+    <h2>Cantidad:</h2>
+    <p id="cantidad">Cargando...</p>
 
-      <h2>Tipo de empaquetado:</h2>
-      <p id="tipoDeEmpaquetado">Cargando...</p>
-    </div>
+    <h2>Peso:</h2>
+    <p id="peso">Cargando...</p>
+
+    <h2>Tipo de empaquetado:</h2>
+    <p id="tipoDeEmpaquetado">Cargando...</p>
   </div>
-
-  
-      <!--Luagar donde se mostrara el mapa-->
-          <div id="map" style="height: 300px; width: 100%; margin: 20px auto;"></div>
-
-
-  <!--<div class="boton-centro">
-    <button class="boton" onclick="guardarCambios()">Haz tu oferta</button>
-  </div>
--->
-
-<div class="btn-container">
-    <button class="btn-31">
-        <span class="text-container">
-            <span class="text" onclick="guardarCambios()">Haz tu oferta</span>
-        </span>
-    </button>
 </div>
 
+<!-- Lugar donde se mostrará el mapa -->
+<div id="map" style="height: 300px; width: 100%; margin: 20px auto;"></div>
 
-  <!-- Botón flotante de WhatsApp -->
-  <button id="botonWhatsApp" title="Contactar por WhatsApp">
-  <img src="/GOBOX_APP/www/img/icons8-whatsapp-48.png" alt="WhatsApp">
+<div class="btn-container">
+  <button class="btn-31">
+    <span class="text-container">
+      <span class="text" onclick="guardarCambios()">Haz tu oferta</span>
+    </span>
+  </button>
+</div>
+
+<!-- Botón flotante de WhatsApp -->
+<button id="botonWhatsApp" title="Contactar por WhatsApp">
+  <img src="img/icons8-whatsapp-48.png" alt="WhatsApp">
 </button>
 
 <footer>
-   <div class="navbar">
-        <div class="icon" onclick="expandIcon(this)" ><a href="Home_viajero.html"><img src="/GOBOX_APP/www/img/home.png" alt=""></div></a>
-        <div class="icon" onclick="expandIcon(this)"><a href="viajes.html"><img src="/GOBOX_APP/www/img/viajes.png" alt=""></div></a>
-        <div class="icon" onclick="expandIcon(this)"><a href="lista_pedidos.html"><img src="/GOBOX_APP/www/img/box.png" alt=""></div></a>
-        <div class="icon" onclick="expandIcon(this)"><a href="BOXBOT.html"><img src="/GOBOX_APP/www/img/IA.png" alt=""></div></a>
-        <div class="icon" onclick="expandIcon(this)"><a href="ViajeroProfile.html"><img src="/GOBOX_APP/www/img/user.png" alt=""></div></a>
-    </div>
+  <div class="navbar">
+    <div class="icon" onclick="expandIcon(this)"><a href="Home_viajero.html"><img src="img/home.png" alt=""></a></div>
+    <div class="icon" onclick="expandIcon(this)"><a href="viajes.html"><img src="img/viajes.png" alt=""></a></div>
+    <div class="icon" onclick="expandIcon(this)"><a href="lista_pedidos.html"><img src="img/box.png" alt=""></a></div>
+    <div class="icon" onclick="expandIcon(this)"><a href="BOXBOT.html"><img src="img/IA.png" alt=""></a></div>
+    <div class="icon" onclick="expandIcon(this)"><a href="ViajeroProfile.html"><img src="img/user.png" alt=""></a></div>
+  </div>
 </footer>
+
 </body>
-<script type="module" src="/GOBOX_APP/www/codigo/detallesviajero.js"></script>
+<script type="module" src="codigo/detallesviajero.js"></script>
 </html>
