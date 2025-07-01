@@ -33,7 +33,7 @@ function mostrarSaludo() {
         saludoElem.innerHTML = `
           <p style="font-size: 20px; margin-bottom: 0.1em;">Bienvenido/a, ${data.nombre} 👋</p>
           <br>
-          <p style="font-size: 0.7em; margin: 0;">"Cada viaje es una nueva oportunidad. Llena tu maleta con ganancias."</p>
+          <p style="font-size: 0.7em; margin: 0;">Cada viaje es una nueva oportunidad. Llena tu maleta con ganancias.</p>
         `;
       }
     });
@@ -136,7 +136,7 @@ async function mostrarPedidos() {
         // Imagen
         const celdaFoto = fila.insertCell(0);
         const img = document.createElement("img");
-        img.src = data.imagen_url || "/www/img/caja.png"
+        img.src = data.imagen_url || "/GOBOX_APP/www/img/caja.png"
         img.alt = "Foto del producto";
         img.style.width = "100px";
         img.style.height = "85px";
@@ -165,7 +165,7 @@ async function mostrarPedidos() {
 
         const imgButton = document.createElement("img");
         imgButton.id = 'arrow2';
-        imgButton.src = 'img/ArrowRight.png';
+        imgButton.src = '/GOBOX_APP/www/img/ArrowRight.png';
         button.appendChild(imgButton);
         buttonCell.appendChild(button);
 
