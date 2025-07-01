@@ -45,7 +45,7 @@ signOut.addEventListener("click", async () => {
     if (confirm("¿Estás seguro de cerrar sesión?")) {
         try {
             await auth.signOut();
-            window.location.href = "login.html";
+            window.location.href = "./login.html";
         } catch (error) {
             console.error("Error cerrando sesión:", error);
         }
@@ -101,7 +101,7 @@ async function mostrarPerfil() {
 // Cambiar a la interfaz de viajero
 function rolcambio() {
     if (confirm("¿Estás seguro de cambiar a Viajero y empezar a ganar con GoBox?")) {
-        window.location.href = "Home_viajero.html"; // Cambia esta ruta según tu estructura
+        window.location.href = "./Home_viajero.html";
     }
 }
 
@@ -148,8 +148,6 @@ async function Guardar() {
             Genero: selectedValue,
             Rol: seleccion
         });
-
-       
 
         // Deshabilitar inputs
         [username, userphone, fechaNacimiento, SelectGender, select].forEach(el => el.disabled = true);
