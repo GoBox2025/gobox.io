@@ -19,7 +19,6 @@ const firebaseConfig = {
   appId: "1:470323269250:web:777b46cbea8d7260822e9b"
 };
 
-
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
 const db = getFirestore(app);
@@ -53,9 +52,9 @@ document.addEventListener('DOMContentLoaded', () => {
       if (userFound) {
         const rol = userFound.Rol?.toLowerCase();
         if (rol === "viajero") {
-          window.location.href = "Home_viajero.html";
+          window.location.href = "Home_viajero.html"; // ruta relativa
         } else if (rol === "comprador") {
-          window.location.href = "Home_comprador.html";
+          window.location.href = "Home_comprador.html"; // ruta relativa
         } else {
           alert("Rol desconocido: " + userFound.Rol);
         }
