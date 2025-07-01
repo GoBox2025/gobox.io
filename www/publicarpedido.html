@@ -1,121 +1,104 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="/GOBOX_APP/www/estilos/publicarpedido.css">
-    <link rel="stylesheet" href="/GOBOX_APP/www/estilos/menu.css">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <link rel="stylesheet" href="estilos/publicarpedido.css">
+    <link rel="stylesheet" href="estilos/menu.css">
     <title>Publicar pedido</title>
-     <script src="https://www.gstatic.com/firebasejs/10.10.0/firebase-app-compat.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/10.10.0/firebase-auth-compat.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/10.10.0/firebase-firestore-compat.js"></script>
-    <script type="module" src="/GOBOX_APP/www/codigo/publicarpedidos.js"></script>
 
- 
+    <script src="https://www.gstatic.com/firebasejs/10.10.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.10.0/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.10.0/firebase-firestore-compat.js"></script>
+    <script type="module" src="codigo/publicarpedidos.js"></script>
 </head>
 <body>
 
-    <!--Linea Naranja (Arriba)-->
   <div class="barra-arriba"></div>
 
-  <!--Imagen agregar-->
- 
+  <a href="Home_comprador.html">
+    <img src="img/flechaIzquierda.png" alt="flecha" style="width: auto; height: 30px; margin-left:-330px; padding: 10px;">
+  </a>
+  <br>
 
-    <a href="/GOBOX_APP/www/Home_comprador.html">
-      <img src="/GOBOX_APP/www/img/flechaIzquierda.png" alt="flecha"  style="width: auto; height: 30px; margin-left:-330px; padding: 10px;">
-    </a>
-    <br>
-    
-    <div class="icono-registro">
-      <b>
-        <p style="color: #542a03; margin-left: 0px; font-size: medium;">Foto del paquete:</p>
-      </b>
-      <img src="/GOBOX_APP/www/img/registro.png" alt="icono registro">
-      <input type="file" id="imagen" accept="image/*" style="display: none;">
-    </div>
-    
+  <div class="icono-registro">
+    <b><p style="color: #542a03; margin-left: 0px; font-size: medium;">Foto del paquete:</p></b>
+    <img src="img/registro.png" alt="icono registro">
+    <input type="file" id="imagen" accept="image/*" style="display: none;">
+  </div>
 
-    <div class="contenedor">
-      
-      <form class="formulario">  <b>
-          <label for="nombre" style="color: #542a03;">Nombre:</label><br></b>
-          <input type="text" id="nombre" placeholder="Ingrese su nombre y apellido"><br><br>
-        <b>
-          <label for="producto">Tipo de paquete:</label><br></b>
-          <select id="producto" name="producto">
-              <option value="" disabled selected>Seleccione el tipo de su paquete</option>
-              <option value="Electrodoméstico">Electrodoméstico</option>
-              <option value="Ropa">Ropa</option>
-              <option value="Electronicos">Electrónicos</option>
-              <option value="Calzado">Calzado</option>
-              <option value="Cosmeticos">Cosméticos</option>
-              
-          </select><br><br>
-          <b>
-          <label for="cantidad"  style="color: #542a03;">Cantidad:</label><br></b>
-          <input type="text" id="cantidad" placeholder="Ingrese la cantidad de paquetes"><br><br>
-  
-         <b> <label for="peso" style="color: #542a03;">Peso:</label><br> </b>
-          <input type="text" id="peso" placeholder="Ingrese el peso total (LB)"><br><br>
-  
-         <b> <label for="empaquetado" style="color: #542a03;">Tipo de empaquetado:</label><br></b>
-          <input type="text" id="empaquetado" placeholder="Ingrese el empaquetado"><br><br>
-  
-         <b> <label for="direccion_origen" style="color: #542a03;">Dirección de origen:</label><br></b>
-          <input type="text" id="direccion_origen" placeholder="Lugar donde se recogerá su paquete"><br><br>
-  
-          <b><label for="direccion_destino" style="color: #542a03;">Dirección de destino:</label><br></b>
-          <input type="text" id="direccion_destino" placeholder="Lugar donde se entregará su paquete"><br><br>
-  
-          <b> <label for="descripcion" style="color: #542a03;">Descripción:</label><br></b>
-          <input type="text" id="descripcion" placeholder="Descripción del paquete"><br><br>
-  
-         <b> <label for="costo" style="color: #542a03;">Valor:</label><br> </b>
-          <input type="text" id="costo" placeholder="Ingrese el valor a pagar por el envio ($)"><br><br>
+  <div class="contenedor">
+    <form class="formulario">
+      <b><label for="nombre" style="color: #542a03;">Nombre:</label><br></b>
+      <input type="text" id="nombre" placeholder="Ingrese su nombre y apellido"><br><br>
 
-          
-          <b> <label for="fecha_estimada" style="color: #542a03;">Fecha estimada:</label><br> </b>
-          <input type="text" id="fecha_estimada" placeholder="Ingrese la fecha en que desea que su paquete sea entregado"><br><br>
+      <b><label for="producto">Tipo de paquete:</label><br></b>
+      <select id="producto" name="producto">
+        <option value="" disabled selected>Seleccione el tipo de su paquete</option>
+        <option value="Electrodoméstico">Electrodoméstico</option>
+        <option value="Ropa">Ropa</option>
+        <option value="Electronicos">Electrónicos</option>
+        <option value="Calzado">Calzado</option>
+        <option value="Cosmeticos">Cosméticos</option>
+      </select><br><br>
 
-           <!--Luagar donde se mostrara el mapa-->
-          <div id="map" style="height: 300px; width: 100%; margin: 20px auto;"></div>
+      <b><label for="cantidad"  style="color: #542a03;">Cantidad:</label><br></b>
+      <input type="text" id="cantidad" placeholder="Ingrese la cantidad de paquetes"><br><br>
 
+      <b><label for="peso" style="color: #542a03;">Peso:</label><br></b>
+      <input type="text" id="peso" placeholder="Ingrese el peso total (LB)"><br><br>
 
-        
-  
-          <!-- Botones de Publicar y Cancelar -->
-        <div class="btn-container">
-          <button type="submit" class="btn-31">
-                <span class="text-container"><span class="text">PUBLICAR</span></span>
-          </button>
+      <b><label for="empaquetado" style="color: #542a03;">Tipo de empaquetado:</label><br></b>
+      <input type="text" id="empaquetado" placeholder="Ingrese el empaquetado"><br><br>
 
-          <button type="button" class="btn-31" onclick="window.location.href='Home_comprador.html';">
-                <span class="text-container"><span class="text">CANCELAR</span></span>
-          </button>
-        </div>
-      </form>
-      
-    </div>
-    
-  
-       <div class="footer">
+      <b><label for="direccion_origen" style="color: #542a03;">Dirección de origen:</label><br></b>
+      <input type="text" id="direccion_origen" placeholder="Lugar donde se recogerá su paquete"><br><br>
+
+      <b><label for="direccion_destino" style="color: #542a03;">Dirección de destino:</label><br></b>
+      <input type="text" id="direccion_destino" placeholder="Lugar donde se entregará su paquete"><br><br>
+
+      <b><label for="descripcion" style="color: #542a03;">Descripción:</label><br></b>
+      <input type="text" id="descripcion" placeholder="Descripción del paquete"><br><br>
+
+      <b><label for="costo" style="color: #542a03;">Valor:</label><br></b>
+      <input type="text" id="costo" placeholder="Ingrese el valor a pagar por el envio ($)"><br><br>
+
+      <b><label for="fecha_estimada" style="color: #542a03;">Fecha estimada:</label><br></b>
+      <input type="text" id="fecha_estimada" placeholder="Ingrese la fecha en que desea que su paquete sea entregado"><br><br>
+
+      <!-- Lugar donde se mostrará el mapa -->
+      <div id="map" style="height: 300px; width: 100%; margin: 20px auto;"></div>
+
+      <!-- Botones de Publicar y Cancelar -->
+      <div class="btn-container">
+        <button type="submit" class="btn-31">
+          <span class="text-container"><span class="text">PUBLICAR</span></span>
+        </button>
+
+        <button type="button" class="btn-31" onclick="window.location.href='Home_comprador.html';">
+          <span class="text-container"><span class="text">CANCELAR</span></span>
+        </button>
+      </div>
+    </form>
+  </div>
+
+  <div class="footer">
     <div class="iconos">
       <nav class="navbar">
-        <a href="/GOBOX_APP/www/Home_comprador.html"><img src="/GOBOX_APP/www/img/home.png" alt="Inicio"></a>
-        <a href="/GOBOX_APP/www/BOXBOT.html"><img src="/GOBOX_APP/www/img/IA.png" alt=""></a>
-         <a href="/GOBOX_APP/www/IACOMPRADOR.html"><img src="/GOBOX_APP/www/img/notificacion.png" alt=""></a>
-        <a href="/GOBOX_APP/www/UserComprador.html"><img src="/GOBOX_APP/www/img/user.png" alt="Perfil"></a>
+        <a href="Home_comprador.html"><img src="img/home.png" alt="Inicio"></a>
+        <a href="BOXBOT.html"><img src="img/IA.png" alt=""></a>
+        <a href="IACOMPRADOR.html"><img src="img/notificacion.png" alt=""></a>
+        <a href="UserComprador.html"><img src="img/user.png" alt="Perfil"></a>
       </nav>
     </div>
+  </div>
 
-</body>
   <!-- Incluir los SDK de Firebase desde CDN -->
   <script src="https://www.gstatic.com/firebasejs/10.10.0/firebase-app-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/10.10.0/firebase-firestore-compat.js"></script>
 
-
   <!-- Referenciar el archivo JavaScript externo -->
-  <script src="/GOBOX_APP/www/codigo/map.js"></script>
+  <script src="codigo/map.js"></script>
 
-
+</body>
 </html>
