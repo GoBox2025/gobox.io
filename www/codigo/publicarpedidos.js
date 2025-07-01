@@ -144,7 +144,7 @@ async function publicarPedido(event) {
 
       await setDoc(doc(db, "pedido1", idFormateado), nuevoPedido);
       alert("¡Pedido publicado con éxito!");
-      window.location.href = "Home_comprador.html";
+      window.location.href = "./Home_comprador.html";
     } catch (error) {
       console.error("Error al publicar el pedido:", error);
       alert("Hubo un error al publicar el pedido.");
