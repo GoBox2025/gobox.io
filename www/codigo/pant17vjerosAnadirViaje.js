@@ -18,21 +18,22 @@ const db = getFirestore(app);
 const auth = getAuth(app);
 
 document.addEventListener('DOMContentLoaded', () => {
-  // Ocultar selects condicionales
+  // Ocultar selects condicionales al inicio
   document.querySelectorAll('.departamentosSV, .estadosUSA').forEach(el => el.style.display = 'none');
 
-  // Mostrar select adecuado según país seleccionado
+  // Escuchar cambios en país de origen
   document.getElementById('paisOrigen').addEventListener('change', function () {
     mostrarUbicacion('Origen', this.value);
   });
 
+  // Escuchar cambios en país de destino
   document.getElementById('paisDestino').addEventListener('change', function () {
     mostrarUbicacion('Destino', this.value);
   });
 
   let currentUser = null;
 
-  // Verificar usuario autenticado
+  // Esperar autenticación
   onAuthStateChanged(auth, (user) => {
     if (user) {
       currentUser = user;
@@ -110,18 +111,19 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 });
 
-// Mostrar selects según país
+// Función para mostrar el select correcto según país y tipo (Origen/Destino)
 function mostrarUbicacion(tipo, pais) {
   const deptSV = document.getElementById(`departamentos${tipo}SV`);
   const estadosUSA = document.getElementById(`estados${tipo}USA`);
 
-  // Ocultar ambos primero
-  deptSV.style.display = 'none';
-  estadosUSA.style.display = 'none';
+  if (deptSV && estadosUSA) {
+    deptSV.style.display = 'none';
+    estadosUSA.style.display = 'none';
 
-  if (pais === 'El Salvador') {
-    deptSV.style.display = 'block';
-  } else if (pais === 'Estados Unidos') {
-    estadosUSA.style.display = 'block';
+    if (pais === 'El Salvador') {
+      deptSV.style.display = 'block';
+    } else if (pais === 'Estados Unidos') {
+      estadosUSA.style.display = 'block';
+    }
   }
 }
