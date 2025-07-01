@@ -4,37 +4,35 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Lista de pedidos</title>
-  <link rel="stylesheet" href="/GOBOX_APP/www/estilos/pedidos.css"/>
-  <link rel="stylesheet" href="/GOBOX_APP/www/estilos/menu.css">
+  <link rel="stylesheet" href="estilos/pedidos.css"/>
+  <link rel="stylesheet" href="estilos/menu.css">
 </head>
 <body>
 
-      <header class="encabezado">
-        <a href="/GOBOX_APP/www/Home_viajero.html" class="back-button">
-            <img src="/GOBOX_APP/www/img/flechaIzquierda.png" alt="Volver" class="flecha">
-        </a>
-        <h1>Pedidos publicados</h1>
-    </header>
-
+  <header class="encabezado">
+    <a href="Home_viajero.html" class="back-button">
+        <img src="img/flechaIzquierda.png" alt="Volver" class="flecha">
+    </a>
+    <h1>Pedidos publicados</h1>
+  </header>
 
   <div class="filtros">
-  <button class="filtro-btn active" onclick="mostrarTodos(this)">Todos</button>
-  <button class="filtro-btn" onclick="ordenarPorFecha('asc', this)">Más antiguos</button>
-  <button class="filtro-btn" onclick="ordenarPorFecha('desc', this)">Más recientes</button>
-</div>
+    <button class="filtro-btn active" onclick="mostrarTodos(this)">Todos</button>
+    <button class="filtro-btn" onclick="ordenarPorFecha('asc', this)">Más antiguos</button>
+    <button class="filtro-btn" onclick="ordenarPorFecha('desc', this)">Más recientes</button>
+  </div>
 
   <div id="contenedor-pedidos" class="contenedor"></div>
 
- <template id="plantilla-tarjeta">
-  <div class="ordenar-tarjeta">
-    
+  <template id="plantilla-tarjeta">
+    <div class="ordenar-tarjeta">
       <div class="info-usuario">
-        <img class="profile-pic" src="/GOBOX_APP/www/img/usuario-to.png" alt="Usuario">
+        <img class="profile-pic" src="img/usuario-to.png" alt="Usuario">
         <h3 class="nombre-usuario">Usuario</h3>
         <p class="estado-pedido"></p>
       </div>
       <div class="contenido">
-        <img class="product-img" src="/GOBOX_APP/www/img/imagen-defecto.png" alt="Producto">
+        <img class="product-img" src="img/imagen-defecto.png" alt="Producto">
         <div class="ordear-información">
           <p class="detalles-pedido">Detalles del pedido</p>
           <p><strong>Tipo:</strong> <span class="tipo-pedido"></span></p>
@@ -42,24 +40,21 @@
           <p><strong>Desde:</strong> <span class="recoger-en"></span></p>
           <p><strong>Hasta:</strong> <span class="entregar-en"></span></p>
           <p><strong>Valor:</strong> $<span class="precio-pedido"></span></p>
-          
         </div>
       </div>
-    </a>
-  </div>
-</template>
-
-      <footer>
-         <div class="navbar">
-        <div class="icon" onclick="expandIcon(this)" ><a href="Home_viajero.html"><img src="/GOBOX_APP/www/img/home.png" alt=""></div></a>
-        <div class="icon" onclick="expandIcon(this)"><a href="viajes.html"><img src="/GOBOX_APP/www/img/viajes.png" alt=""></div></a>
-        <div class="icon" onclick="expandIcon(this)"><a href="lista_pedidos.html"><img src="/GOBOX_APP/www/img/box.png" alt=""></div></a>
-        <div class="icon" onclick="expandIcon(this)"><a href="BOXBOT.html"><img src="/GOBOX_APP/www/img/IA.png" alt=""></div></a>
-        <div class="icon" onclick="expandIcon(this)"><a href="ViajeroProfile.html"><img src="/GOBOX_APP/www/img/user.png" alt=""></div></a>
     </div>
-</footer>
+  </template>
 
+  <footer>
+    <div class="navbar">
+      <div class="icon" onclick="expandIcon(this)"><a href="Home_viajero.html"><img src="img/home.png" alt=""></a></div>
+      <div class="icon" onclick="expandIcon(this)"><a href="viajes.html"><img src="img/viajes.png" alt=""></a></div>
+      <div class="icon" onclick="expandIcon(this)"><a href="lista_pedidos.html"><img src="img/box.png" alt=""></a></div>
+      <div class="icon" onclick="expandIcon(this)"><a href="BOXBOT.html"><img src="img/IA.png" alt=""></a></div>
+      <div class="icon" onclick="expandIcon(this)"><a href="ViajeroProfile.html"><img src="img/user.png" alt=""></a></div>
+    </div>
+  </footer>
 
-  <script type="module" src="/GOBOX_APP/www//www/codigo/pedidos.js"></script>
+  <script type="module" src="codigo/pedidos.js"></script>
 </body>
 </html>
