@@ -1,90 +1,77 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Perfil</title>
-    <link rel="stylesheet" href="/www/estilos/estiloCompradorP.css">
-    <link rel="stylesheet" href="/www/estilos/menu.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Perfil comprador</title>
+  <link rel="stylesheet" href="/GOBOX_APP/www/estilos/estiloCompradorP.css" />
+  <link rel="stylesheet" href="/GOBOX_APP/www/estilos/menu.css" />
 </head>
-<body>
-    <div class="barra-arriba"></div>
-    <img src="img/logout.png" id="logout" alt="">
-<br>
-   <center> <table class="tabla" style="border-spacing: 20px;" >
+<body style="background-color: white; color: #8B4513;">
+  <div class="barra-arriba"></div>
 
-        <tr>
+  <!-- Botón Cerrar Sesión -->
+  <div class="btn-container">
+<img src="/GOBOX_APP/www/img/logout.png" id="logout" alt="">      
+  </div>
 
-            <td id="Contenedor_nombre"> <input type="text" id="username" disabled></h2>
-
-                <h5 id="useremail"></h5>
-
-            </td>
-
-            <td id="photo">
-
-                
-
-            </td>
-
-        </tr>
-
+  <br />
+  <center>
+    <table class="tabla" style="border-spacing: 20px;">
+      <tr>
+        <td id="Contenedor_nombre">
+          <input type="text" id="username" disabled />
+          <h5 id="useremail"></h5>
+        </td>
+        <td id="photo"><!-- Foto del usuario --></td>
+      </tr>
     </table>
-</center>
-    <hr id="separador">
+  </center>
 
-    <div class="contenedor">
+  <hr id="separador" />
 
-      
-       <b><p style="font-size: 20px;">Rol</p></b> 
+  <div class="contenedor">
+    <b><p style="font-size: 20px;">Rol:</p></b>
+    <select class="Rol" style="font-size: 20px;" id="rolSelect" disabled>
+      <option value="Comprador">Comprador</option>
+      <option value="Viajero" id="rolCambio">Viajero</option>
+    </select>
 
-        <select name="" class="Rol" style="font-size: 20px;" id="rolSelect" disabled>
+    <b><p style="font-size: 20px;">Teléfono:</p></b>
+    <input type="text" id="userphone" disabled />
 
-            <option value="Comprador"    >Comprador</option>
+    <b><p style="font-size: 20px;">Fecha de nacimiento:</p></b>
+    <input type="date" id="userFecha" disabled />
 
-            <option value="Viajero"  onclick="miConfirm(event)" id="rolCambio" >Viajero</option>  <!--LUZ ACA VAS A PONER EL SELECTED EN VIAJERO-->
+    <b><p style="font-size: 20px;">Género:</p></b>
+    <select class="Rol" style="font-size: 20px;" id="selectGenero" disabled>
+      <option value="Femenino">Femenino</option>
+      <option value="Masculino">Masculino</option>
+      <option value="Otro">Otro</option>
+    </select>
+  </div>
 
-        </select> 
+  <br />
 
-       <b><p style="font-size: 20px;">Telefono</p></b> 
+  <!-- Botón Editar -->
+  <div class="btn-container">
+    <button id="change" class="btn-31">
+      <span class="text-container"><span class="text">EDITAR</span></span>
+    </button>
+  </div>
 
-       <input type="text" id="userphone" disabled>
-
-         <b><p style="font-size: 20px;">Fecha de nacimiento:</p></b> 
-
-          <input type="date" id="userFecha" disabled>
-
-           <b><p style="font-size: 20px;">Genero:</p></b>
-
-            <select name="" class="Rol" style="font-size: 20px;" id="selectGenero" disabled>
-
-            <option value="Femenino"  selected  >Femenino</option>
-
-            <option value="Masculino"  >Masculino</option>
-
-            <option value="Otro" >Otro</option>
-
-        </select> 
-           
-           
-
-    </div>
- <br>
-    <button id="change">Editar</button>
-
-</center>
-
-   
+  <!-- Footer -->
   <div class="footer">
     <div class="iconos">
-       <nav class="navbar">
-        <a href="/www/Home_comprador.html"><img src="/www/img/home.png" alt="Inicio"></a>
-        <a href="/www/Asistente.html"><img src="/www/img/IA.png" alt=""></a>
-        <a href="/www/UserComprador.html"><img src="/www/img/user.png" alt="Perfil" ></a>
-    </nav>
-  
+      <nav class="navbar">
+        <a href="/GOBOX_APP/www/Home_comprador.html"><img src="/GOBOX_APP/www/img/home.png" alt="Inicio" /></a>
+        <a href="/GOBOX_APP/www/IACOMPRADOR.html"><img src="/GOBOX_APP/www/img/IA.png" alt="IA" /></a>
+        <a href="notificaciones.html"><img src="/GOBOX_APP/www/img/notificacion.png" alt="Notificaciones" /></a>
+        <a href="/GOBOX_APP/www/UserComprador.html"><img src="/GOBOX_APP/www/img/user.png" alt="Perfil" /></a>
+      </nav>
+    </div>
   </div>
-  
-  <script type="module" src="/www/codigo/perfilC.js"></script>
+
+  <script type="module" src="/GOBOX_APP/www/codigo/perfilC.js"></script>
 </body>
 </html>
