@@ -57,7 +57,7 @@ function mostrarViajes(lista) {
 
 // Función global para borrar un viaje por id
 window.borrarViaje = async function(id) {
-  const confirmado = confirm("¿Estás seguro de que deseas borrar este viaje?");
+  const confirmado = confirm("¿Está seguro de que desea borrar este viaje?");
   if (confirmado) {
     await deleteDoc(doc(db, "Viajes", id));  // Borra documento Firestore
     const user = auth.currentUser;
