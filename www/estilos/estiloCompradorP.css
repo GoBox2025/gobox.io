@@ -7,48 +7,52 @@ body {
     color: #542a03;
 }
 
-/*Diseño para la imagen de cerrar sección.*/
+/* Diseño para la imagen de cerrar sesión */
 #logout {
     height: 50px;
-
     position: absolute;
     top: 60px;
     right: 15px;
     cursor: pointer;
 }
 
-
-.tabla{
+/* Tabla del perfil */
+.tabla {
     border-spacing: 0;
     width: 85%;
+    max-width: 600px;
+    margin: 0 auto;
+    table-layout: fixed;
+    word-wrap: break-word;
 }
-/*Estilo para la foto de perfil*/
+
+/* Contenedor de la imagen de perfil */
 #userphoto {
     margin-top: 20px;
     height: 120px;
-
 }
 
+/* Imagen dentro de #photo */
+#photo img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 80px;
+}
 
-/*Codigo para los elementos del perfil, telefono, rol etc.*/
+/* Contenedor de los campos del perfil */
 .contenedor {
-
     text-align: left;
     height: 405px;
     margin-bottom: 30px;
     width: 75%;
     background-color: #fda735;
     border-radius: 15px;
-
     max-width: 400px;
-    /* Ancho máximo del div */
     margin: 0 auto;
-    /* Centra horizontalmente el div */
     padding: 20px;
-
 }
 
-/*Diseño del boton de editar perfil*/
+/* Botón de editar */
 button {
     margin-bottom: 100px;
     height: 40px;
@@ -57,15 +61,14 @@ button {
     background-color: #fda735;
     color: white;
     width: 200px;
-
 }
 
-/*efecto para el boton de envio*/
+/* Hover del botón */
 button:hover {
     background-color: #ef7c2c;
 }
 
-/*Estilo para la linea hr que separa los dos contenedores, foto y .contenedor*/
+/* Separador entre tabla y contenedor */
 #separador {
     margin-bottom: 30px;
     background-color: #fda735;
@@ -75,7 +78,7 @@ button:hover {
     width: 100%;
 }
 
-/*estilo para el select*/
+/* Estilo general para los select */
 .Rol {
     border-radius: 8px;
     height: 30px;
@@ -98,52 +101,10 @@ option {
     border-color: #fda735;
 }
 
-#Contenedor_nombre{
-    padding: 0%;
-    margin: 0%;
-    width: 100%;
-}
-
-#username {
-
-    font-size: 25px;
-    padding-left: 8px;
-    width: 80%;
-    height: 30px;
-    border: none;
-    font-weight: bold;
+#Contenedor_nombre {
     padding: 0;
     margin: 0;
-}
-
-input:disabled {
-    background-color: white;
-    color: #542a03;
-    font-size: 30px;
-
-}
-
-select:disabled{
-     opacity: 1 !important;
-    background-color: white;
-    color: #542a03;
-    font-size: 30px;
-    
-}
-
-#userFecha{
-    border-radius: 10px;
-    font-size: 20px;
-    padding-left: 8px;
-    width: 93%;
-    height: 30px;
-    border-color: #fda735;
-}
-
-#useremail{
-    width: 70%;
-}
-#Contenedor_nombre {
+    width: 100%;
     display: flex;
     flex-direction: column;
     align-items: flex-start;
@@ -158,9 +119,14 @@ select:disabled{
     border: none;
     background: transparent;
     outline: none;
+    padding: 0;
+    margin: 0;
+    width: 80%;
+    height: 30px;
 }
 
 #useremail {
+    width: 70%;
     font-size: 20px;
     font-weight: normal;
     color: #8B4513;
@@ -168,8 +134,30 @@ select:disabled{
     text-align: left;
 }
 
+/* Campos deshabilitados */
+input:disabled {
+    background-color: white;
+    color: #542a03;
+    font-size: 30px;
+}
 
-/* Contenedor de botones */
+select:disabled {
+    opacity: 1 !important;
+    background-color: white;
+    color: #542a03;
+    font-size: 30px;
+}
+
+#userFecha {
+    border-radius: 10px;
+    font-size: 20px;
+    padding-left: 8px;
+    width: 93%;
+    height: 30px;
+    border-color: #fda735;
+}
+
+/* Contenedor del botón moderno */
 .btn-container {
     display: flex;
     justify-content: center;
@@ -178,7 +166,7 @@ select:disabled{
     gap: 20px;
 }
 
-/* Estilos del botón moderno */
+/* Estilo del botón moderno (btn-31) */
 .btn-31,
 .btn-31 *,
 .btn-31 :after,
@@ -190,10 +178,9 @@ select:disabled{
 }
 
 .btn-31 {
-    display: flex; /* CENTRADO CORRECTO */
-    justify-content: center; /* CENTRADO CORRECTO */
-    align-items: center; /* CENTRADO CORRECTO */
-
+    display: flex;
+    justify-content: center;
+    align-items: center;
     -webkit-tap-highlight-color: transparent;
     background-color: #ff9500;
     padding: 1rem 2rem;
@@ -266,5 +253,50 @@ select:disabled{
 .btn-31:hover .text {
     -webkit-animation: move-up-alternate 0.3s ease forwards;
     animation: move-up-alternate 0.3s ease forwards;
+}
+
+/* RESPONSIVE: Ajustes para pantallas pequeñas */
+@media screen and (max-width: 600px) {
+    #Contenedor_nombre {
+        align-items: center;
+        padding-left: 0;
+        text-align: center;
+    }
+
+    #username,
+    #useremail {
+        width: 100%;
+        text-align: center;
+    }
+
+    .contenedor {
+        width: 90%;
+        padding: 15px;
+    }
+
+    #logout {
+        top: 20px;
+        right: 10px;
+        height: 40px;
+    }
+
+    .tabla {
+        display: block;
+    }
+
+    .tabla tr {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    #photo {
+        margin-top: 10px;
+    }
+
+    #photo img {
+        width: 100px;
+        height: 100px;
+    }
 }
 
