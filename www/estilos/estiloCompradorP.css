@@ -53,9 +53,8 @@ body {
 }
 
 #photo {
-    width: 30vw;             /* tamaño dinámico basado en el ancho de la pantalla */
-    max-width: 130px;        /* nunca más grande de 130px */
-    aspect-ratio: 1 / 1;     /* mantiene forma cuadrada */
+    width: 130px;
+    height: 130px;
     border-radius: 50%;
     overflow: hidden;
     display: flex;
@@ -67,7 +66,7 @@ body {
 #photo img {
     width: 100%;
     height: 100%;
-    object-fit: contain;     /* asegura que toda la imagen se vea */
+    object-fit: scale-down; /* Muestra toda la imagen sin recorte ni zoom */
     border-radius: 50%;
     display: block;
 }
