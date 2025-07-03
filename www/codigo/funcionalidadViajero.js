@@ -5,13 +5,14 @@ import {
     collection,
     getDocs,
     query,
-    where
+    where,
+    doc,
+    updateDoc
 } from "https://www.gstatic.com/firebasejs/10.0.0/firebase-firestore.js";
 import {
     getAuth,
     onAuthStateChanged
 } from "https://www.gstatic.com/firebasejs/10.0.0/firebase-auth.js";
-import { doc, updateDoc } from "https://www.gstatic.com/firebasejs/10.0.0/firebase-firestore.js";
 
 const firebaseConfig = {
     apiKey: "AIzaSyBB0GFK5FhyPsLXrZGIYCxNT47738DXK1o",
@@ -45,12 +46,12 @@ let seleccion = "";
 // Función para cerrar sesión
 const cerrarSesion = async () => {
     try {
-        let confirmacion = confirm("¿Estas seguro de cerrar sesión?");
-        if (confirmacion == "true") {
+        let confirmacion = confirm("¿Estás seguro de cerrar sesión?");
+        if (confirmacion) {
             await auth.signOut();
+            window.location.href = "login.html";
+            console.log("Se cerró la sesión");
         }
-        window.location.href = "login.html";
-        console.log("se cerró la sesión");
     } catch (error) {
         console.error("Error cerrando sesión:", error);
     }
@@ -78,29 +79,33 @@ async function mostrarPerfil() {
         querySnapshot.forEach((doc) => {
             const data = doc.data();
 
-            // Mostrar nombre
-            username.value = `${data.nombre}`;
+            // Mostrar nombre (h2) usando textContent y contentEditable false
+            username.textContent = data.nombre || "";
+            username.contentEditable = false;
 
             // Mostrar correo
-            useremail.innerHTML = `${data.correo}`;
+            useremail.textContent = data.correo || "";
 
-            // Mostrar foto
-            const foto = document.createElement("img");
-            foto.src = `${data.fotoURL}`;
-            foto.alt = "Foto de perfil";
-            foto.style.width = "130px";
-            foto.style.height = "130px";
-            foto.style.borderRadius = "80px";
-            userphoto.appendChild(foto);
+            // Mostrar foto: limpiar antes y añadir imagen nueva
+            userphoto.innerHTML = '';
+            if(data.fotoURL){
+                const foto = document.createElement("img");
+                foto.src = data.fotoURL;
+                foto.alt = "Foto de perfil";
+                foto.style.width = "130px";
+                foto.style.height = "130px";
+                foto.style.borderRadius = "80px";
+                userphoto.appendChild(foto);
+            }
 
             // Mostrar número de teléfono
-            userphone.value = `${data.telefono}`;
+            userphone.value = data.telefono || "";
 
             // Mostrar fecha de nacimiento
-            fechaNacimiento.value = `${data.FechaNacimiento}`;
+            fechaNacimiento.value = data.FechaNacimiento || "";
 
             // Mostrar género
-            SelectGender.value = `${data.Genero}`;
+            SelectGender.value = data.Genero || "Masculino";
             selectedValue = data.Genero || "Masculino";
 
             // Mostrar rol
@@ -134,7 +139,7 @@ select.addEventListener("change", function () {
 // Habilita los campos para editar el perfil
 function habilitarInput() {
     console.log("Habilitando edición...");
-    username.disabled = false;
+    username.contentEditable = true; // Ahora editable
     userphone.disabled = false;
     fechaNacimiento.disabled = false;
     SelectGender.disabled = false;
@@ -145,6 +150,10 @@ function habilitarInput() {
 // Función que guarda los cambios realizados en el perfil
 async function Guardar() {
     const user = auth.currentUser;
+    if (!user) {
+        alert("No hay usuario autenticado.");
+        return;
+    }
     const uid = user.uid;
 
     const userQuery = query(collection(db, "users"), where("uid", "==", uid));
@@ -165,7 +174,7 @@ async function Guardar() {
 
     try {
         await updateDoc(userRef, {
-            nombre: username.value,
+            nombre: username.textContent.trim(),
             telefono: userphone.value,
             FechaNacimiento: stringFecha,
             Genero: selectedValue,
@@ -176,7 +185,7 @@ async function Guardar() {
         alert("Tu perfil se editó correctamente");
 
         // Deshabilitar inputs después de guardar
-        username.disabled = true;
+        username.contentEditable = false;
         userphone.disabled = true;
         fechaNacimiento.disabled = true;
         SelectGender.disabled = true;
@@ -193,7 +202,7 @@ async function Guardar() {
 
 // Controla el botón que alterna entre modo "Editar" y "Guardar"
 function editarP() {
-    if (botonEdit.textContent.trim() === "Editar") {
+    if (botonEdit.textContent.trim().toLowerCase() === "editar") {
         habilitarInput();
     } else {
         Guardar();
@@ -201,7 +210,7 @@ function editarP() {
 }
 
 // Asignar evento al botón de edición
-document.getElementById("change").addEventListener("click", editarP);
+botonEdit.addEventListener("click", editarP);
 
 // Ejecutar la función que carga el perfil al cargar la página
 window.onload = mostrarPerfil;
