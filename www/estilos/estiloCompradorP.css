@@ -54,20 +54,23 @@ body {
 
 /* Imagen al lado del nombre */
 #photo {
-    width: 30%;
-    margin-left: 20px;
+    width: 130px;     
+    height: 130px;
 }
 
 /* Imagen responsiva con borde redondo */
 #photo img {
-    max-width: 130px;
-    height: auto;
-    border-radius: 80px;
+    width: 130px;        
+    height: 130px;       
+    object-fit: cover;   
+    border-radius: 80px; 
+    max-width: 100%;    
+    display: block;     
 }
 
 /* Contenedor principal (datos, teléfono, rol, etc.) */
 .contenedor {
-    text-align: left;
+    text-align: left;e
     height: 405px;
     margin: 30px auto 30px auto;
     width: 75%;
