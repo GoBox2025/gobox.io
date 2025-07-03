@@ -156,6 +156,7 @@ option {
     font-weight: bold;
     padding: 0;
     margin: 0;
+    ackground-color: white;
 }
 
 /* Inputs y selects deshabilitados */
