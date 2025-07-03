@@ -270,7 +270,7 @@ select:disabled {
 
     .tabla {
         width: 95%;
-        margin-top: 90px; /* espacio para barra y logout */
+        margin-top: 30px; /* espacio para barra y logout */
     }
 
     .tabla tr {
