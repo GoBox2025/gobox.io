@@ -8,7 +8,19 @@ body {
 }
 
 
-
+/* Nombre estilo */
+#username {
+    font-size: 25px;
+    font-weight: bold;
+    color: white;
+    margin: 0;
+    padding-left: 8px;
+    width: 100%;
+    height: 30px;
+    background-color: transparent;
+    border: none;
+    outline: none;
+}
 
 /* Barra naranja fija arriba */
 .barra-arriba {
