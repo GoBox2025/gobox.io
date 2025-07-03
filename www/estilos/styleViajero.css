@@ -4,8 +4,14 @@ body {
     margin: 0;
     padding: 0;
     text-align: center;
-    color: #542a03;
+    color: white;
 }
+
+.tabla {
+    border-spacing: 20px;
+    width: 95%;
+}
+
 
 /* Barra naranja fija arriba */
 .barra-arriba {
