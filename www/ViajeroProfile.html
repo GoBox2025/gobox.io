@@ -1,99 +1,77 @@
- <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Perfil viajero</title>
-    <link rel="stylesheet" href="estilos/styleViajero.css">
-    <link rel="stylesheet" href="estilos/menu.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Perfil comprador</title>
+  <link rel="stylesheet" href="estilos/estiloCompradorP.css" />
+  <link rel="stylesheet" href="estilos/menu.css" />
 </head>
-<body  style="background-color: black; color: white;">
-    <div class="barra-arriba"></div>
-    <img src="img/logout.png" id="logout" alt="">
-<br>
-   <center> <table class="tabla" style="border-spacing: 20px;" >
+<body style="background-color: white; color: #8B4513;">
+  <div class="barra-arriba"></div>
 
-        <tr>
+  <!-- Botón Cerrar Sesión -->
+  <div class="btn-container">
+    <img src="img/logout.png" id="logout" alt="" />      
+  </div>
 
-            <td id="Contenedor_nombre"> <input type="text" id="username" disabled></h2>
-
-                <h5 id="useremail"></h5>
-
-            </td>
-
-            <td id="photo">
-
-                
-
-            </td>
-
-        </tr>
-
+  <br />
+  <center>
+    <table class="tabla" style="border-spacing: 20px;">
+      <tr>
+        <td id="Contenedor_nombre">
+          <input type="text" id="username" disabled />
+          <h5 id="useremail"></h5>
+        </td>
+        <td id="photo"><!-- Foto del usuario --></td>
+      </tr>
     </table>
-</center>
-    <hr id="separador">
+  </center>
 
-    <div class="contenedor">
+  <hr id="separador" />
 
-      
-       <b><p style="font-size: 20px;">Rol:</p></b> 
+  <div class="contenedor">
+    <b><p style="font-size: 20px;">Rol:</p></b>
+    <select class="Rol" style="font-size: 20px;" id="rolSelect" disabled>
+      <option value="Comprador">Comprador</option>
+      <option value="Viajero" id="rolCambio">Viajero</option>
+    </select>
 
-        <select name="" class="Rol" style="font-size: 20px;" id="rolSelect" disabled>
+    <b><p style="font-size: 20px;">Teléfono:</p></b>
+    <input type="text" id="userphone" disabled />
 
-            <option value="Comprador"  selected  >Comprador</option>
+    <b><p style="font-size: 20px;">Fecha de nacimiento:</p></b>
+    <input type="date" id="userFecha" disabled />
 
-            <option value="Viajero"  onclick="miConfirm(event)" id="rolCambio" >Viajero</option>  
+    <b><p style="font-size: 20px;">Género:</p></b>
+    <select class="Rol" style="font-size: 20px;" id="selectGenero" disabled>
+      <option value="Femenino">Femenino</option>
+      <option value="Masculino">Masculino</option>
+      <option value="Otro">Otro</option>
+    </select>
+  </div>
 
-        </select> 
+  <br />
 
-       <b><p style="font-size: 20px;">Teléfono:</p></b> 
+  <!-- Botón Editar -->
+  <div class="btn-container">
+    <button id="change" class="btn-31">
+      <span class="text-container"><span class="text">EDITAR</span></span>
+    </button>
+  </div>
 
-       <input type="text" id="userphone" disabled>
-
-         <b><p style="font-size: 20px;">Fecha de nacimiento:</p></b> 
-
-          <input type="date" id="userFecha" disabled>
-
-           <b><p style="font-size: 20px;">Género:</p></b>
-
-            <select name="" class="Rol" style="font-size: 20px;" id="selectGenero" disabled>
-
-            <option value="Femenino"  selected  >Femenino</option>
-
-            <option value="Masculino"  >Masculino</option>
-
-            <option value="Otro" >Otro</option>
-
-        </select> 
-           
-           
-
+  <!-- Footer -->
+  <div class="footer">
+    <div class="iconos">
+      <nav class="navbar">
+        <a href="Home_comprador.html"><img src="img/home.png" alt="Inicio" /></a>
+        <a href="IACOMPRADOR.html"><img src="img/IA.png" alt="IA" /></a>
+        <a href="notificaciones.html"><img src="img/notificacion.png" alt="Notificaciones" /></a>
+        <a href="UserComprador.html"><img src="img/user.png" alt="Perfil" /></a>
+      </nav>
     </div>
- <br>
-    <button id="change">Editar</button>
+  </div>
 
-</center>
-
-    <footer>
-        <div class="navbar">
-            <div class="icon" onclick="expandIcon(this)">
-                <a href="Home_viajero.html"><img src="img/home.png" alt="" /></a>
-            </div>
-            <div class="icon" onclick="expandIcon(this)">
-                <a href="viajes.html"><img src="img/viajes.png" alt="" /></a>
-            </div>
-            <div class="icon" onclick="expandIcon(this)">
-                <a href="lista_pedidos.html"><img src="img/box.png" alt="" /></a>
-            </div>
-            <div class="icon" onclick="expandIcon(this)">
-                <a href="BOXBOT.html"><img src="img/IA.png" alt="" /></a>
-            </div>
-            <div class="icon" onclick="expandIcon(this)">
-                <a href="ViajeroProfile.html"><img src="img/user.png" alt="" /></a>
-            </div>
-        </div>
-    </footer>
-
-    <script type="module" src="codigo/funcionalidadViajero.js"></script>
+  <script type="module" src="codigo/perfilC.js"></script>
 </body>
 </html>
