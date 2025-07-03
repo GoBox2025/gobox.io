@@ -18,14 +18,32 @@ body {
     z-index: 1000;
 }
 
-/* Botón cerrar sesión */
 #logout {
     position: fixed;
-    top: 65px; /* justo debajo de la barra naranja */
+    top: 70px;        /* justo debajo de la barra naranja */
     right: 15px;
     height: 50px;
+    width: 50px;      /* para que sea cuadrado y se vea botón */
+    background-color: #fda735;
+    border-radius: 12px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.2);
     cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     z-index: 1100;
+    transition: background-color 0.3s ease;
+}
+
+#logout:hover {
+    background-color: #ef7c2c;
+}
+
+/* Asegúrate que la imagen dentro no sea demasiado grande */
+#logout img {
+    max-width: 30px;
+    max-height: 30px;
+    pointer-events: none; /* para que no interfiera con el click */
 }
 
 /* Tabla con nombre, correo e imagen */
