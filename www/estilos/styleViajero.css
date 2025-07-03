@@ -1,86 +1,54 @@
 body {
     font-family: Arial, sans-serif;
-    background-color: black; /* Cambiado a negro */
+    background-color: white;
     margin: 0;
     padding: 0;
     text-align: center;
-    color: white; /* Cambiado a blanco */
+    color: #542a03;
 }
 
-/* Barra naranja fija arriba */
-.barra-arriba {
-    height: 60px;
-    width: 100%;
-    background-color: #fda735;
-    position: fixed;
-    top: 0;
-    left: 0;
-    z-index: 1000;
-}
-
+/*Diseño para la imagen de cerrar sección.*/
 #logout {
     height: 50px;
+
     position: absolute;
     top: 60px;
     right: 15px;
     cursor: pointer;
 }
 
-/* Tabla con nombre, correo e imagen */
-.tabla {
+
+.tabla{
     border-spacing: 0;
     width: 85%;
-    max-width: 600px;
-    margin: 100px auto 0 auto; /* margen superior para dejar espacio barra + logout */
-    table-layout: fixed;
-    word-wrap: break-word;
+}
+/*Estilo para la foto de perfil*/
+#userphoto {
+    margin-top: 20px;
+    height: 120px;
+
 }
 
-/* Flex para fila con nombre y foto */
-.tabla tr {
-    display: flex;
-    align-items: center;
-    justify-content: flex-start;
-}
 
-/* Contenedor del nombre y correo */
-#Contenedor_nombre {
-    width: 70%;
-    padding-left: 20px;
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 4px;
-}
-
-#photo {
-    width: 130px;
-    height: 130px;
-    border-radius: 50%;
-}
-
-#photo img {
-    max-width: 100%;
-    max-height: 100%;
-    object-fit: scale-down; /* se ajusta sin recorte */
-    border-radius: 50%;
-    display: block;
-}
-
-/* Contenedor principal (datos, teléfono, rol, etc.) */
+/*Codigo para los elementos del perfil, telefono, rol etc.*/
 .contenedor {
+
     text-align: left;
     height: 405px;
-    margin: 30px auto 30px auto;
+    margin-bottom: 30px;
     width: 75%;
-    max-width: 400px;
     background-color: #fda735;
     border-radius: 15px;
+
+    max-width: 400px;
+    /* Ancho máximo del div */
+    margin: 0 auto;
+    /* Centra horizontalmente el div */
     padding: 20px;
-    color: #542a03;
+
 }
 
-/* Botón editar */
+/*Diseño del boton de editar perfil*/
 button {
     margin-bottom: 100px;
     height: 40px;
@@ -89,15 +57,15 @@ button {
     background-color: #fda735;
     color: white;
     width: 200px;
-    cursor: pointer;
+
 }
 
-/* Hover botón */
+/*efecto para el boton de envio*/
 button:hover {
     background-color: #ef7c2c;
 }
 
-/* Línea separadora */
+/*Estilo para la linea hr que separa los dos contenedores, foto y .contenedor*/
 #separador {
     margin-bottom: 30px;
     background-color: #fda735;
@@ -107,7 +75,7 @@ button:hover {
     width: 100%;
 }
 
-/* Selects estilo */
+/*estilo para el select*/
 .Rol {
     border-radius: 8px;
     height: 30px;
@@ -115,15 +83,13 @@ button:hover {
     text-align: left;
     border-color: #fda735;
     padding-left: 20px;
-    font-size: 20px;
 }
 
 option {
     border-radius: 9px;
 }
 
-/* Inputs teléfono y fecha */
-#userphone, #userFecha {
+#userphone {
     border-radius: 10px;
     font-size: 20px;
     padding-left: 8px;
@@ -132,15 +98,14 @@ option {
     border-color: #fda735;
 }
 
-/* Contenedor nombre y correo */
-#Contenedor_nombre {
-    padding: 0;
-    margin: 0;
-    width: 90%;
+#Contenedor_nombre{
+    padding: 0%;
+    margin: 0%;
+    width: 100%;
 }
 
-/* Input nombre */
 #username {
+
     font-size: 25px;
     padding-left: 8px;
     width: 80%;
@@ -151,31 +116,60 @@ option {
     margin: 0;
 }
 
-/* Inputs y selects deshabilitados */
 input:disabled {
-    background-color: transparent !important;
-    color: white !important;
-    font-size: 20px;
+    background-color: white;
+    color: #542a03;
+    font-size: 30px;
+
 }
 
-select:disabled {
-    opacity: 1 !important;
-    background-color: transparent !important;
-    color: white !important;
-    font-size: 20px;
+select:disabled{
+     opacity: 1 !important;
+    background-color: white;
+    color: #542a03;
+    font-size: 30px;
+    
 }
 
-/* Estilo email */
-#useremail {
+#userFecha{
+    border-radius: 10px;
+    font-size: 20px;
+    padding-left: 8px;
+    width: 93%;
+    height: 30px;
+    border-color: #fda735;
+}
+
+#useremail{
     width: 70%;
+}
+#Contenedor_nombre {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 4px;
+    padding-left: 20px;
+}
+
+#username {
+    font-size: 28px;
+    font-weight: bold;
+    color: #8B4513;
+    border: none;
+    background: transparent;
+    outline: none;
+}
+
+#useremail {
     font-size: 20px;
     font-weight: normal;
-    color: white;
+    color: #8B4513;
     margin: 0;
     text-align: left;
 }
 
-/* Contenedor botones */
+
+/* Contenedor de botones */
 .btn-container {
     display: flex;
     justify-content: center;
@@ -184,7 +178,7 @@ select:disabled {
     gap: 20px;
 }
 
-/* Botón moderno estilo */
+/* Estilos del botón moderno */
 .btn-31,
 .btn-31 *,
 .btn-31 :after,
@@ -196,17 +190,18 @@ select:disabled {
 }
 
 .btn-31 {
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    display: flex; /* CENTRADO CORRECTO */
+    justify-content: center; /* CENTRADO CORRECTO */
+    align-items: center; /* CENTRADO CORRECTO */
+
     -webkit-tap-highlight-color: transparent;
     background-color: #ff9500;
     padding: 1rem 2rem;
     color: #fff;
     cursor: pointer;
     font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont,
-        "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif,
-        "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+        Segoe UI, Roboto, Helvetica Neue, Arial, Noto Sans, sans-serif,
+        Apple Color Emoji, Segoe UI Emoji, Segoe UI Symbol, Noto Color Emoji;
     font-size: 100%;
     font-weight: 900;
     line-height: 1.5;
@@ -231,8 +226,18 @@ select:disabled {
 .btn-31:before {
     --progress: 100%;
     background: #e74504;
-    -webkit-clip-path: polygon(100% 0, var(--progress) var(--progress), 0 100%, 100% 100%);
-    clip-path: polygon(100% 0, var(--progress) var(--progress), 0 100%, 100% 100%);
+    -webkit-clip-path: polygon(
+        100% 0,
+        var(--progress) var(--progress),
+        0 100%,
+        100% 100%
+    );
+    clip-path: polygon(
+        100% 0,
+        var(--progress) var(--progress),
+        0 100%,
+        100% 100%
+    );
     content: "";
     inset: 0;
     position: absolute;
@@ -262,49 +267,3 @@ select:disabled {
     -webkit-animation: move-up-alternate 0.3s ease forwards;
     animation: move-up-alternate 0.3s ease forwards;
 }
-
-/* Responsive */
-
-@media screen and (max-width: 600px) {
-
-    .tabla {
-        width: 95%;
-        margin-top: 30px; /* espacio para barra y logout */
-    }
-
-    .tabla tr {
-        flex-wrap: nowrap; /* no apilar */
-    }
-
-    #Contenedor_nombre {
-        width: 65%;
-        padding-left: 10px;
-    }
-
-    #photo {
-        width: 120px;
-        height: 120px;
-        border-radius: 50%;
-        overflow: hidden;
-        margin-top: 20px;
-    }
-
-    #photo img {
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-        display: block;
-    }
-
-    #logout {
-        top: 65px; /* mismo lugar que en desktop */
-        right: 10px;
-        height: 40px;
-    }
-
-    .contenedor {
-        width: 80%;
-        padding: 15px;
-    }
-}
-
