@@ -10,7 +10,7 @@
   <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 
   <link rel="stylesheet" href="estilos/detallesviajero.css" />
-  <link rel="stylesheet" href="estilos/menu.css" />
+  <link rel="stylesheet" href="estilos/menu.css">
 
   <style>
     #botonWhatsApp {
@@ -35,81 +35,95 @@
 </head>
 
 <body style="background-color: black; color: white;">
-  <div class="barra-arriba"></div>
 
-  <a href="lista_pedidos.html">
-    <img src="img/flechaIzquierda.png" alt="Volver" class="flecha-volver" />
-  </a>
-
-  <div id="contactoWhatsApp" style="margin-top: 15px;"></div>
-
-  <br /><br />
-  
-  <img id="imagen-pedido" src="" alt="Imagen del Pedido" class="imagen-pedido" />
-
-  <div class="contenedor">
-    <div class="detalle">
-      <h2>Valor:</h2>
-      <p id="costo">Cargando...</p>
-
-      <h2>Nombre del producto:</h2>
-      <p id="pedido">Cargando...</p>
-
-      <h2>Tipo:</h2>
-      <p id="tipo">Cargando...</p>
-
-      <h2>Entrega antes de:</h2>
-      <p id="tipoEntrega">Cargando...</p>
-
-      <h2>Recoger en:</h2>
-      <p id="recogerEn">Cargando...</p>
-
-      <h2>Entregar en:</h2>
-      <p id="entregarEn">Cargando...</p>
-          
-      <h2>Cantidad:</h2>
-      <p id="cantidad">Cargando...</p>
-
-      <h2>Peso:</h2>
-      <p id="peso">Cargando...</p>
-
-      <h2>Tipo de empaquetado:</h2>
-      <p id="tipoDeEmpaquetado">Cargando...</p>
+<!-- Barra superior con flecha de regreso -->
+<div class="barra-arriba">
+  <div class="icono">
+    <div>
+      <a href="Home_viajero.html"><img src="img/flechaIzquierda.png" alt="Volver"></a>
     </div>
   </div>
+</div>
 
-  <!-- Lugar donde se mostrará el mapa -->
-  <div id="map" style="height: 300px; width: 100%; margin: 20px auto;"></div>
+<!-- Contacto WhatsApp dinámico -->
+<div id="contactoWhatsApp" style="margin-top: 15px;"></div>
 
-  <div class="boton-centro">
-    <button class="boton" onclick="guardarCambios()">Haz tu oferta</button>
+<br><br>
+
+<!-- Imagen del pedido -->
+<img id="imagen-pedido" src="" alt="Imagen del Pedido" class="imagen-pedido" />
+
+<!-- Contenedor de detalles -->
+<div class="contenedor">
+  <div class="detalle">
+    <h2>Valor:</h2>
+    <p id="costo">Cargando...</p>
+
+    <h2>Nombre del producto:</h2>
+    <p id="pedido">Cargando...</p>
+
+    <h2>Tipo:</h2>
+    <p id="tipo">Cargando...</p>
+
+    <h2>Entrega antes de:</h2>
+    <p id="tipoEntrega">Cargando...</p>
+
+    <h2>Recoger en:</h2>
+    <p id="recogerEn">Cargando...</p>
+
+    <h2>Entregar en:</h2>
+    <p id="entregarEn">Cargando...</p>
+
+    <h2>Cantidad:</h2>
+    <p id="cantidad">Cargando...</p>
+
+    <h2>Peso:</h2>
+    <p id="peso">Cargando...</p>
+
+    <h2>Tipo de empaquetado:</h2>
+    <p id="tipoDeEmpaquetado">Cargando...</p>
   </div>
+</div>
 
-  <!-- Botón flotante de WhatsApp -->
-  <button id="botonWhatsApp" title="Contactar por WhatsApp">
-    <img src="img/icons8-whatsapp-48.png" alt="WhatsApp" />
+<!-- Mapa de Leaflet -->
+<div id="map" style="height: 300px; width: 100%; margin: 20px auto;"></div>
+
+<!-- Botón animado -->
+<div class="btn-container">
+  <button class="btn-31">
+    <span class="text-container">
+      <span class="text" onclick="guardarCambios()">Haz tu oferta</span>
+    </span>
   </button>
+</div>
 
-  <footer>
-    <div class="navbar">
-      <div class="icon" onclick="expandIcon(this)">
-        <a href="Home_viajero.html"><img src="img/home.png" alt="" /></a>
-      </div>
-      <div class="icon" onclick="expandIcon(this)">
-        <a href="viajes.html"><img src="img/viajes.png" alt="" /></a>
-      </div>
-      <div class="icon" onclick="expandIcon(this)">
-        <a href="lista_pedidos.html"><img src="img/box.png" alt="" /></a>
-      </div>
-      <div class="icon" onclick="expandIcon(this)">
-        <a href="BOXBOT.html"><img src="img/IA.png" alt="" /></a>
-      </div>
-      <div class="icon" onclick="expandIcon(this)">
-        <a href="ViajeroProfile.html"><img src="img/user.png" alt="" /></a>
-      </div>
+<!-- Botón flotante de WhatsApp -->
+<button id="botonWhatsApp" title="Contactar por WhatsApp">
+  <img src="img/icons8-whatsapp-48.png" alt="WhatsApp">
+</button>
+
+<!-- Footer con navegación -->
+<footer>
+  <div class="navbar">
+    <div class="icon" onclick="expandIcon(this)">
+      <a href="Home_viajero.html"><img src="img/home.png" alt="Inicio"></a>
     </div>
-  </footer>
-</body>
+    <div class="icon" onclick="expandIcon(this)">
+      <a href="viajes.html"><img src="img/viajes.png" alt="Viajes"></a>
+    </div>
+    <div class="icon" onclick="expandIcon(this)">
+      <a href="lista_pedidos.html"><img src="img/box.png" alt="Pedidos"></a>
+    </div>
+    <div class="icon" onclick="expandIcon(this)">
+      <a href="BOXBOT.html"><img src="img/IA.png" alt="IA"></a>
+    </div>
+    <div class="icon" onclick="expandIcon(this)">
+      <a href="ViajeroProfile.html"><img src="img/user.png" alt="Perfil"></a>
+    </div>
+  </div>
+</footer>
 
+<!-- Script -->
 <script type="module" src="codigo/detallesviajero.js"></script>
+</body>
 </html>
