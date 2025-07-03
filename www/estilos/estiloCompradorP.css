@@ -7,52 +7,80 @@ body {
     color: #542a03;
 }
 
-/* Diseño para la imagen de cerrar sesión */
-#logout {
-    top: 70px;
-    right: 15px;
-    height: 40px;
-    z-index: 10;
+/* Barra naranja fija arriba */
+.barra-arriba {
+    height: 60px;
+    width: 100%;
+    background-color: #fda735;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 1000;
 }
 
+/* Botón cerrar sesión */
+#logout {
+    position: fixed;
+    top: 65px; /* justo debajo de la barra naranja */
+    right: 15px;
+    height: 50px;
+    cursor: pointer;
+    z-index: 1100;
+}
 
-/* Tabla del perfil */
+/* Tabla con nombre, correo e imagen */
 .tabla {
     border-spacing: 0;
     width: 85%;
     max-width: 600px;
-    margin: 0 auto;
+    margin: 100px auto 0 auto; /* margen superior para dejar espacio barra + logout */
     table-layout: fixed;
     word-wrap: break-word;
 }
 
-/* Contenedor de la imagen de perfil */
-#userphoto {
-    margin-top: 20px;
-    height: 120px;
+/* Flex para fila con nombre y foto */
+.tabla tr {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
 }
 
-/* Imagen dentro de #photo */
+/* Contenedor del nombre y correo */
+#Contenedor_nombre {
+    width: 70%;
+    padding-left: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 4px;
+}
+
+/* Imagen al lado del nombre */
+#photo {
+    width: 30%;
+    margin-left: 20px;
+}
+
+/* Imagen responsiva con borde redondo */
 #photo img {
-    max-width: 100%;
+    max-width: 130px;
     height: auto;
     border-radius: 80px;
 }
 
-/* Contenedor de los campos del perfil */
+/* Contenedor principal (datos, teléfono, rol, etc.) */
 .contenedor {
     text-align: left;
     height: 405px;
-    margin-bottom: 30px;
+    margin: 30px auto 30px auto;
     width: 75%;
+    max-width: 400px;
     background-color: #fda735;
     border-radius: 15px;
-    max-width: 400px;
-    margin: 0 auto;
     padding: 20px;
 }
 
-/* Botón de editar */
+/* Botón editar */
 button {
     margin-bottom: 100px;
     height: 40px;
@@ -61,14 +89,15 @@ button {
     background-color: #fda735;
     color: white;
     width: 200px;
+    cursor: pointer;
 }
 
-/* Hover del botón */
+/* Hover botón */
 button:hover {
     background-color: #ef7c2c;
 }
 
-/* Separador entre tabla y contenedor */
+/* Línea separadora */
 #separador {
     margin-bottom: 30px;
     background-color: #fda735;
@@ -78,7 +107,7 @@ button:hover {
     width: 100%;
 }
 
-/* Estilo general para los select */
+/* Selects estilo */
 .Rol {
     border-radius: 8px;
     height: 30px;
@@ -92,7 +121,8 @@ option {
     border-radius: 9px;
 }
 
-#userphone {
+/* Inputs teléfono y fecha */
+#userphone, #userFecha {
     border-radius: 10px;
     font-size: 20px;
     padding-left: 8px;
@@ -101,40 +131,26 @@ option {
     border-color: #fda735;
 }
 
+/* Contenedor nombre y correo */
 #Contenedor_nombre {
     padding: 0;
     margin: 0;
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 4px;
-    padding-left: 20px;
+    width: 90%;
 }
 
+/* Input nombre */
 #username {
-    font-size: 28px;
-    font-weight: bold;
-    color: #8B4513;
-    border: none;
-    background: transparent;
-    outline: none;
-    padding: 0;
-    margin: 0;
+    font-size: 25px;
+    padding-left: 8px;
     width: 80%;
     height: 30px;
-}
-
-#useremail {
-    width: 70%;
-    font-size: 20px;
-    font-weight: normal;
-    color: #8B4513;
+    border: none;
+    font-weight: bold;
+    padding: 0;
     margin: 0;
-    text-align: left;
 }
 
-/* Campos deshabilitados */
+/* Inputs y selects deshabilitados */
 input:disabled {
     background-color: white;
     color: #542a03;
@@ -148,16 +164,17 @@ select:disabled {
     font-size: 30px;
 }
 
-#userFecha {
-    border-radius: 10px;
+/* Estilo email */
+#useremail {
+    width: 70%;
     font-size: 20px;
-    padding-left: 8px;
-    width: 93%;
-    height: 30px;
-    border-color: #fda735;
+    font-weight: normal;
+    color: #8B4513;
+    margin: 0;
+    text-align: left;
 }
 
-/* Contenedor del botón moderno */
+/* Contenedor botones */
 .btn-container {
     display: flex;
     justify-content: center;
@@ -166,7 +183,7 @@ select:disabled {
     gap: 20px;
 }
 
-/* Estilo del botón moderno (btn-31) */
+/* Botón moderno estilo */
 .btn-31,
 .btn-31 *,
 .btn-31 :after,
@@ -187,8 +204,8 @@ select:disabled {
     color: #fff;
     cursor: pointer;
     font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont,
-        Segoe UI, Roboto, Helvetica Neue, Arial, Noto Sans, sans-serif,
-        Apple Color Emoji, Segoe UI Emoji, Segoe UI Symbol, Noto Color Emoji;
+        "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif,
+        "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
     font-size: 100%;
     font-weight: 900;
     line-height: 1.5;
@@ -213,18 +230,8 @@ select:disabled {
 .btn-31:before {
     --progress: 100%;
     background: #e74504;
-    -webkit-clip-path: polygon(
-        100% 0,
-        var(--progress) var(--progress),
-        0 100%,
-        100% 100%
-    );
-    clip-path: polygon(
-        100% 0,
-        var(--progress) var(--progress),
-        0 100%,
-        100% 100%
-    );
+    -webkit-clip-path: polygon(100% 0, var(--progress) var(--progress), 0 100%, 100% 100%);
+    clip-path: polygon(100% 0, var(--progress) var(--progress), 0 100%, 100% 100%);
     content: "";
     inset: 0;
     position: absolute;
@@ -255,43 +262,37 @@ select:disabled {
     animation: move-up-alternate 0.3s ease forwards;
 }
 
+/* Responsive */
+
 @media screen and (max-width: 600px) {
+
     .tabla {
-        width: 100%;
-        max-width: 100%;
+        width: 95%;
+        margin-top: 90px; /* espacio para barra y logout */
     }
 
     .tabla tr {
-        display: flex;
-        flex-direction: row; /* Mantener lado a lado */
-        justify-content: space-between;
-        align-items: center;
+        flex-wrap: nowrap; /* no apilar */
     }
 
     #Contenedor_nombre {
+        width: 65%;
         padding-left: 10px;
-        flex: 1;
     }
 
     #photo {
-        flex: 0 0 auto;
-        margin-right: 10px;
+        width: 30%;
+        margin-left: 10px;
     }
 
     #photo img {
-        width: 80px;
-        height: 80px;
-    }
-
-    #username,
-    #useremail {
-        font-size: 18px;
-        width: 100%;
-        text-align: left;
+        max-width: 100px;
+        height: auto;
+        border-radius: 80px;
     }
 
     #logout {
-        top: 20px;
+        top: 65px; /* mismo lugar que en desktop */
         right: 10px;
         height: 40px;
     }
@@ -301,4 +302,3 @@ select:disabled {
         padding: 15px;
     }
 }
-
