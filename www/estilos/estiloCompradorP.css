@@ -9,12 +9,12 @@ body {
 
 /* Diseño para la imagen de cerrar sesión */
 #logout {
-    height: 50px;
-    position: absolute;
-    top: 60px;
+    top: 70px;
     right: 15px;
-    cursor: pointer;
+    height: 40px;
+    z-index: 10;
 }
+
 
 /* Tabla del perfil */
 .tabla {
