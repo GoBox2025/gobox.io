@@ -52,17 +52,6 @@ body {
     gap: 4px;
 }
 
-#photo {
-    width: 130px;
-    height: 130px;
-    border-radius: 50%;
-    overflow: hidden;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin: auto;
-}
-
 #photo img {
     max-width: 100%;
     max-height: 100%;
