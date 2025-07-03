@@ -149,14 +149,13 @@ option {
     color: white; /* texto blanco */
     margin: 0;
     padding-left: 8px;
-    padding-top: 0;
-    padding-bottom: 0;
-    width: 80%;  /* o 100%, según prefieras */
+    width: 80%;
     height: 30px;
     background-color: transparent; /* fondo transparente */
     border: none;
     outline: none;
 }
+
 /* Inputs y selects deshabilitados */
 input:disabled {
     background-color: white;
