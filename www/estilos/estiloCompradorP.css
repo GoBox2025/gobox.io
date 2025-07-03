@@ -279,17 +279,21 @@ select:disabled {
         width: 65%;
         padding-left: 10px;
     }
+#photo {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    overflow: hidden;
+    margin-top: 20px;
+}
 
-    #photo {
-        width: 30%;
-        margin-left: 10px;
-    }
+#photo img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
 
-    #photo img {
-        max-width: 100px;
-        height: auto;
-        border-radius: 80px;
-    }
 
     #logout {
         top: 65px; /* mismo lugar que en desktop */
