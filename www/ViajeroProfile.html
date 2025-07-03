@@ -1,72 +1,78 @@
-<!DOCTYPE html>
+ <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Perfil viajero</title>
-    <link rel="stylesheet" href="estilos/styleViajero.css" />
-    <link rel="stylesheet" href="estilos/menu.css" />
+    <link rel="stylesheet" href="estilos/styleViajero.css">
+    <link rel="stylesheet" href="estilos/menu.css">
 </head>
-<body style="background-color: black; color: white;">
-
+<body  style="background-color: black; color: white;">
     <div class="barra-arriba"></div>
+    <img src="img/logout.png" id="logout" alt="">
+<br>
+   <center> <table class="tabla" style="border-spacing: 20px;" >
 
-    <!-- Botón Cerrar Sesión -->
-    <div id="logout" class="logout-btn" title="Cerrar sesión">
-        <div class="text-container">
-            <img src="img/logout.png" alt="Logout" class="logout-img" />
-        </div>
-    </div>
+        <tr>
 
-    <br />
+            <td id="Contenedor_nombre"> <input type="text" id="username" disabled></h2>
 
-    <center>
-        <table class="tabla" style="border-spacing: 20px;">
-            <tr>
-                <td id="Contenedor_nombre">
-                    <!-- Nombre arriba -->
-                    <h2 id="username" class="nombre-usuario" contenteditable="false"></h2>
-                    <!-- Correo abajo -->
-                    <h5 id="useremail" class="correo-usuario"></h5>
-                </td>
-                <td id="photo">
-                    <!-- Foto aquí -->
-                </td>
-            </tr>
-        </table>
-    </center>
+                <h5 id="useremail"></h5>
 
-    <hr id="separador" />
+            </td>
+
+            <td id="photo">
+
+                
+
+            </td>
+
+        </tr>
+
+    </table>
+</center>
+    <hr id="separador">
 
     <div class="contenedor">
-        <b><p style="font-size: 20px;">Rol:</p></b>
-        <select class="Rol" style="font-size: 20px;" id="rolSelect" disabled>
-            <option value="Comprador" selected>Comprador</option>
-            <option value="Viajero" id="rolCambio">Viajero</option>
-        </select>
 
-        <b><p style="font-size: 20px;">Teléfono:</p></b>
-        <input type="text" id="userphone" disabled />
+      
+       <b><p style="font-size: 20px;">Rol:</p></b> 
 
-        <b><p style="font-size: 20px;">Fecha de nacimiento:</p></b>
-        <input type="date" id="userFecha" disabled />
+        <select name="" class="Rol" style="font-size: 20px;" id="rolSelect" disabled>
 
-        <b><p style="font-size: 20px;">Género:</p></b>
-        <select class="Rol" style="font-size: 20px;" id="selectGenero" disabled>
-            <option value="Femenino" selected>Femenino</option>
-            <option value="Masculino">Masculino</option>
-            <option value="Otro">Otro</option>
-        </select>
+            <option value="Comprador"  selected  >Comprador</option>
+
+            <option value="Viajero"  onclick="miConfirm(event)" id="rolCambio" >Viajero</option>  
+
+        </select> 
+
+       <b><p style="font-size: 20px;">Teléfono:</p></b> 
+
+       <input type="text" id="userphone" disabled>
+
+         <b><p style="font-size: 20px;">Fecha de nacimiento:</p></b> 
+
+          <input type="date" id="userFecha" disabled>
+
+           <b><p style="font-size: 20px;">Género:</p></b>
+
+            <select name="" class="Rol" style="font-size: 20px;" id="selectGenero" disabled>
+
+            <option value="Femenino"  selected  >Femenino</option>
+
+            <option value="Masculino"  >Masculino</option>
+
+            <option value="Otro" >Otro</option>
+
+        </select> 
+           
+           
+
     </div>
+ <br>
+    <button id="change">Editar</button>
 
-    <br />
-
-    <!-- Botón Editar -->
-    <div class="btn-container">
-        <button id="change" class="btn-31" type="button">
-            <span class="text-container"><span class="text">EDITAR</span></span>
-        </button>
-    </div>
+</center>
 
     <footer>
         <div class="navbar">
