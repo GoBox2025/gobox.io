@@ -4,13 +4,14 @@ import {
     collection,
     getDocs,
     query,
-    where
+    where,
+    doc,
+    updateDoc
 } from "https://www.gstatic.com/firebasejs/10.0.0/firebase-firestore.js";
 import {
     getAuth,
     onAuthStateChanged
 } from "https://www.gstatic.com/firebasejs/10.0.0/firebase-auth.js";
-import { doc, updateDoc } from "https://www.gstatic.com/firebasejs/10.0.0/firebase-firestore.js";
 
 const firebaseConfig = {
     apiKey: "AIzaSyBB0GFK5FhyPsLXrZGIYCxNT47738DXK1o",
@@ -36,7 +37,7 @@ const fechaNacimiento = document.getElementById("userFecha");
 const SelectGender = document.getElementById("selectGenero");
 const signOut = document.getElementById("logout");
 
-// Variables globales para selects
+// Variables globales
 let selectedValue = "";
 let seleccion = "";
 
@@ -84,7 +85,7 @@ async function mostrarPerfil() {
             seleccion = data.Rol || "Comprador";
 
             // Renderizar foto
-            userphoto.innerHTML = ""; // limpiar para evitar duplicados
+            userphoto.innerHTML = "";
             if (data.fotoURL) {
                 const foto = document.createElement("img");
                 foto.src = data.fotoURL;
@@ -117,7 +118,10 @@ select.addEventListener("change", () => {
 function habilitarInput() {
     console.log("Habilitando edición...");
     [username, userphone, fechaNacimiento, SelectGender, select].forEach(el => el.disabled = false);
-    botonEdit.textContent = "Guardar";
+
+    // Cambiar texto visual del botón sin romper diseño
+    const textoBoton = document.querySelector(".btn-31 .text");
+    if (textoBoton) textoBoton.textContent = "GUARDAR";
 }
 
 // Guardar cambios en Firestore
@@ -149,9 +153,11 @@ async function Guardar() {
             Rol: seleccion
         });
 
-        // Deshabilitar inputs
         [username, userphone, fechaNacimiento, SelectGender, select].forEach(el => el.disabled = true);
-        botonEdit.textContent = "Editar";
+
+        // Cambiar texto visual del botón de nuevo a "EDITAR"
+        const textoBoton = document.querySelector(".btn-31 .text");
+        if (textoBoton) textoBoton.textContent = "EDITAR";
 
         if (seleccion === "Viajero") rolcambio();
 
@@ -163,7 +169,8 @@ async function Guardar() {
 
 // Alternar entre editar y guardar
 function editarP() {
-    if (botonEdit.textContent.trim() === "Editar") {
+    const textoBoton = document.querySelector(".btn-31 .text");
+    if (textoBoton && textoBoton.textContent.trim() === "EDITAR") {
         habilitarInput();
     } else {
         Guardar();
