@@ -38,8 +38,10 @@ async function crearNotificacionOferta(oferta) {
     await addDoc(collection(db, "notificaciones"), notificacionData);
 }
 
-window.addEventListener("DOMContentLoaded", () => {
-  // Configurar enlace dinámico
+
+// Esperar a que se cargue el DOM
+document.addEventListener("DOMContentLoaded", () => {
+    // Configurar enlace dinámico
   const params = new URLSearchParams(window.location.search);
   const pedidoId = params.get("id");
   if (pedidoId) {
@@ -48,9 +50,6 @@ window.addEventListener("DOMContentLoaded", () => {
       volver.href = `detallesviajero.html?id=${pedidoId}`;
     }
   }
-
-// Esperar a que se cargue el DOM
-document.addEventListener("DOMContentLoaded", () => {
     const form = document.getElementById("ofertaForm");
     const cancelarBtn = document.getElementById("botonCancelarOferta");
 
