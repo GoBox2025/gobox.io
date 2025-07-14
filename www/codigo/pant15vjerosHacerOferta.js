@@ -116,11 +116,9 @@ document.addEventListener("DOMContentLoaded", () => {
         });
 
         // Botón cancelar
-        cancelarBtn.addEventListener("click", () => {
-             window.location.href = "Home_viajero.html";
-        // Enlace dinámico para regresar con el mismo ID de pedido
-     
+       cancelarBtn.addEventListener("click", () => {
+  window.location.href = "Home_viajero.html";
+});
 
-        });
     });
 });
