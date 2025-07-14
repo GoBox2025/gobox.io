@@ -109,12 +109,16 @@ document.addEventListener("DOMContentLoaded", () => {
         cancelarBtn.addEventListener("click", () => {
              window.location.href = "Home_viajero.html";
         // Enlace dinámico para regresar con el mismo ID de pedido
-const params = new URLSearchParams(window.location.search);
-const pedidoId = params.get("id");
-if (pedidoId) {
-  const volver = document.getElementById("linkVolver");
-  volver.href = `detallesviajero.html?id=${pedidoId}`;
-}
+window.addEventListener("DOMContentLoaded", () => {
+  const params = new URLSearchParams(window.location.search);
+  const pedidoId = params.get("id");
+
+  if (pedidoId) {
+    const volver = document.getElementById("linkVolver");
+    volver.href = `detallesviajero.html?id=${pedidoId}`;
+  }
+});
+
 
         });
     });
