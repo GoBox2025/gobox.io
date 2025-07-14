@@ -179,9 +179,6 @@ async function mostrarPedido() {
             // Función para eliminar un pedido
             async function eliminarPedido(docId, fila, fila2) {
                 let resultado = confirm("¿Está seguro de eliminar tu pedido?");
-                if (!resultado) return;
-
-                window.open("https://www.paypal.com", "paypalWindow", "width=600,height=700");
 
                 try {
                     await deleteDoc(doc(db, "pedido1", docId));
